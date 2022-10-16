@@ -5,7 +5,7 @@ import Auth from "../components/Auth";
 import {
     BottomNavigation,
     BottomNavigationAction,
-    Box,
+    Box, CircularProgress,
     createTheme,
     CssBaseline,
     Paper,
@@ -13,28 +13,31 @@ import {
 } from "@mui/material";
 import {useState} from "react";
 import {Restore, Favorite, LocationOnRounded, LogoutOutlined} from "@mui/icons-material"
+import {Theme} from "../components/theme/Theme";
 
 function MyApp({Component, pageProps}: AppProps) {
     const [user, loading, error] = useAuthState(firebase.auth());
     const [value, setValue] = useState("sdf")
 
-    const darkTheme = createTheme({
-        palette: {
-            mode: 'dark',
-        },
-    });
 
     if (loading) {
-        return <h4>loading</h4>
+        return (
+            <Theme>
+                <Box display="flex"
+                     justifyContent="center"
+                     alignItems="center"
+                     minHeight="100vh">
+                    <CircularProgress/>
+                </Box>
+            </Theme>)
     }
     if (!user) {
-        return <Auth/>
+        return <Theme><Auth/></Theme>
     }
     if (error) {
-        return <h1>Opps, noe gikk feil</h1>
+        return <Theme><h1>Opps, noe gikk feil</h1></Theme>
     }
-    return <ThemeProvider theme={darkTheme}>
-        <CssBaseline/>
+    return <Theme>
 
         <Box sx={{pb: 7}}>
             <Component {...pageProps} />
@@ -54,7 +57,7 @@ function MyApp({Component, pageProps}: AppProps) {
                 </BottomNavigation>
             </Paper>
         </Box>
-    </ThemeProvider>
+    </Theme>
 
 
 }

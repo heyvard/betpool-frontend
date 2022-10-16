@@ -5,7 +5,7 @@ import styles from '../../styles/Home.module.css'
 import {useAuthState} from "react-firebase-hooks/auth";
 import firebase from "../firebase/clientApp";
 import Auth from "../components/Auth";
-import {Typography} from '@mui/material';
+import {Box, CircularProgress, Typography} from '@mui/material';
 
 const Home: NextPage = () => {
     const [user, loading, error] = useAuthState(firebase.auth());
@@ -15,9 +15,15 @@ const Home: NextPage = () => {
             <Head>
                 <title>Betpool 2022</title>
             </Head>
-            <Typography variant="h4" component="h2">
-                Welcome to {user!.displayName}
-            </Typography>
+            <Box display="flex"
+                 justifyContent="center"
+                 alignItems="center"
+                 minHeight="100vh">
+                <Typography variant="h4" component="h2">
+                    Hei {user!.displayName}
+                </Typography>
+            </Box>
+
         </>
 
 
