@@ -20,10 +20,11 @@ jobs:
         run: npm run lint
 
 
-  Deploy-Production:
+  deploy-prod:
     needs: lint-test
     if: github.ref_name == 'master'
     runs-on: ubuntu-latest
+    concurrency: deploy-prod
     steps:
       - uses: actions/checkout@v3
       - name: Install Vercel CLI
