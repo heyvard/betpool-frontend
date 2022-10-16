@@ -8,5 +8,5 @@ module.exports = {
     connection: PG_URI,
     migrations: {
         directory: './migrations',
-    }
+    },
 }

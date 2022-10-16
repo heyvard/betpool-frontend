@@ -18,7 +18,8 @@ jobs:
       - run: npm ci
       - name: Run lint
         run: npm run lint
-
+      - name: Run lint
+        run: npm run prettier:check
 
   deploy-prod:
     needs: lint-test

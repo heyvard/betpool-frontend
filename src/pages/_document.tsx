@@ -1,5 +1,5 @@
-import type {NextPage} from 'next'
-import {Html, Head, Main, NextScript} from "next/document";
+import type { NextPage } from 'next'
+import { Html, Head, Main, NextScript } from 'next/document'
 
 const Home: NextPage = () => {
     return (
@@ -11,13 +11,12 @@ const Home: NextPage = () => {
                 />
             </Head>
             <body>
-            <Main/>
+                <Main />
 
-            <NextScript/>
+                <NextScript />
             </body>
         </Html>
     )
-
 }
 
 export default Home
