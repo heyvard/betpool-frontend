@@ -1,16 +1,31 @@
-name: GitHub Actions Vercel Production Deployment
+name: Betpool 2022 *GHA flyt
 env:
   VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
   VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
 on:
   push:
-    branches:
-      - master
+
 jobs:
-  Deploy-Production:
+  lint-test:
+    name: Bygg, test og publiser docker image
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 16
+          cache: 'npm'
+      - run: npm ci
+      - name: Run lint
+        run: npm run lint
+
+
+  Deploy-Production:
+    needs: lint-test
+    if: github.ref_name == 'master'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
       - name: Install Vercel CLI
         run: npm install --global vercel@latest
       - name: Pull Vercel Environment Information
