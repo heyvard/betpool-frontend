@@ -12,7 +12,7 @@ const Home: NextPage = () => {
             <Head>
                 <title>Betpool 2022</title>
             </Head>
-            <Box display="flex" justifyContent="center" alignItems="center" minHeight="100vh">
+            <Box display="flex" justifyContent="center" alignItems="center" minHeight="80vh">
                 <Typography variant="h4" component="h2">
                     Hei {data?.name}
                 </Typography>
