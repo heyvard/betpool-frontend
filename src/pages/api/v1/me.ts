@@ -1,8 +1,9 @@
 import { NextApiRequest, NextApiResponse } from 'next'
 import { verifiserIdToken } from '../../../auth/verifiserIdToken'
 import { getKnex } from '../../../knex'
+import { User } from '../../../domain/user'
 
-export default async function handler(req: NextApiRequest, res: NextApiResponse<any>) {
+export default async function handler(req: NextApiRequest, res: NextApiResponse<User>) {
     const knex = getKnex()
 
     const authheader = req.headers.authorization
@@ -17,14 +18,14 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse<
         return
     }
 
-    const user = await knex.select('*').from('users').where('firebase_user_id', verifisert.payload.sub)
+    const user = (await knex.select('*').from('users').where('firebase_user_id', verifisert.payload.sub)) as User[]
 
     if (user.length === 1) {
         res.status(200).json(user[0])
         return
     }
 
-    const nyBruker = await knex
+    const nyBruker = (await knex
         .insert({
             name: verifisert.payload.name,
             email: verifisert.payload.email,
@@ -34,7 +35,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse<
             active: true,
         })
         .into('users')
-        .returning('*')
+        .returning('*')) as User[]
 
     const matchIds = await knex.select('id').from('matches')
 

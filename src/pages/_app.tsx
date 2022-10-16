@@ -6,12 +6,60 @@ import { BottomNavigation, BottomNavigationAction, Box, CircularProgress, Paper 
 import { useState } from 'react'
 import { Restore, Favorite, LocationOnRounded, LogoutOutlined } from '@mui/icons-material'
 import { Theme } from '../components/theme/Theme'
-import { UserContext } from '../auth/UserContext'
 import { QueryClient, QueryClientProvider } from 'react-query'
+import { UseUser } from '../queries/useUser'
+
+function UserFetchInnlogging(props: { children: React.ReactNode }) {
+    const { isLoading } = UseUser()
+    const [value, setValue] = useState('sdf')
+    if (isLoading) {
+        return (
+            <Box display="flex" justifyContent="center" alignItems="center" minHeight="100vh">
+                <CircularProgress />
+            </Box>
+        )
+    }
+
+    return (
+        <>
+            {props.children}
+            <Paper sx={{ position: 'fixed', bottom: 0, left: 0, right: 0 }} elevation={3}>
+                <BottomNavigation
+                    showLabels
+                    value={value}
+                    onChange={(event, newValue) => {
+                        setValue(newValue)
+                    }}
+                >
+                    <BottomNavigationAction label="Recents" icon={<Restore />} />
+                    <BottomNavigationAction label="Favorites" icon={<Favorite />} />
+                    <BottomNavigationAction label="Nearby" icon={<LocationOnRounded />} />
+                    <BottomNavigationAction label="Logout" icon={<LogoutOutlined />} />
+                </BottomNavigation>
+            </Paper>
+        </>
+    )
+}
+
+function UserInnlogging(props: { children: React.ReactNode }) {
+    const [user, loading, error] = useAuthState(firebase.auth())
+    if (loading) {
+        return (
+            <Box display="flex" justifyContent="center" alignItems="center" minHeight="100vh">
+                <CircularProgress />
+            </Box>
+        )
+    }
+    if (!user) {
+        return <SignInScreen />
+    }
+    if (error) {
+        return <h1>Opps, noe gikk feil</h1>
+    }
+    return <UserFetchInnlogging>{props.children}</UserFetchInnlogging>
+}
 
 function MyApp({ Component, pageProps }: AppProps) {
-    const [user, loading, error] = useAuthState(firebase.auth())
-    const [value, setValue] = useState('sdf')
     const [queryClient] = useState(
         () =>
             new QueryClient({
@@ -26,53 +74,14 @@ function MyApp({ Component, pageProps }: AppProps) {
             })
     )
 
-    if (loading) {
-        return (
-            <Theme>
-                <Box display="flex" justifyContent="center" alignItems="center" minHeight="100vh">
-                    <CircularProgress />
-                </Box>
-            </Theme>
-        )
-    }
-    if (!user) {
-        return (
-            <Theme>
-                <SignInScreen />
-            </Theme>
-        )
-    }
-    if (error) {
-        return (
-            <Theme>
-                <h1>Opps, noe gikk feil</h1>
-            </Theme>
-        )
-    }
-
     return (
         <Theme>
             <QueryClientProvider client={queryClient}>
-                <UserContext user={user}>
-                    <Box sx={{ pb: 7 }}>
+                <Box sx={{ pb: 7 }}>
+                    <UserInnlogging>
                         <Component {...pageProps} />
-
-                        <Paper sx={{ position: 'fixed', bottom: 0, left: 0, right: 0 }} elevation={3}>
-                            <BottomNavigation
-                                showLabels
-                                value={value}
-                                onChange={(event, newValue) => {
-                                    setValue(newValue)
-                                }}
-                            >
-                                <BottomNavigationAction label="Recents" icon={<Restore />} />
-                                <BottomNavigationAction label="Favorites" icon={<Favorite />} />
-                                <BottomNavigationAction label="Nearby" icon={<LocationOnRounded />} />
-                                <BottomNavigationAction label="Logout" icon={<LogoutOutlined />} />
-                            </BottomNavigation>
-                        </Paper>
-                    </Box>
-                </UserContext>
+                    </UserInnlogging>
+                </Box>
             </QueryClientProvider>
         </Theme>
     )
