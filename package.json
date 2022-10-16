@@ -21,13 +21,15 @@
     "@mui/material": "^5.10.9",
     "@next/env": "^12.3.1",
     "firebase": "^8.10.0",
+    "jose": "^4.10.0",
     "knex": "^2.3.0",
     "next": "12.3.1",
     "pg": "^8.8.0",
     "react": "17.0.2",
     "react-dom": "17.0.2",
     "react-firebase-hooks": "^3.0.4",
-    "react-firebaseui": "^5.0.2"
+    "react-firebaseui": "^5.0.2",
+    "react-query": "^3.39.2"
   },
   "devDependencies": {
     "@types/node": "18.11.0",

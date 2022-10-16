@@ -1,6 +1,6 @@
 import React from 'react'
 import StyledFirebaseAuth from 'react-firebaseui/StyledFirebaseAuth'
-import firebase from '../firebase/clientApp'
+import firebase from '../auth/clientApp'
 
 // Configure FirebaseUI.
 const uiConfig = {
@@ -9,7 +9,7 @@ const uiConfig = {
     signInOptions: [firebase.auth.GoogleAuthProvider.PROVIDER_ID, firebase.auth.EmailAuthProvider.PROVIDER_ID],
 }
 
-function SignInScreen() {
+export function SignInScreen() {
     return (
         <div
             style={{
@@ -25,5 +25,3 @@ function SignInScreen() {
         </div>
     )
 }
-
-export default SignInScreen

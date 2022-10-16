@@ -5,10 +5,10 @@ exports.up = async (knex) => {
 
     await knex.schema.createTable('users', (t) => {
         t.uuid('id').default(knex.raw('uuid_generate_v4()')).primary()
-        t.string('google_id').notNullable()
+        t.string('firebase_user_id').unique().notNullable()
         t.string('picture').nullable()
         t.boolean('active').notNullable()
-        t.string('email').notNullable()
+        t.string('email').unique().notNullable()
         t.string('name').notNullable()
         t.boolean('admin').notNullable()
         t.timestamps(false, true)
