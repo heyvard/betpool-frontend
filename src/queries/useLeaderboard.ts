@@ -1,7 +1,7 @@
 import { useQuery } from 'react-query'
 import { useAuthState } from 'react-firebase-hooks/auth'
 import firebase from '../auth/clientApp'
-import { LeaderboardLinje } from '../domain/leaderboard'
+import { LeaderboardLinje } from '../types/types'
 
 export function UseLeaderboard() {
     const [user] = useAuthState(firebase.auth())

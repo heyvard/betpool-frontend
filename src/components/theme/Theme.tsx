@@ -3,7 +3,7 @@ import { createTheme, CssBaseline, responsiveFontSizes, ThemeProvider } from '@m
 export const Theme = (props: { children: React.ReactNode }) => {
     const darkTheme = createTheme({
         palette: {
-            mode: 'dark',
+            mode: 'light',
         },
     })
     return (

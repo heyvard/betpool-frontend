@@ -1,9 +1,9 @@
 import { NextApiRequest, NextApiResponse } from 'next'
 import { verifiserIdToken } from '../../../../auth/verifiserIdToken'
 import { getKnex } from '../../../../knex'
-import { User } from '../../../../domain/user'
+import { Bet } from '../../../../types/types'
 
-export default async function handler(req: NextApiRequest, res: NextApiResponse<User>) {
+export default async function handler(req: NextApiRequest, res: NextApiResponse<Bet[]>) {
     const authheader = req.headers.authorization
     if (!authheader) {
         res.status(401)
@@ -19,24 +19,24 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse<
     const upcoming = (
         await getKnex().raw(
             `
-            SELECT m.game_start,
-                   m.away_team,
-                   m.home_team,
-                   b.home_score,
-                   b.away_score,
-                   b.match_id,
-                   b.id bet_id,
-                   m.channel
-            FROM bets b,
-                 matches m,
-                 users u
-            WHERE b.user_id = u.id
-              and u.firebase_user_id = ?
-              AND b.match_id = m.id
-            ORDER BY game_start, m.id asc;`,
+                SELECT m.game_start,
+                       m.away_team,
+                       m.home_team,
+                       b.home_score,
+                       b.away_score,
+                       b.match_id,
+                       b.id bet_id,
+                       m.channel
+                FROM bets b,
+                     matches m,
+                     users u
+                WHERE b.user_id = u.id
+                  and u.firebase_user_id = ?
+                  AND b.match_id = m.id
+                ORDER BY game_start, m.id asc;`,
             [userid]
         )
-    ).rows
+    ).rows as Bet[]
 
     res.status(200).json(upcoming)
 }

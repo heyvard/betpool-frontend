@@ -1,7 +1,7 @@
 import { NextApiRequest, NextApiResponse } from 'next'
 import { verifiserIdToken } from '../../../auth/verifiserIdToken'
 import { getKnex } from '../../../knex'
-import { User } from '../../../domain/user'
+import { User } from '../../../types/user'
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse<User>) {
     const knex = getKnex()

@@ -1,7 +1,7 @@
 import { useQuery } from 'react-query'
 import { useAuthState } from 'react-firebase-hooks/auth'
 import firebase from '../auth/clientApp'
-import { User } from '../domain/user'
+import { User } from '../types/user'
 
 export function UseUser() {
     const [user] = useAuthState(firebase.auth())
