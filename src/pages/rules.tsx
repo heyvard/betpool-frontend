@@ -9,7 +9,7 @@ const Home: NextPage = () => {
             <Head>
                 <title>Rules</title>
             </Head>
-            <Container maxWidth="md">
+            <Container maxWidth="md" sx={{ mt: 2, mb: 2 }}>
                 <Typography variant="h4" component="h2">
                     Regler!
                 </Typography>

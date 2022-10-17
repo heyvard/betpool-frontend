@@ -15,7 +15,7 @@ const Home: NextPage = () => {
             <Head>
                 <title>Betpool 2022</title>
             </Head>
-            <Container maxWidth="md" sx={{ mt: '20px' }}>
+            <Container maxWidth="md" sx={{ mt: 2 }}>
                 <Typography variant="h4" component="h2">
                     Hei {data?.name}
                 </Typography>
