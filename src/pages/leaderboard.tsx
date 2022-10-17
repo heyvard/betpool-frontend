@@ -61,7 +61,14 @@ const Leaderboard: NextPage = () => {
                                             <Typography variant="h2"> {plassVisning(i + 1)}</Typography>
                                         </TableCell>
                                         <TableCell align="left">
-                                            {row.picture && <Image src={row.picture} alt={row.name} width={'10vw'} />}
+                                            {row.picture && (
+                                                <Image
+                                                    src={row.picture}
+                                                    alt={row.name}
+                                                    width={'40vw'}
+                                                    height={'40vw'}
+                                                />
+                                            )}
                                         </TableCell>
                                         <TableCell component="th" scope="row">
                                             {row.name}

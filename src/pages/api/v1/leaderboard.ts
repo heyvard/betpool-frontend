@@ -3,6 +3,7 @@ import { NextApiRequest, NextApiResponse } from 'next'
 import { getAllBets } from '../../../bets/getAllBets'
 import { matchResultScores } from '../../../bets/matchResultScores'
 import { scoreCalculator } from '../../../bets/scoreCalculator'
+import { verifiserIdToken } from '../../../auth/verifiserIdToken'
 
 async function getEmptyBoard() {
     return (
@@ -24,6 +25,18 @@ function compare(a: any, b: any) {
 }
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse<any>) {
+    const authheader = req.headers.authorization
+    if (!authheader) {
+        res.status(401)
+        return
+    }
+
+    const verifisert = await verifiserIdToken(authheader.split(' ')[1])
+    if (!verifisert) {
+        res.status(401)
+        return
+    }
+
     const allBets = await getAllBets()
     if (allBets.length === 0) {
         const emptyBoard = await getEmptyBoard()
