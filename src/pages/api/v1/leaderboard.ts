@@ -12,7 +12,7 @@ async function getEmptyBoard() {
     ).rows
 }
 
-function compare(a, b) {
+function compare(a: any, b: any) {
     if (a.score < b.score) {
         return 1
     }
@@ -24,7 +24,6 @@ function compare(a, b) {
 }
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse<any>) {
-    const knex = getKnex()
     const allBets = await getAllBets()
     if (allBets.length === 0) {
         const emptyBoard = await getEmptyBoard()

@@ -22,7 +22,6 @@ function UserFetchInnlogging(props: { children: React.ReactNode }) {
             </Box>
         )
     }
-    console.log(router.pathname)
 
     return (
         <>
