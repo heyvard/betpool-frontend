@@ -4,7 +4,7 @@ import firebase from '../auth/clientApp'
 import { SignInScreen } from '../components/SignIn'
 import { BottomNavigation, BottomNavigationAction, Box, CircularProgress, Paper } from '@mui/material'
 import { useState } from 'react'
-import { Favorite, LogoutOutlined, Sports, LocalPolice, Chat } from '@mui/icons-material'
+import { EmojiEvents, LogoutOutlined, Sports, LocalPolice, Chat } from '@mui/icons-material'
 import { Theme } from '../components/theme/Theme'
 import { QueryClient, QueryClientProvider } from 'react-query'
 import { UseUser } from '../queries/useUser'
@@ -39,7 +39,7 @@ function UserFetchInnlogging(props: { children: React.ReactNode }) {
                     }}
                 >
                     <BottomNavigationAction label="Bets" value="/" icon={<Sports />} />
-                    <BottomNavigationAction label="Leaderboard" value="/leaderboard" icon={<Favorite />} />
+                    <BottomNavigationAction label="Leaderboard" value="/leaderboard" icon={<EmojiEvents />} />
                     <BottomNavigationAction label="Chat" value="/chat" icon={<Chat />} />
                     <BottomNavigationAction label="Regler" value="/rules" icon={<LocalPolice />} />
                     <BottomNavigationAction label="Logout" value="utlogging" icon={<LogoutOutlined />} />

@@ -1,4 +1,4 @@
-import { createTheme, CssBaseline, ThemeProvider } from '@mui/material'
+import { createTheme, CssBaseline, responsiveFontSizes, ThemeProvider } from '@mui/material'
 
 export const Theme = (props: { children: React.ReactNode }) => {
     const darkTheme = createTheme({
@@ -7,7 +7,7 @@ export const Theme = (props: { children: React.ReactNode }) => {
         },
     })
     return (
-        <ThemeProvider theme={darkTheme}>
+        <ThemeProvider theme={responsiveFontSizes(darkTheme)}>
             <CssBaseline />
             {props.children}
         </ThemeProvider>

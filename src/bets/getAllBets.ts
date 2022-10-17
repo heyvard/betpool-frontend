@@ -5,6 +5,7 @@ export async function getAllBets() {
         await getKnex().raw(`
         SELECT u.id         userid,
                u.name,
+               u.picture,
                b.match_id,
                m.game_start,
                m.away_team,

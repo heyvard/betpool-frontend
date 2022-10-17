@@ -7,8 +7,8 @@ import { scoreCalculator } from '../../../bets/scoreCalculator'
 async function getEmptyBoard() {
     return (
         await getKnex().raw(`
-    SELECT u.id userid, u.name, 0.0 score
-    FROM users u`)
+            SELECT u.id userid, u.name, u.picture, 0.0 score
+            FROM users u`)
     ).rows
 }
 
@@ -53,7 +53,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse<
     })
 
     const personsFlat = processedPersons.map(function (bets) {
-        const person = { name: bets[0].name, userid: bets[0].userid, score: 0.0 }
+        const person = { name: bets[0].name, picture: bets[0].picture, userid: bets[0].userid, score: 0.0 }
         bets.forEach(function (bet: any) {
             person.score += bet.score
         })

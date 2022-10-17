@@ -1,5 +1,6 @@
 import type { NextPage } from 'next'
 import Head from 'next/head'
+import Image from 'next/image'
 
 import {
     Box,
@@ -11,9 +12,22 @@ import {
     TableContainer,
     TableHead,
     TableRow,
+    Typography,
 } from '@mui/material'
 import { UseLeaderboard } from '../queries/useLeaderboard'
 import { Container } from '@mui/system'
+
+function plassVisning(plass: number) {
+    switch (plass) {
+        case 1:
+            return '🥇'
+        case 2:
+            return '🥈'
+        case 3:
+            return '🥉'
+    }
+    return plass
+}
 
 const Leaderboard: NextPage = () => {
     const { data, isLoading } = UseLeaderboard()
@@ -31,7 +45,8 @@ const Leaderboard: NextPage = () => {
                         <Table>
                             <TableHead>
                                 <TableRow>
-                                    <TableCell>Plass</TableCell>
+                                    <TableCell align="center">Plass</TableCell>
+                                    <TableCell></TableCell>
                                     <TableCell>Navn</TableCell>
                                     <TableCell align="right">Poeng</TableCell>
                                 </TableRow>
@@ -42,8 +57,12 @@ const Leaderboard: NextPage = () => {
                                         key={row.userid}
                                         sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
                                     >
-                                        <TableCell align="left">{i + 1}</TableCell>
-
+                                        <TableCell align="center">
+                                            <Typography variant="h2"> {plassVisning(i + 1)}</Typography>
+                                        </TableCell>
+                                        <TableCell align="left">
+                                            {row.picture && <Image src={row.picture} alt={row.name} width={'10vw'} />}
+                                        </TableCell>
                                         <TableCell component="th" scope="row">
                                             {row.name}
                                         </TableCell>
