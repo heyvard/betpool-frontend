@@ -1,7 +1,7 @@
 import type { NextPage } from 'next'
 import Head from 'next/head'
 
-import { Box, Typography } from '@mui/material'
+import { Typography, Container } from '@mui/material'
 
 const Home: NextPage = () => {
     return (
@@ -9,7 +9,7 @@ const Home: NextPage = () => {
             <Head>
                 <title>Rules</title>
             </Head>
-            <Box justifyContent="center" alignItems="center" minHeight="80vh">
+            <Container maxWidth="md">
                 <Typography variant="h4" component="h2">
                     Regler!
                 </Typography>
@@ -65,7 +65,7 @@ const Home: NextPage = () => {
                 <br />
                 Kampverdien økes til 2, I finalen er den 3<br />
                 <br />
-            </Box>
+            </Container>
         </>
     )
 }
