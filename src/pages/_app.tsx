@@ -4,7 +4,7 @@ import firebase from '../auth/clientApp'
 import { SignInScreen } from '../components/SignIn'
 import { BottomNavigation, BottomNavigationAction, Box, CircularProgress, Paper } from '@mui/material'
 import { useState } from 'react'
-import { Restore, Favorite, LocationOnRounded, LogoutOutlined } from '@mui/icons-material'
+import { Favorite, LogoutOutlined, Sports, LocalPolice, Chat } from '@mui/icons-material'
 import { Theme } from '../components/theme/Theme'
 import { QueryClient, QueryClientProvider } from 'react-query'
 import { UseUser } from '../queries/useUser'
@@ -38,10 +38,11 @@ function UserFetchInnlogging(props: { children: React.ReactNode }) {
                         }
                     }}
                 >
-                    <BottomNavigationAction label="Home" value="/" icon={<Restore />} />
-                    <BottomNavigationAction value="/leaderboard" label="Leaderboard" icon={<Favorite />} />
-                    <BottomNavigationAction label="Nearby" icon={<LocationOnRounded />} />
-                    <BottomNavigationAction value="utlogging" label="Logout" icon={<LogoutOutlined />} />
+                    <BottomNavigationAction label="Bets" value="/" icon={<Sports />} />
+                    <BottomNavigationAction label="Leaderboard" value="/leaderboard" icon={<Favorite />} />
+                    <BottomNavigationAction label="Chat" value="/chat" icon={<Chat />} />
+                    <BottomNavigationAction label="Regler" value="/rules" icon={<LocalPolice />} />
+                    <BottomNavigationAction label="Logout" value="utlogging" icon={<LogoutOutlined />} />
                 </BottomNavigation>
             </Paper>
         </>

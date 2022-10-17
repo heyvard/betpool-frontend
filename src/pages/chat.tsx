@@ -7,11 +7,11 @@ const Home: NextPage = () => {
     return (
         <>
             <Head>
-                <title>Leaderboard</title>
+                <title>Chat</title>
             </Head>
             <Box display="flex" justifyContent="center" alignItems="center" minHeight="80vh">
                 <Typography variant="h4" component="h2">
-                    Leaderboard!
+                    Chat!
                 </Typography>
             </Box>
         </>

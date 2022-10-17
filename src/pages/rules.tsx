@@ -1,0 +1,73 @@
+import type { NextPage } from 'next'
+import Head from 'next/head'
+
+import { Box, Typography } from '@mui/material'
+
+const Home: NextPage = () => {
+    return (
+        <>
+            <Head>
+                <title>Rules</title>
+            </Head>
+            <Box justifyContent="center" alignItems="center" minHeight="80vh">
+                <Typography variant="h4" component="h2">
+                    Regler!
+                </Typography>
+                <h3>Innskudd</h3>
+                Det koster 250 kr å delta.
+                <br />
+                Pengene må være overført innen første kamp på vipps til 467 90 000
+                <h3>Premier</h3>
+                Potten er på: 5.500 kr
+                <br />
+                1. plass får 45% av potten: 2.475 kr
+                <br />
+                2. plass får 25% av potten: 1.375 kr
+                <br />
+                3. plass får 15% av potten: 825 kr
+                <br />
+                4. plass får 10% av potten: 550 kr
+                <br />
+                5. plass får 5% av potten: 275 kr
+                <br />
+                <br />
+                Hvis flere personer får like mange poeng så deles premiepottene for de aktuelle plassene.
+                <br />
+                <br />
+                <i>Eksempel:</i>
+                <br />
+                To personer kommer på delt 2. plass.
+                <br />
+                Premien for 2. plass er 1.125 kr og 3. plass er 675 kr.
+                <br />
+                Begge får da 900 kr.
+                <br />
+                <br />
+                <h3>Poengsystem</h3>
+                Man får 1 poeng ganget med kampverdien for å gjette riktig utfall av kampen (hvem som vinner eller
+                uavgjort).
+                <br />
+                <br />
+                Treffer man riktig resultat får man 2-5 poeng avhengig av hvor mange andre som hadde riktig resultat
+                <h2>Tidsfrister</h2>
+                Du kan bette helt frem til kampstart. Bets sendt inn etter kampstart blir ikke lagret.
+                <h3>Kampverdier</h3>
+                <b>Fase 1:</b> Gruppespill
+                <br />
+                Kampverdien er 1. Maksimal poengfangst er TBA poeng.
+                <br />
+                <br />
+                <b>Fase 2:</b> Sluttspill
+                <br />
+                Sluttspillet er i gang og nervene er i høyspenn!
+                <br />
+                I sluttspillet tipper man på stillingen etter ordinær spilletid (90 min)
+                <br />
+                Kampverdien økes til 2, I finalen er den 3<br />
+                <br />
+            </Box>
+        </>
+    )
+}
+
+export default Home
