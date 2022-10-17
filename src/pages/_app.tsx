@@ -8,10 +8,11 @@ import { Restore, Favorite, LocationOnRounded, LogoutOutlined } from '@mui/icons
 import { Theme } from '../components/theme/Theme'
 import { QueryClient, QueryClientProvider } from 'react-query'
 import { UseUser } from '../queries/useUser'
+import { useRouter } from 'next/router'
 
 function UserFetchInnlogging(props: { children: React.ReactNode }) {
     const { isLoading } = UseUser()
-    const [value, setValue] = useState('sdf')
+    const router = useRouter()
     if (isLoading) {
         return (
             <Box display="flex" justifyContent="center" alignItems="center" minHeight="100vh">
@@ -19,6 +20,7 @@ function UserFetchInnlogging(props: { children: React.ReactNode }) {
             </Box>
         )
     }
+    console.log(router.pathname)
 
     return (
         <>
@@ -26,15 +28,20 @@ function UserFetchInnlogging(props: { children: React.ReactNode }) {
             <Paper sx={{ position: 'fixed', bottom: 0, left: 0, right: 0 }} elevation={3}>
                 <BottomNavigation
                     showLabels
-                    value={value}
+                    value={router.pathname}
                     onChange={(event, newValue) => {
-                        setValue(newValue)
+                        console.log(newValue)
+                        if (newValue == 'utlogging') {
+                            window.alert('log out')
+                        } else {
+                            router.push(newValue)
+                        }
                     }}
                 >
-                    <BottomNavigationAction label="Recents" icon={<Restore />} />
-                    <BottomNavigationAction label="Favorites" icon={<Favorite />} />
+                    <BottomNavigationAction label="Home" value="/" icon={<Restore />} />
+                    <BottomNavigationAction value="/leaderboard" label="Leaderboard" icon={<Favorite />} />
                     <BottomNavigationAction label="Nearby" icon={<LocationOnRounded />} />
-                    <BottomNavigationAction label="Logout" icon={<LogoutOutlined />} />
+                    <BottomNavigationAction value="utlogging" label="Logout" icon={<LogoutOutlined />} />
                 </BottomNavigation>
             </Paper>
         </>
