@@ -11,7 +11,6 @@ import {
     TableContainer,
     TableHead,
     TableRow,
-    Typography,
 } from '@mui/material'
 import { UseLeaderboard } from '../queries/useLeaderboard'
 import { Container } from '@mui/system'

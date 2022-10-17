@@ -31,7 +31,6 @@ function UserFetchInnlogging(props: { children: React.ReactNode }) {
                     showLabels
                     value={router.pathname}
                     onChange={(event, newValue) => {
-                        console.log(newValue)
                         if (newValue == 'utlogging') {
                             firebase.auth().signOut()
                         } else {
