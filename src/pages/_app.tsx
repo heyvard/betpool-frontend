@@ -12,8 +12,10 @@ import { useRouter } from 'next/router'
 
 function UserFetchInnlogging(props: { children: React.ReactNode }) {
     const { isLoading } = UseUser()
+    const [user] = useAuthState(firebase.auth())
+
     const router = useRouter()
-    if (isLoading) {
+    if (isLoading || !user) {
         return (
             <Box display="flex" justifyContent="center" alignItems="center" minHeight="100vh">
                 <CircularProgress />
@@ -32,7 +34,7 @@ function UserFetchInnlogging(props: { children: React.ReactNode }) {
                     onChange={(event, newValue) => {
                         console.log(newValue)
                         if (newValue == 'utlogging') {
-                            window.alert('log out')
+                            firebase.auth().signOut()
                         } else {
                             router.push(newValue)
                         }
