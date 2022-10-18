@@ -9,6 +9,7 @@ import { Theme } from '../components/theme/Theme'
 import { QueryClient, QueryClientProvider } from 'react-query'
 import { UseUser } from '../queries/useUser'
 import { useRouter } from 'next/router'
+import { Spinner } from '../components/loading/Spinner'
 
 function UserFetchInnlogging(props: { children: React.ReactNode }) {
     const { isLoading } = UseUser()
@@ -16,11 +17,7 @@ function UserFetchInnlogging(props: { children: React.ReactNode }) {
 
     const router = useRouter()
     if (isLoading || !user) {
-        return (
-            <Box display="flex" justifyContent="center" alignItems="center" minHeight="100vh">
-                <CircularProgress />
-            </Box>
-        )
+        return <Spinner />
     }
 
     return (

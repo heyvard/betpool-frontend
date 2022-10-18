@@ -1,6 +1,8 @@
 import React from 'react'
 import StyledFirebaseAuth from 'react-firebaseui/StyledFirebaseAuth'
 import firebase from '../auth/clientApp'
+import { Container, Stack } from '@mui/system'
+import { Typography } from '@mui/material'
 
 // Configure FirebaseUI.
 const uiConfig = {
@@ -11,17 +13,14 @@ const uiConfig = {
 
 export function SignInScreen() {
     return (
-        <div
-            style={{
-                maxWidth: '320px',
-                display: 'flex',
-                flexDirection: 'column',
-                alignItems: 'center',
-                justifyContent: 'center',
-            }}
-        >
-            <h1>Betpool Login</h1>
+        <Container maxWidth="md" sx={{ mt: 2 }}>
+            <Stack direction="row" justifyContent="center">
+                <Typography variant="h4" component="h2">
+                    VM Betpool 2022
+                </Typography>
+            </Stack>
+
             <StyledFirebaseAuth uiConfig={uiConfig} firebaseAuth={firebase.auth()} />
-        </div>
+        </Container>
     )
 }

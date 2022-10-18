@@ -4,7 +4,6 @@ import Image from 'next/image'
 
 import {
     Box,
-    CircularProgress,
     Paper,
     Table,
     TableBody,
@@ -16,6 +15,7 @@ import {
 } from '@mui/material'
 import { UseLeaderboard } from '../queries/useLeaderboard'
 import { Container } from '@mui/system'
+import { Spinner } from '../components/loading/Spinner'
 
 function plassVisning(plass: number) {
     switch (plass) {
@@ -32,7 +32,7 @@ function plassVisning(plass: number) {
 const Leaderboard: NextPage = () => {
     const { data, isLoading } = UseLeaderboard()
     if (!data || isLoading) {
-        return <CircularProgress />
+        return <Spinner />
     }
     return (
         <>
