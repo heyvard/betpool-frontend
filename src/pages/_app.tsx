@@ -2,9 +2,19 @@ import type { AppProps } from 'next/app'
 import { useAuthState } from 'react-firebase-hooks/auth'
 import firebase from '../auth/clientApp'
 import { SignInScreen } from '../components/SignIn'
-import { BottomNavigation, BottomNavigationAction, Box, CircularProgress, Paper } from '@mui/material'
-import { useState } from 'react'
-import { EmojiEvents, LogoutOutlined, Sports, LocalPolice, Chat } from '@mui/icons-material'
+import LogoutIcon from '@mui/icons-material/Logout'
+import {
+    BottomNavigation,
+    BottomNavigationAction,
+    Box,
+    CircularProgress,
+    IconButton,
+    Menu,
+    MenuItem,
+    Paper,
+} from '@mui/material'
+import React, { useState } from 'react'
+import { EmojiEvents, Sports, Chat, Menu as MenuIcon, Person } from '@mui/icons-material'
 import { Theme } from '../components/theme/Theme'
 import { QueryClient, QueryClientProvider } from 'react-query'
 import { UseUser } from '../queries/useUser'
@@ -16,10 +26,19 @@ function UserFetchInnlogging(props: { children: React.ReactNode }) {
     const [user] = useAuthState(firebase.auth())
 
     const router = useRouter()
+
+    const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null)
+
+    const handleMenu = (event: React.MouseEvent<HTMLElement>) => {
+        setAnchorEl(event.currentTarget)
+    }
+
+    const handleClose = () => {
+        setAnchorEl(null)
+    }
     if (isLoading || !user) {
         return <Spinner />
     }
-
     return (
         <>
             {props.children}
@@ -28,18 +47,65 @@ function UserFetchInnlogging(props: { children: React.ReactNode }) {
                     showLabels
                     value={router.pathname}
                     onChange={(event, newValue) => {
-                        if (newValue == 'utlogging') {
-                            firebase.auth().signOut()
-                        } else {
-                            router.push(newValue)
-                        }
+                        router.push(newValue)
                     }}
                 >
                     <BottomNavigationAction label="Bets" value="/" icon={<Sports />} />
                     <BottomNavigationAction label="Leaderboard" value="/leaderboard" icon={<EmojiEvents />} />
                     <BottomNavigationAction label="Chat" value="/chat" icon={<Chat />} />
-                    <BottomNavigationAction label="Regler" value="/rules" icon={<LocalPolice />} />
-                    <BottomNavigationAction label="Logout" value="utlogging" icon={<LogoutOutlined />} />
+                    <IconButton
+                        size="large"
+                        aria-label="account of current user"
+                        aria-controls="menu-appbar"
+                        aria-haspopup="true"
+                        onClick={handleMenu}
+                        color="inherit"
+                    >
+                        <MenuIcon />
+                    </IconButton>
+                    <Menu
+                        id="menu-appbar"
+                        anchorEl={anchorEl}
+                        anchorOrigin={{
+                            vertical: 'top',
+                            horizontal: 'right',
+                        }}
+                        keepMounted
+                        transformOrigin={{
+                            vertical: 'top',
+                            horizontal: 'right',
+                        }}
+                        open={Boolean(anchorEl)}
+                        onClose={handleClose}
+                    >
+                        <MenuItem
+                            onClick={async () => {
+                                handleClose()
+                            }}
+                        >
+                            {' '}
+                            <Person />
+                            {user.displayName}
+                        </MenuItem>
+                        <MenuItem
+                            onClick={async () => {
+                                await firebase.auth().signOut()
+                                handleClose()
+                            }}
+                        >
+                            <LogoutIcon />
+                            Logout
+                        </MenuItem>
+                        <MenuItem
+                            onClick={() => {
+                                handleClose()
+                                router.push('rules')
+                            }}
+                        >
+                            <EmojiEvents />
+                            Regler
+                        </MenuItem>
+                    </Menu>
                 </BottomNavigation>
             </Paper>
         </>
