@@ -3,6 +3,8 @@ import { useAuthState } from 'react-firebase-hooks/auth'
 import firebase from '../auth/clientApp'
 import { SignInScreen } from '../components/SignIn'
 import LogoutIcon from '@mui/icons-material/Logout'
+import MenuOpenIcon from '@mui/icons-material/MenuOpen'
+import MenuIcon from '@mui/icons-material/Menu'
 import {
     BottomNavigation,
     BottomNavigationAction,
@@ -14,7 +16,7 @@ import {
     Paper,
 } from '@mui/material'
 import React, { useState } from 'react'
-import { EmojiEvents, Sports, Chat, Menu as MenuIcon, Person } from '@mui/icons-material'
+import { EmojiEvents, Sports, Chat, Person } from '@mui/icons-material'
 import { Theme } from '../components/theme/Theme'
 import { QueryClient, QueryClientProvider } from 'react-query'
 import { UseUser } from '../queries/useUser'
@@ -61,7 +63,7 @@ function UserFetchInnlogging(props: { children: React.ReactNode }) {
                         onClick={handleMenu}
                         color="inherit"
                     >
-                        <MenuIcon />
+                        {anchorEl != null ? <MenuOpenIcon /> : <MenuIcon />}
                     </IconButton>
                     <Menu
                         id="menu-appbar"
@@ -72,7 +74,7 @@ function UserFetchInnlogging(props: { children: React.ReactNode }) {
                         }}
                         keepMounted
                         transformOrigin={{
-                            vertical: 'top',
+                            vertical: 'bottom',
                             horizontal: 'right',
                         }}
                         open={Boolean(anchorEl)}
@@ -87,15 +89,7 @@ function UserFetchInnlogging(props: { children: React.ReactNode }) {
                             <Person />
                             {user.displayName}
                         </MenuItem>
-                        <MenuItem
-                            onClick={async () => {
-                                await firebase.auth().signOut()
-                                handleClose()
-                            }}
-                        >
-                            <LogoutIcon />
-                            Logout
-                        </MenuItem>
+
                         <MenuItem
                             onClick={() => {
                                 handleClose()
@@ -104,6 +98,15 @@ function UserFetchInnlogging(props: { children: React.ReactNode }) {
                         >
                             <EmojiEvents />
                             Regler
+                        </MenuItem>
+                        <MenuItem
+                            onClick={async () => {
+                                await firebase.auth().signOut()
+                                handleClose()
+                            }}
+                        >
+                            <LogoutIcon />
+                            Logout
                         </MenuItem>
                     </Menu>
                 </BottomNavigation>
