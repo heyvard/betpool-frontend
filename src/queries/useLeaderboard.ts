@@ -8,7 +8,7 @@ export function UseLeaderboard() {
 
     return useQuery<LeaderboardLinje[], Error>('leaderboard', async () => {
         const idtoken = await user?.getIdToken()
-        let responsePromise = await fetch('/api/v1/leaderboard', {
+        let responsePromise = await fetch('https://betpool-2022-backend.vercel.app/api/v1/leaderboard', {
             method: 'GET',
             headers: { Authorization: `Bearer ${idtoken}` },
         })

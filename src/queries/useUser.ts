@@ -8,7 +8,7 @@ export function UseUser() {
 
     return useQuery<User, Error>('user', async () => {
         const idtoken = await user?.getIdToken()
-        let responsePromise = await fetch('/api/v1/me', {
+        let responsePromise = await fetch('https://betpool-2022-backend.vercel.app/api/v1/me', {
             method: 'GET',
             headers: { Authorization: `Bearer ${idtoken}` },
         })
