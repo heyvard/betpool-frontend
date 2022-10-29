@@ -1,22 +1,17 @@
 import { Box, Card, CardContent, TextField, Typography } from '@mui/material'
 import { Bet } from '../../types/types'
 import dayjs from 'dayjs'
+import { useState } from 'react'
 
 export const BetView = ({ bet }: { bet: Bet }) => {
-    // const [hjemmescore, setHjemmescore] = useState<number | undefined>(bet.home_score)
-    // const [bortescore, setBortescore] = useState<number | undefined>(bet.home_score)
+    const [hjemmescore, setHjemmescore] = useState<number | undefined>(bet.home_score)
+    const [bortescore, setBortescore] = useState<number | undefined>(bet.away_score)
 
     const kampstart = dayjs(bet.game_start)
 
-    function fixLand(s: string): string {
-        const split = s.split(' ')
-        if (split.length == 2) {
-            return split[1] + ' ' + split[0]
-        }
-        return s
-    }
+    const disabled = kampstart.isBefore(dayjs())
+    const lagreknapp = hjemmescore !== bet.home_score || bortescore !== bet.away_score
 
-    let disabled = kampstart.isBefore(dayjs())
     return (
         <Card sx={{ mt: 1 }}>
             <CardContent>
@@ -24,10 +19,17 @@ export const BetView = ({ bet }: { bet: Bet }) => {
                 <Box sx={{ display: 'flex', alignItems: 'flex-end' }}>
                     <Typography width={100}> {fixLand(bet.home_team)}</Typography>
                     <TextField
+                        type={'number'}
                         disabled={disabled}
                         variant="standard"
-                        sx={{
-                            width: { sm: 50, md: 50 },
+                        sx={{ width: 40 }}
+                        value={hjemmescore}
+                        onChange={(e) => {
+                            if (!e.currentTarget.value) {
+                                setHjemmescore(undefined)
+                                return
+                            }
+                            setHjemmescore(Number(e.currentTarget.value))
                         }}
                     />
                 </Box>
@@ -35,14 +37,30 @@ export const BetView = ({ bet }: { bet: Bet }) => {
                     <Typography width={100}> {fixLand(bet.away_team)}</Typography>
 
                     <TextField
+                        type={'number'}
                         disabled={disabled}
                         variant="standard"
-                        sx={{
-                            width: { sm: 50, md: 50 },
+                        sx={{ width: 40 }}
+                        value={bortescore}
+                        onChange={(e) => {
+                            if (!e.currentTarget.value) {
+                                setBortescore(undefined)
+                                return
+                            }
+                            setBortescore(Number(e.currentTarget.value))
                         }}
                     />
                 </Box>
+                {lagreknapp && 'Lagre'}
             </CardContent>
         </Card>
     )
+}
+
+function fixLand(s: string): string {
+    const split = s.split(' ')
+    if (split.length == 2) {
+        return split[1] + ' ' + split[0]
+    }
+    return s
 }
