@@ -145,7 +145,7 @@ function MyApp({ Component, pageProps }: AppProps) {
                         refetchOnWindowFocus: false,
                     },
                 },
-            })
+            }),
     )
 
     return (
