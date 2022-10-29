@@ -3,18 +3,18 @@ import { Bet } from '../../types/types'
 import dayjs from 'dayjs'
 import { useState } from 'react'
 import SaveIcon from '@mui/icons-material/Save'
-import { useQueryClient } from 'react-query'
+import { UseMutateBet } from '../../queries/mutateBet'
 
 export const BetView = ({ bet }: { bet: Bet }) => {
     const [hjemmescore, setHjemmescore] = useState<number | undefined>(bet.home_score)
     const [bortescore, setBortescore] = useState<number | undefined>(bet.away_score)
 
     const kampstart = dayjs(bet.game_start)
-    const queryClient = useQueryClient()
+
+    const { mutate } = UseMutateBet(bet.bet_id, hjemmescore!, bortescore!)
 
     const disabled = kampstart.isBefore(dayjs())
     const lagreknapp = hjemmescore !== bet.home_score || bortescore !== bet.away_score
-    const color = lagreknapp ? 'warning' : undefined
     return (
         <Card sx={{ mt: 1 }}>
             <CardContent>
@@ -24,7 +24,7 @@ export const BetView = ({ bet }: { bet: Bet }) => {
                     <TextField
                         type={'number'}
                         disabled={disabled}
-                        color={color}
+                        error={lagreknapp}
                         variant="standard"
                         sx={{ width: 40 }}
                         value={hjemmescore}
@@ -44,7 +44,7 @@ export const BetView = ({ bet }: { bet: Bet }) => {
                         type={'number'}
                         disabled={disabled}
                         variant="standard"
-                        color={color}
+                        error={lagreknapp}
                         sx={{ width: 40 }}
                         value={bortescore}
                         onChange={(e) => {
@@ -61,7 +61,7 @@ export const BetView = ({ bet }: { bet: Bet }) => {
                         sx={{ mt: 2 }}
                         variant="contained"
                         onClick={() => {
-                            queryClient.invalidateQueries(['my-bets']).then()
+                            mutate()
                         }}
                         endIcon={<SaveIcon />}
                     >
