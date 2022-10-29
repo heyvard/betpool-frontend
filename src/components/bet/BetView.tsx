@@ -14,7 +14,7 @@ export const BetView = ({ bet }: { bet: Bet }) => {
 
     const disabled = kampstart.isBefore(dayjs())
     const lagreknapp = hjemmescore !== bet.home_score || bortescore !== bet.away_score
-
+    const color = lagreknapp ? 'warning' : undefined
     return (
         <Card sx={{ mt: 1 }}>
             <CardContent>
@@ -24,6 +24,7 @@ export const BetView = ({ bet }: { bet: Bet }) => {
                     <TextField
                         type={'number'}
                         disabled={disabled}
+                        color={color}
                         variant="standard"
                         sx={{ width: 40 }}
                         value={hjemmescore}
@@ -43,6 +44,7 @@ export const BetView = ({ bet }: { bet: Bet }) => {
                         type={'number'}
                         disabled={disabled}
                         variant="standard"
+                        color={color}
                         sx={{ width: 40 }}
                         value={bortescore}
                         onChange={(e) => {
@@ -56,6 +58,7 @@ export const BetView = ({ bet }: { bet: Bet }) => {
                 </Box>
                 {lagreknapp && (
                     <Button
+                        sx={{ mt: 2 }}
                         variant="contained"
                         onClick={() => {
                             queryClient.invalidateQueries(['my-bets']).then()
