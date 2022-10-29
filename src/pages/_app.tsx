@@ -5,17 +5,8 @@ import { SignInScreen } from '../components/SignIn'
 import LogoutIcon from '@mui/icons-material/Logout'
 import MenuOpenIcon from '@mui/icons-material/MenuOpen'
 import MenuIcon from '@mui/icons-material/Menu'
-import {
-    BottomNavigation,
-    BottomNavigationAction,
-    Box,
-    CircularProgress,
-    IconButton,
-    Menu,
-    MenuItem,
-    Paper,
-} from '@mui/material'
-import React, { useState } from 'react'
+import { BottomNavigation, BottomNavigationAction, Box, CircularProgress, Menu, MenuItem, Paper } from '@mui/material'
+import React, { SyntheticEvent, useState } from 'react'
 import { EmojiEvents, Sports, Chat, Person } from '@mui/icons-material'
 import { Theme } from '../components/theme/Theme'
 import { QueryClient, QueryClientProvider } from 'react-query'
@@ -29,9 +20,9 @@ function UserFetchInnlogging(props: { children: React.ReactNode }) {
 
     const router = useRouter()
 
-    const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null)
+    const [anchorEl, setAnchorEl] = useState<null | Element>(null)
 
-    const handleMenu = (event: React.MouseEvent<HTMLElement>) => {
+    const handleMenu = (event: SyntheticEvent<Element, Event>) => {
         setAnchorEl(event.currentTarget)
     }
 
@@ -49,22 +40,22 @@ function UserFetchInnlogging(props: { children: React.ReactNode }) {
                     showLabels
                     value={router.pathname}
                     onChange={(event, newValue) => {
+                        if (newValue == 'meny') {
+                            handleMenu(event)
+                            return
+                        }
                         router.push(newValue)
                     }}
                 >
                     <BottomNavigationAction label="Bets" value="/" icon={<Sports />} />
                     <BottomNavigationAction label="Leaderboard" value="/leaderboard" icon={<EmojiEvents />} />
                     <BottomNavigationAction label="Chat" value="/chat" icon={<Chat />} />
-                    <IconButton
-                        size="large"
-                        aria-label="account of current user"
-                        aria-controls="menu-appbar"
-                        aria-haspopup="true"
-                        onClick={handleMenu}
-                        color="inherit"
-                    >
-                        {anchorEl != null ? <MenuOpenIcon /> : <MenuIcon />}
-                    </IconButton>
+                    <BottomNavigationAction
+                        label="Menu"
+                        value="meny"
+                        icon={anchorEl != null ? <MenuOpenIcon /> : <MenuIcon />}
+                    />
+
                     <Menu
                         id="menu-appbar"
                         anchorEl={anchorEl}
