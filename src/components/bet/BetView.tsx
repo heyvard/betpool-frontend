@@ -41,7 +41,10 @@ export const BetView = ({ bet }: { bet: Bet }) => {
                                 setHjemmescore(undefined)
                                 return
                             }
-                            setHjemmescore(Number(e.currentTarget.value))
+                            const number = Number(e.currentTarget.value)
+                            if (number >= 0 && number <= 99) {
+                                setHjemmescore(number)
+                            }
                         }}
                     />
                 </Box>
@@ -67,7 +70,10 @@ export const BetView = ({ bet }: { bet: Bet }) => {
                                 setBortescore(undefined)
                                 return
                             }
-                            setBortescore(Number(e.currentTarget.value))
+                            const number = Number(e.currentTarget.value)
+                            if (number >= 0 && number <= 99) {
+                                setBortescore(number)
+                            }
                         }}
                     />
                 </Box>
