@@ -7,12 +7,15 @@ import MenuOpenIcon from '@mui/icons-material/MenuOpen'
 import MenuIcon from '@mui/icons-material/Menu'
 import { BottomNavigation, BottomNavigationAction, Box, CircularProgress, Menu, MenuItem, Paper } from '@mui/material'
 import React, { SyntheticEvent, useState } from 'react'
-import { EmojiEvents, Sports, Chat, Person } from '@mui/icons-material'
+import { EmojiEvents, Chat, Person } from '@mui/icons-material'
 import { Theme } from '../components/theme/Theme'
 import { QueryClient, QueryClientProvider } from 'react-query'
 import { UseUser } from '../queries/useUser'
 import { useRouter } from 'next/router'
 import { Spinner } from '../components/loading/Spinner'
+import SportsSoccerIcon from '@mui/icons-material/SportsSoccer'
+import SportsScoreIcon from '@mui/icons-material/SportsScore'
+import Head from 'next/head'
 
 function UserFetchInnlogging(props: { children: React.ReactNode }) {
     const { isLoading } = UseUser()
@@ -47,8 +50,9 @@ function UserFetchInnlogging(props: { children: React.ReactNode }) {
                         router.push(newValue)
                     }}
                 >
-                    <BottomNavigationAction label="Bets" value="/" icon={<Sports />} />
-                    <BottomNavigationAction label="Leaderboard" value="/leaderboard" icon={<EmojiEvents />} />
+                    <BottomNavigationAction label="Bets" value="/" icon={<SportsSoccerIcon />} />
+                    <BottomNavigationAction label="Resultater" value="/past-bets" icon={<SportsScoreIcon />} />
+                    <BottomNavigationAction label="Sammendraget" value="/leaderboard" icon={<EmojiEvents />} />
                     <BottomNavigationAction label="Chat" value="/chat" icon={<Chat />} />
                     <BottomNavigationAction
                         label="Menu"
@@ -140,15 +144,20 @@ function MyApp({ Component, pageProps }: AppProps) {
     )
 
     return (
-        <Theme>
-            <QueryClientProvider client={queryClient}>
-                <Box sx={{ pb: 7 }}>
-                    <UserInnlogging>
-                        <Component {...pageProps} />
-                    </UserInnlogging>
-                </Box>
-            </QueryClientProvider>
-        </Theme>
+        <>
+            <Head>
+                <title>Betpool 2022</title>
+            </Head>
+            <Theme>
+                <QueryClientProvider client={queryClient}>
+                    <Box sx={{ pb: 7 }}>
+                        <UserInnlogging>
+                            <Component {...pageProps} />
+                        </UserInnlogging>
+                    </Box>
+                </QueryClientProvider>
+            </Theme>
+        </>
     )
 }
 

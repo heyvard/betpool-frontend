@@ -15,3 +15,8 @@ export interface Bet {
     bet_id: string
     channel: string
 }
+
+export interface Chat {
+    message: string
+    id: string
+}

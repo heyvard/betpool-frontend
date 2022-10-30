@@ -15,7 +15,8 @@ const Home: NextPage = () => {
         <>
             <Container maxWidth="md" sx={{ mt: 2 }}>
                 {myBets
-                    .filter((b) => dayjs(b.game_start).isAfter(dayjs()))
+                    .filter((b) => dayjs(b.game_start).isBefore(dayjs()))
+                    .sort((b, a) => dayjs(a.game_start).unix() - dayjs(b.game_start).unix())
                     .map((a) => (
                         <BetView key={a.bet_id} bet={a} />
                     ))}
