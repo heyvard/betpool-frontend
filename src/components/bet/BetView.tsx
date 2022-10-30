@@ -27,6 +27,13 @@ export const BetView = ({ bet }: { bet: Bet }) => {
                         disabled={disabled}
                         error={lagreknapp}
                         variant="standard"
+                        InputProps={{
+                            sx: {
+                                '& input': {
+                                    textAlign: 'center',
+                                },
+                            },
+                        }}
                         sx={{ width: 40 }}
                         value={hjemmescore}
                         onChange={(e) => {
@@ -45,6 +52,13 @@ export const BetView = ({ bet }: { bet: Bet }) => {
                         type={'number'}
                         disabled={disabled}
                         variant="standard"
+                        InputProps={{
+                            sx: {
+                                '& input': {
+                                    textAlign: 'center',
+                                },
+                            },
+                        }}
                         error={lagreknapp}
                         sx={{ width: 40 }}
                         value={bortescore}
