@@ -3,7 +3,7 @@ import { useMutation, useQueryClient } from 'react-query'
 import { useAuthState } from 'react-firebase-hooks/auth'
 import firebase from '../auth/clientApp'
 
-export function UseMutateBet(id: string, homeScore: number, awayScore: number) {
+export function UseMutateBet(id: string, homeScore: number, awayScore: number, successCallback: () => void) {
     const queryClient = useQueryClient()
     const [user] = useAuthState(firebase.auth())
 
@@ -20,6 +20,7 @@ export function UseMutateBet(id: string, homeScore: number, awayScore: number) {
         {
             onSuccess: () => {
                 queryClient.invalidateQueries('my-bets').then()
+                successCallback()
             },
         },
     )

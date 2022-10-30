@@ -7,15 +7,22 @@ import { UseMutateBet } from '../../queries/mutateBet'
 import LoadingButton from '@mui/lab/LoadingButton'
 
 export const BetView = ({ bet }: { bet: Bet }) => {
-    const [hjemmescore, setHjemmescore] = useState<number | undefined>(bet.home_score)
-    const [bortescore, setBortescore] = useState<number | undefined>(bet.away_score)
-
+    const [hjemmescore, setHjemmescore] = useState<string>(bet.home_score + '')
+    const [bortescore, setBortescore] = useState<string>(bet.away_score + '')
+    const [nyligLagret, setNyliglagret] = useState(false)
     const kampstart = dayjs(bet.game_start)
 
-    const { mutate, isLoading } = UseMutateBet(bet.bet_id, hjemmescore!, bortescore!)
+    const lagreCb = () => {
+        setNyliglagret(true)
+        setTimeout(() => {
+            setNyliglagret(false)
+        }, 2000)
+    }
+
+    const { mutate, isLoading } = UseMutateBet(bet.bet_id, Number(hjemmescore!), Number(bortescore!), lagreCb)
 
     const disabled = kampstart.isBefore(dayjs())
-    const lagreknapp = hjemmescore !== bet.home_score || bortescore !== bet.away_score
+    const lagreknappSynlig = (hjemmescore !== bet.home_score + '' || bortescore !== bet.away_score + '') && !nyligLagret
     return (
         <Card sx={{ mt: 1 }}>
             <CardContent>
@@ -25,7 +32,7 @@ export const BetView = ({ bet }: { bet: Bet }) => {
                     <TextField
                         type={'number'}
                         disabled={disabled}
-                        error={lagreknapp}
+                        error={lagreknappSynlig}
                         variant="standard"
                         InputProps={{
                             sx: {
@@ -38,12 +45,13 @@ export const BetView = ({ bet }: { bet: Bet }) => {
                         value={hjemmescore}
                         onChange={(e) => {
                             if (!e.currentTarget.value) {
-                                setHjemmescore(undefined)
+                                setHjemmescore('')
                                 return
                             }
                             const number = Number(e.currentTarget.value)
                             if (number >= 0 && number <= 99) {
-                                setHjemmescore(number)
+                                console.log('Setter number', number)
+                                setHjemmescore(String(number))
                             }
                         }}
                     />
@@ -62,22 +70,22 @@ export const BetView = ({ bet }: { bet: Bet }) => {
                                 },
                             },
                         }}
-                        error={lagreknapp}
+                        error={lagreknappSynlig}
                         sx={{ width: 40 }}
                         value={bortescore}
                         onChange={(e) => {
                             if (!e.currentTarget.value) {
-                                setBortescore(undefined)
+                                setBortescore('undefined')
                                 return
                             }
                             const number = Number(e.currentTarget.value)
                             if (number >= 0 && number <= 99) {
-                                setBortescore(number)
+                                setBortescore(String(number))
                             }
                         }}
                     />
                 </Box>
-                {lagreknapp && (
+                {lagreknappSynlig && (
                     <LoadingButton
                         sx={{ mt: 2 }}
                         variant="contained"
