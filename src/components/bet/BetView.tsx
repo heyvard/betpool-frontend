@@ -30,10 +30,14 @@ export const BetView = ({ bet }: { bet: Bet }) => {
                 <Box sx={{ display: 'flex', alignItems: 'flex-end' }}>
                     <Typography width={100}> {fixLand(bet.home_team)}</Typography>
                     <TextField
-                        type={'number'}
+                        type="text"
                         disabled={disabled}
                         error={lagreknappSynlig}
                         variant="standard"
+                        inputProps={{
+                            inputmode: 'numeric',
+                            pattern: '[0-9]*',
+                        }}
                         InputProps={{
                             sx: {
                                 '& input': {
@@ -60,9 +64,13 @@ export const BetView = ({ bet }: { bet: Bet }) => {
                     <Typography width={100}> {fixLand(bet.away_team)}</Typography>
 
                     <TextField
-                        type={'number'}
+                        type={'text'}
                         disabled={disabled}
                         variant="standard"
+                        inputProps={{
+                            inputmode: 'numeric',
+                            pattern: '[0-9]*',
+                        }}
                         InputProps={{
                             sx: {
                                 '& input': {
@@ -75,7 +83,7 @@ export const BetView = ({ bet }: { bet: Bet }) => {
                         value={bortescore}
                         onChange={(e) => {
                             if (!e.currentTarget.value) {
-                                setBortescore('undefined')
+                                setBortescore('')
                                 return
                             }
                             const number = Number(e.currentTarget.value)

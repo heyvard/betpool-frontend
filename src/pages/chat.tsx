@@ -1,6 +1,6 @@
 import type { NextPage } from 'next'
 
-import { Button, TextField } from '@mui/material'
+import { Button, Paper, TextField } from '@mui/material'
 import { Spinner } from '../components/loading/Spinner'
 import { UseChat } from '../queries/useChat'
 import SendIcon from '@mui/icons-material/Send'
@@ -51,10 +51,14 @@ const Home: NextPage = () => {
     }
     return (
         <>
-            {chat.map((c) => (
-                <MessageLeft message={c.message} key={c.id} photoURL={c.picture} displayName={c.name} />
-            ))}
-            <TextInput></TextInput>
+            <Paper sx={{ position: 'fixed', bottom: 120, left: 0, right: 0 }} elevation={3}>
+                {chat.map((c) => (
+                    <MessageLeft message={c.message} key={c.id} photoURL={c.picture} displayName={c.name} />
+                ))}
+            </Paper>
+            <Paper sx={{ position: 'fixed', bottom: 60, left: 0, right: 0 }} elevation={3}>
+                <TextInput></TextInput>
+            </Paper>
         </>
     )
 }
