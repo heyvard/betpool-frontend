@@ -19,4 +19,7 @@ export interface Bet {
 export interface Chat {
     message: string
     id: string
+    created_at: string
+    name: string
+    picture: string
 }

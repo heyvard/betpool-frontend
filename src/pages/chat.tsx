@@ -6,6 +6,7 @@ import { UseChat } from '../queries/useChat'
 import SendIcon from '@mui/icons-material/Send'
 import { useState } from 'react'
 import { UseMutateChat } from '../queries/mutateChat'
+import { MessageLeft } from '../components/chat/bubbles'
 
 const TextInput = () => {
     const [input, setInput] = useState<string>('')
@@ -50,9 +51,9 @@ const Home: NextPage = () => {
     }
     return (
         <>
-            {chat.map((c) => {
-                return <h1 key={c.id}>{c.message}</h1>
-            })}
+            {chat.map((c) => (
+                <MessageLeft message={c.message} key={c.id} photoURL={c.picture} displayName={c.name} />
+            ))}
             <TextInput></TextInput>
         </>
     )
