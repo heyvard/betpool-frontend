@@ -9,8 +9,8 @@ export interface Bet {
     game_start: string
     away_team: string
     home_team: string
-    home_score?: number
-    away_score?: number
+    home_score: number | null
+    away_score: number | null
     match_id: string
     bet_id: string
     channel: string

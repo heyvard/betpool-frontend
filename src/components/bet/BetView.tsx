@@ -7,8 +7,17 @@ import { UseMutateBet } from '../../queries/mutateBet'
 import LoadingButton from '@mui/lab/LoadingButton'
 
 export const BetView = ({ bet }: { bet: Bet }) => {
-    const [hjemmescore, setHjemmescore] = useState<string>(bet.home_score + '')
-    const [bortescore, setBortescore] = useState<string>(bet.away_score + '')
+    const numberPropTilString = (prop: number | null) => {
+        if (prop == null) {
+            return ''
+        }
+        return `${prop}`
+    }
+
+    let hjemmescoreProp = numberPropTilString(bet.home_score)
+    const [hjemmescore, setHjemmescore] = useState<string>(hjemmescoreProp)
+    let bortescoreProp = numberPropTilString(bet.away_score)
+    const [bortescore, setBortescore] = useState<string>(bortescoreProp)
     const [nyligLagret, setNyliglagret] = useState(false)
     const kampstart = dayjs(bet.game_start)
 
@@ -22,7 +31,7 @@ export const BetView = ({ bet }: { bet: Bet }) => {
     const { mutate, isLoading } = UseMutateBet(bet.bet_id, Number(hjemmescore!), Number(bortescore!), lagreCb)
 
     const disabled = kampstart.isBefore(dayjs())
-    const lagreknappSynlig = (hjemmescore !== bet.home_score + '' || bortescore !== bet.away_score + '') && !nyligLagret
+    const lagreknappSynlig = (hjemmescore !== hjemmescoreProp || bortescore !== bortescoreProp) && !nyligLagret
     return (
         <Card sx={{ mt: 1 }}>
             <CardContent>
