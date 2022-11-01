@@ -11,6 +11,7 @@ const Home: NextPage = () => {
     if (!myBets) {
         return <Spinner />
     }
+
     return (
         <>
             <Container maxWidth="md" sx={{ mt: 2 }}>

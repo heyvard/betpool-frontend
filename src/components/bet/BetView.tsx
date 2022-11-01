@@ -5,6 +5,7 @@ import { useState } from 'react'
 import SaveIcon from '@mui/icons-material/Save'
 import { UseMutateBet } from '../../queries/mutateBet'
 import LoadingButton from '@mui/lab/LoadingButton'
+import { hentFlag } from '../../utils/lag'
 
 export const BetView = ({ bet }: { bet: Bet }) => {
     const numberPropTilString = (prop: number | null) => {
@@ -47,7 +48,7 @@ export const BetView = ({ bet }: { bet: Bet }) => {
     return (
         <Card sx={{ mt: 1 }}>
             <CardContent>
-                {kampstart.toString()}
+                {kampstart.format('ddd, D MMM  HH:mm')}
                 <Box sx={{ display: 'flex', alignItems: 'flex-end' }}>
                     <Typography width={100}> {fixLand(bet.home_team)}</Typography>
                     <TextField
@@ -133,9 +134,5 @@ export const BetView = ({ bet }: { bet: Bet }) => {
 }
 
 function fixLand(s: string): string {
-    const split = s.split(' ')
-    if (split.length == 2) {
-        return split[1] + ' ' + split[0]
-    }
-    return s
+    return hentFlag(s) + ' ' + s
 }
