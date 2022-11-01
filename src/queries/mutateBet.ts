@@ -3,7 +3,12 @@ import { useMutation, useQueryClient } from 'react-query'
 import { useAuthState } from 'react-firebase-hooks/auth'
 import firebase from '../auth/clientApp'
 
-export function UseMutateBet(id: string, homeScore: number, awayScore: number, successCallback: () => void) {
+export function UseMutateBet(
+    id: string,
+    homeScore: number | null,
+    awayScore: number | null,
+    successCallback: () => void,
+) {
     const queryClient = useQueryClient()
     const [user] = useAuthState(firebase.auth())
 

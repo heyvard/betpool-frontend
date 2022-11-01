@@ -28,7 +28,19 @@ export const BetView = ({ bet }: { bet: Bet }) => {
         }, 2000)
     }
 
-    const { mutate, isLoading } = UseMutateBet(bet.bet_id, Number(hjemmescore!), Number(bortescore!), lagreCb)
+    const stringTilNumber = (prop: string): number | null => {
+        if (prop == '') {
+            return null
+        }
+        return Number(prop!)
+    }
+
+    const { mutate, isLoading } = UseMutateBet(
+        bet.bet_id,
+        stringTilNumber(hjemmescore),
+        stringTilNumber(bortescore),
+        lagreCb,
+    )
 
     const disabled = kampstart.isBefore(dayjs())
     const lagreknappSynlig = (hjemmescore !== hjemmescoreProp || bortescore !== bortescoreProp) && !nyligLagret
