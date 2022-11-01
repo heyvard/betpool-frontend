@@ -6,7 +6,8 @@ import { UseChat } from '../queries/useChat'
 import SendIcon from '@mui/icons-material/Send'
 import { useState } from 'react'
 import { UseMutateChat } from '../queries/mutateChat'
-import { MessageLeft } from '../components/chat/bubbles'
+import { MessageLeft, MessageRight } from '../components/chat/bubbles'
+import { UseUser } from '../queries/useUser'
 
 const TextInput = () => {
     const [input, setInput] = useState<string>('')
@@ -46,15 +47,23 @@ const TextInput = () => {
 
 const Home: NextPage = () => {
     const { data: chat } = UseChat()
+
+    const { data: megselv } = UseUser()
     if (!chat) {
+        return <Spinner />
+    }
+    if (!megselv) {
         return <Spinner />
     }
     return (
         <>
             <Paper sx={{ position: 'fixed', bottom: 120, left: 0, right: 0 }} elevation={3}>
-                {chat.map((c) => (
-                    <MessageLeft message={c.message} key={c.id} photoURL={c.picture} displayName={c.name} />
-                ))}
+                {chat.map((c) => {
+                    if (megselv.id !== c.user_id) {
+                        return <MessageLeft message={c.message} key={c.id} photoURL={c.picture} displayName={c.name} />
+                    }
+                    return <MessageRight key={c.id} message={c.message} />
+                })}
             </Paper>
             <Paper sx={{ position: 'fixed', bottom: 60, left: 0, right: 0 }} elevation={3}>
                 <TextInput></TextInput>

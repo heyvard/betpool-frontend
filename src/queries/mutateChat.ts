@@ -36,6 +36,7 @@ export function UseMutateChat(message: string, successCallback: () => void) {
                     picture: megselv.picture,
                     name: megselv.name,
                     created_at: Date(),
+                    user_id: megselv.id,
                 }
                 // Optimistically update to the new value
                 queryClient.setQueryData('chat', [...previousTodos, ny])

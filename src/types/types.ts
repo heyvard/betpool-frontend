@@ -22,4 +22,5 @@ export interface Chat {
     created_at: string
     name: string
     picture: string
+    user_id: string
 }
