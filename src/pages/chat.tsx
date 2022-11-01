@@ -4,7 +4,7 @@ import { Button, Paper, TextField } from '@mui/material'
 import { Spinner } from '../components/loading/Spinner'
 import { UseChat } from '../queries/useChat'
 import SendIcon from '@mui/icons-material/Send'
-import { useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { UseMutateChat } from '../queries/mutateChat'
 import { MessageLeft, MessageRight } from '../components/chat/bubbles'
 import { UseUser } from '../queries/useUser'
@@ -49,21 +49,32 @@ const Home: NextPage = () => {
     const { data: chat } = UseChat()
 
     const { data: megselv } = UseUser()
+    const bottom = useRef<HTMLDivElement>(null)
+
+    useEffect(() => {
+        bottom.current?.scrollIntoView({ behavior: 'auto' })
+    }, [chat])
     if (!chat) {
         return <Spinner />
     }
     if (!megselv) {
         return <Spinner />
     }
+
     return (
         <>
-            <Paper sx={{ position: 'fixed', bottom: 120, left: 0, right: 0 }} elevation={3}>
+            <Paper
+                sx={{ position: 'fixed', bottom: 120, left: 0, right: 0 }}
+                elevation={3}
+                style={{ maxHeight: '100%', overflow: 'auto' }}
+            >
                 {chat.map((c) => {
                     if (megselv.id !== c.user_id) {
                         return <MessageLeft message={c.message} key={c.id} photoURL={c.picture} displayName={c.name} />
                     }
                     return <MessageRight key={c.id} message={c.message} />
                 })}
+                <div ref={bottom}></div>
             </Paper>
             <Paper sx={{ position: 'fixed', bottom: 60, left: 0, right: 0 }} elevation={3}>
                 <TextInput></TextInput>
