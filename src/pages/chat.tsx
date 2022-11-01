@@ -29,7 +29,7 @@ const TextInput = () => {
                 <TextField style={{ width: '100%' }} value={input} onChange={(e) => setInput(e.currentTarget.value)} />
                 <Button
                     variant="contained"
-                    disabled={isLoading}
+                    disabled={isLoading || input == ''}
                     type={'submit'}
                     onClick={(e) => {
                         e.preventDefault()
