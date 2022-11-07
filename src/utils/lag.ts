@@ -21,13 +21,13 @@ const alle: Lag[] = [
     {
         engelsk: 'Canada',
         norsk: 'Canada',
-        flagg: '🇺🇸',
+        flagg: '🇨🇦',
     },
     { engelsk: 'Costa Rica', norsk: 'Costa Rica', flagg: '🇨🇷' },
     {
         engelsk: 'Croatia',
         norsk: 'Croatia',
-        flagg: '🇺🇸',
+        flagg: '🇭🇷',
     },
     { engelsk: 'Denmark', norsk: 'Denmark', flagg: '🇩🇰' },
     {
@@ -88,6 +88,11 @@ const alle: Lag[] = [
         engelsk: 'Switzerland',
         norsk: 'Switzerland',
         flagg: '🇨🇭',
+    },
+    {
+        engelsk: 'Tunisia',
+        norsk: 'Tunisia',
+        flagg: '🇹🇳',
     },
     { engelsk: 'Uruguay', norsk: 'Uruguay', flagg: '🇺🇾' },
     {

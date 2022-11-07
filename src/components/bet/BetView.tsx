@@ -50,7 +50,7 @@ export const BetView = ({ bet }: { bet: Bet }) => {
             <CardContent>
                 {kampstart.format('ddd, D MMM  HH:mm')}
                 <Box sx={{ display: 'flex', alignItems: 'flex-end' }}>
-                    <Typography width={100}> {fixLand(bet.home_team)}</Typography>
+                    <Typography width={140}> {fixLand(bet.home_team)}</Typography>
                     <TextField
                         type="text"
                         disabled={disabled}
@@ -83,7 +83,7 @@ export const BetView = ({ bet }: { bet: Bet }) => {
                     />
                 </Box>
                 <Box sx={{ display: 'flex', alignItems: 'flex-end' }}>
-                    <Typography width={100}> {fixLand(bet.away_team)}</Typography>
+                    <Typography width={140}> {fixLand(bet.away_team)}</Typography>
 
                     <TextField
                         type={'text'}
