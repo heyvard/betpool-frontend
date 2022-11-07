@@ -1,6 +1,6 @@
 import type { NextPage } from 'next'
 
-import { UseMyBets } from '../queries/useBets'
+import { UseMyBets } from '../queries/useMyBets'
 import { Container } from '@mui/system'
 import { BetView } from '../components/bet/BetView'
 import { Spinner } from '../components/loading/Spinner'

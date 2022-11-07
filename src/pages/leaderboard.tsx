@@ -6,6 +6,7 @@ import { Box, Paper, Table, TableBody, TableCell, TableContainer, TableHead, Tab
 import { UseLeaderboard } from '../queries/useLeaderboard'
 import { Container } from '@mui/system'
 import { Spinner } from '../components/loading/Spinner'
+import { UseAllBets } from '../queries/useAllBets'
 
 function plassVisning(plass: number) {
     switch (plass) {
@@ -21,6 +22,7 @@ function plassVisning(plass: number) {
 
 const Leaderboard: NextPage = () => {
     const { data, isLoading } = UseLeaderboard()
+    const { data: d2, isLoading: l2 } = UseAllBets()
     if (!data || isLoading) {
         return <Spinner />
     }
