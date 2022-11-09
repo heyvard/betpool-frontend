@@ -120,11 +120,14 @@ function UserInnlogging(props: { children: React.ReactNode }) {
         )
     }
     if (!user) {
-        return <SignInScreen />
+        return (
+            <>
+                <SignInScreen />
+                {error && <h1>Opps, noe gikk feil {error?.message}</h1>}
+            </>
+        )
     }
-    if (error) {
-        return <h1>Opps, noe gikk feil</h1>
-    }
+
     return <UserFetchInnlogging>{props.children}</UserFetchInnlogging>
 }
 

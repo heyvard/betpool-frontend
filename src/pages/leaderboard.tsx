@@ -26,6 +26,9 @@ const Leaderboard: NextPage = () => {
     if (!data || isLoading) {
         return <Spinner />
     }
+    if (!d2 || l2) {
+        return <Spinner />
+    }
     return (
         <>
             <Head>
