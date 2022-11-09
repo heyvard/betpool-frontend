@@ -50,15 +50,11 @@ function UserFetchInnlogging(props: { children: React.ReactNode }) {
                         router.push(newValue)
                     }}
                 >
-                    <BottomNavigationAction label="Meg" value="/" icon={<HomeIcon />} />
+                    <BottomNavigationAction value="/" icon={<HomeIcon />} />
                     <BottomNavigationAction label="Bets" value="/my-bets" icon={<SportsSoccerIcon />} />
                     <BottomNavigationAction label="Sammendraget" value="/leaderboard" icon={<EmojiEvents />} />
-                    <BottomNavigationAction label="Chat" value="/chat" icon={<Chat />} />
-                    <BottomNavigationAction
-                        label="Menu"
-                        value="meny"
-                        icon={anchorEl != null ? <MenuOpenIcon /> : <MenuIcon />}
-                    />
+                    <BottomNavigationAction value="/chat" icon={<Chat />} />
+                    <BottomNavigationAction value="meny" icon={anchorEl != null ? <MenuOpenIcon /> : <MenuIcon />} />
 
                     <Menu
                         id="menu-appbar"

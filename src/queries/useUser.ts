@@ -6,7 +6,7 @@ import { User } from '../types/user'
 export function UseUser() {
     const [user] = useAuthState(firebase.auth())
 
-    return useQuery<User, Error>('user', async () => {
+    return useQuery<User, Error>('user-me', async () => {
         const idtoken = await user?.getIdToken()
         let responsePromise = await fetch('https://betpool-2022-backend.vercel.app/api/v1/me', {
             method: 'GET',

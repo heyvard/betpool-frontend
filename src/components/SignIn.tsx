@@ -19,10 +19,10 @@ const uiConfig = {
 export function SignInScreen() {
     return (
         <>
-            <Container maxWidth="md" sx={{ mt: 2 }}>
+            <Container maxWidth="md">
                 <Card sx={{ mt: 1 }}>
                     <CardContent>
-                        <Typography variant="h1" component="h1" align={'center'}>
+                        <Typography variant="h4" component="h1" align={'center'}>
                             VM Betpool
                         </Typography>
                     </CardContent>
@@ -40,7 +40,8 @@ export function SignInScreen() {
                         <Typography variant="subtitle2" align={'center'}>
                             Qatar VM er kontroversielt. 🧐
                             <br />
-                            Derfor velger du mellom 10% og 75% av innskuddet som går til Amnesty og ikke i premiepotten.
+                            Derfor velger du selv mellom 10% og 75% av innskuddet ditt som går til Amnesty og ikke i
+                            premiepotten.
                         </Typography>
                     </CardContent>
                 </Card>

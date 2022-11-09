@@ -8,4 +8,5 @@ export interface User {
     admin: boolean
     created_at: string
     updated_at: string
+    charity: number
 }
