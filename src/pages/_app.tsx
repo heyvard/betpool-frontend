@@ -5,6 +5,7 @@ import { SignInScreen } from '../components/SignIn'
 import LogoutIcon from '@mui/icons-material/Logout'
 import MenuOpenIcon from '@mui/icons-material/MenuOpen'
 import MenuIcon from '@mui/icons-material/Menu'
+import HomeIcon from '@mui/icons-material/Home'
 import { BottomNavigation, BottomNavigationAction, Box, CircularProgress, Menu, MenuItem, Paper } from '@mui/material'
 import React, { SyntheticEvent, useState } from 'react'
 import { EmojiEvents, Chat, Person } from '@mui/icons-material'
@@ -50,7 +51,8 @@ function UserFetchInnlogging(props: { children: React.ReactNode }) {
                         router.push(newValue)
                     }}
                 >
-                    <BottomNavigationAction label="Bets" value="/" icon={<SportsSoccerIcon />} />
+                    <BottomNavigationAction label="Meg" value="/" icon={<HomeIcon />} />
+                    <BottomNavigationAction label="Bets" value="/my-bets" icon={<SportsSoccerIcon />} />
                     <BottomNavigationAction label="Resultater" value="/past-bets" icon={<SportsScoreIcon />} />
                     <BottomNavigationAction label="Sammendraget" value="/leaderboard" icon={<EmojiEvents />} />
                     <BottomNavigationAction label="Chat" value="/chat" icon={<Chat />} />
@@ -78,9 +80,9 @@ function UserFetchInnlogging(props: { children: React.ReactNode }) {
                         <MenuItem
                             onClick={async () => {
                                 handleClose()
+                                router.push('/')
                             }}
                         >
-                            {' '}
                             <Person />
                             {user.displayName}
                         </MenuItem>
