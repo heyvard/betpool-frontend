@@ -17,16 +17,20 @@ import React, { useState } from 'react'
 import { useAuthState } from 'react-firebase-hooks/auth'
 import firebase from '../auth/clientApp'
 import { useQueryClient } from 'react-query'
+import { UseStats } from '../queries/useStats'
 
 const Home: NextPage = () => {
     const { data: megselv } = UseUser()
     const [user] = useAuthState(firebase.auth())
     const [lagrer, setLagrer] = useState(false)
     const queryClient = useQueryClient()
-
-    if (!megselv) {
+    const { data: stats } = UseStats()
+    if (!megselv || !stats) {
         return <Spinner></Spinner>
     }
+
+    const charity = stats.map((a) => (a.charity / 100.0) * 300).reduce((partialSum, a) => partialSum + a, 0)
+    const pot = stats.length * 300 - charity
 
     return (
         <>
@@ -59,7 +63,8 @@ const Home: NextPage = () => {
                                         if (!responsePromise.ok) {
                                             window.alert('oops, feil ved lagring')
                                         }
-                                        await queryClient.invalidateQueries('user-me')
+                                        queryClient.invalidateQueries('user-me').then()
+                                        queryClient.invalidateQueries('stats').then()
                                     } finally {
                                         setLagrer(false)
                                     }
@@ -71,6 +76,20 @@ const Home: NextPage = () => {
                                 <FormControlLabel value={75} control={<Radio />} label="75%" />
                             </RadioGroup>
                         </FormControl>
+                    </CardContent>
+                </Card>
+                <Card sx={{ mt: 1 }}>
+                    <CardContent>
+                        <Typography variant="h4" component="h4" align={'center'}>
+                            {charity} kr til amnesty
+                        </Typography>
+                    </CardContent>
+                </Card>
+                <Card sx={{ mt: 1 }}>
+                    <CardContent>
+                        <Typography variant="h4" component="h4" align={'center'}>
+                            Potten er på {pot} kr
+                        </Typography>
                     </CardContent>
                 </Card>
             </Container>

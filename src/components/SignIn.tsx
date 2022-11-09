@@ -63,11 +63,11 @@ export function SignInScreen() {
             </Container>
             <Paper sx={{ position: 'fixed', bottom: 0, left: 0, right: 0 }} elevation={3}>
                 <BottomNavigation showLabels>
-                    <BottomNavigationAction label="Meg" disabled icon={<HomeIcon />} />
+                    <BottomNavigationAction disabled icon={<HomeIcon />} />
                     <BottomNavigationAction label="Bets" disabled icon={<SportsSoccerIcon />} />
                     <BottomNavigationAction label="Resultater" disabled icon={<EmojiEvents />} />
                     <BottomNavigationAction label="Chat" icon={<Chat />} />
-                    <BottomNavigationAction label="Menu" disabled icon={<MenuIcon />} />
+                    <BottomNavigationAction disabled icon={<MenuIcon />} />
                 </BottomNavigation>
             </Paper>
         </>
