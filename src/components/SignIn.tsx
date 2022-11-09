@@ -8,6 +8,7 @@ import { Typography } from '@mui/material'
 const uiConfig = {
     // Redirect to / after sign in is successful. Alternatively you can provide a callbacks.signInSuccess function.
     signInSuccessUrl: '/',
+    signInFlow: 'popup',
     signInOptions: [firebase.auth.GoogleAuthProvider.PROVIDER_ID, firebase.auth.EmailAuthProvider.PROVIDER_ID],
 }
 
