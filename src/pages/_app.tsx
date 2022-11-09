@@ -15,7 +15,6 @@ import { UseUser } from '../queries/useUser'
 import { useRouter } from 'next/router'
 import { Spinner } from '../components/loading/Spinner'
 import SportsSoccerIcon from '@mui/icons-material/SportsSoccer'
-import SportsScoreIcon from '@mui/icons-material/SportsScore'
 import Head from 'next/head'
 
 function UserFetchInnlogging(props: { children: React.ReactNode }) {
@@ -53,7 +52,6 @@ function UserFetchInnlogging(props: { children: React.ReactNode }) {
                 >
                     <BottomNavigationAction label="Meg" value="/" icon={<HomeIcon />} />
                     <BottomNavigationAction label="Bets" value="/my-bets" icon={<SportsSoccerIcon />} />
-                    <BottomNavigationAction label="Resultater" value="/past-bets" icon={<SportsScoreIcon />} />
                     <BottomNavigationAction label="Sammendraget" value="/leaderboard" icon={<EmojiEvents />} />
                     <BottomNavigationAction label="Chat" value="/chat" icon={<Chat />} />
                     <BottomNavigationAction
