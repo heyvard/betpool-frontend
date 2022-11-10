@@ -26,9 +26,9 @@ export function UseMutateChat(message: string, successCallback: () => void) {
         {
             onSuccess: () => {
                 queryClient.invalidateQueries('chat').then()
-                successCallback()
             },
             onMutate: () => {
+                successCallback()
                 const previousTodos = queryClient.getQueryData('chat') as Chat[]
                 const ny: Chat = {
                     message,
