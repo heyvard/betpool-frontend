@@ -3,10 +3,10 @@ import Head from 'next/head'
 import Image from 'next/image'
 
 import { Box, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Typography } from '@mui/material'
-import { UseLeaderboard } from '../queries/useLeaderboard'
 import { Container } from '@mui/system'
 import { Spinner } from '../components/loading/Spinner'
 import { UseAllBets } from '../queries/useAllBets'
+import arrayShuffle from 'array-shuffle'
 
 function plassVisning(plass: number) {
     switch (plass) {
@@ -21,14 +21,11 @@ function plassVisning(plass: number) {
 }
 
 const Leaderboard: NextPage = () => {
-    const { data, isLoading } = UseLeaderboard()
-    const { data: d2, isLoading: l2 } = UseAllBets()
+    const { data, isLoading } = UseAllBets()
     if (!data || isLoading) {
         return <Spinner />
     }
-    if (!d2 || l2) {
-        return <Spinner />
-    }
+    const shufflet = arrayShuffle(data.users)
     return (
         <>
             <Head>
@@ -47,11 +44,8 @@ const Leaderboard: NextPage = () => {
                                 </TableRow>
                             </TableHead>
                             <TableBody>
-                                {data.map((row, i) => (
-                                    <TableRow
-                                        key={row.userid}
-                                        sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
-                                    >
+                                {shufflet.map((row, i) => (
+                                    <TableRow key={row.id} sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
                                         <TableCell align="center">
                                             <Typography variant="h2"> {plassVisning(i + 1)}</Typography>
                                         </TableCell>
@@ -68,7 +62,7 @@ const Leaderboard: NextPage = () => {
                                         <TableCell component="th" scope="row">
                                             {row.name}
                                         </TableCell>
-                                        <TableCell align="right">{row.score}</TableCell>
+                                        <TableCell align="right">0</TableCell>
                                     </TableRow>
                                 ))}
                             </TableBody>
