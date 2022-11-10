@@ -11,13 +11,13 @@ const alle: Lag[] = [
         norsk: 'Australia',
         flagg: '🇦🇺',
     },
-    { engelsk: 'Belgium', norsk: 'Belgium', flagg: '🇧🇪' },
+    { engelsk: 'Belgium', norsk: 'Belgia', flagg: '🇧🇪' },
     {
         engelsk: 'Brazil',
-        norsk: 'Brazil',
+        norsk: 'Brasil',
         flagg: '🇧🇷',
     },
-    { engelsk: 'Cameroon', norsk: 'Cameroon', flagg: '🇨🇲' },
+    { engelsk: 'Cameroon', norsk: 'Kamerun', flagg: '🇨🇲' },
     {
         engelsk: 'Canada',
         norsk: 'Canada',
@@ -26,22 +26,22 @@ const alle: Lag[] = [
     { engelsk: 'Costa Rica', norsk: 'Costa Rica', flagg: '🇨🇷' },
     {
         engelsk: 'Croatia',
-        norsk: 'Croatia',
+        norsk: 'Kroatia',
         flagg: '🇭🇷',
     },
     { engelsk: 'Denmark', norsk: 'Denmark', flagg: '🇩🇰' },
     {
         engelsk: 'Ecuador',
-        norsk: 'Ecuador',
+        norsk: 'Equador',
         flagg: '🇪🇨',
     },
     { engelsk: 'England', norsk: 'England', flagg: '🏴󠁧󠁢󠁥󠁮󠁧󠁿' },
     {
         engelsk: 'France',
-        norsk: 'France',
+        norsk: 'Frankrike',
         flagg: '🇫🇷',
     },
-    { engelsk: 'Germany', norsk: 'Germany', flagg: '🇩🇪' },
+    { engelsk: 'Germany', norsk: 'Tyskland', flagg: '🇩🇪' },
     {
         engelsk: 'Ghana',
         norsk: 'Ghana',
@@ -53,19 +53,19 @@ const alle: Lag[] = [
         norsk: 'Japan',
         flagg: '🇯🇵',
     },
-    { engelsk: 'Korea Republic', norsk: 'Korea Republic', flagg: '🇰🇷' },
+    { engelsk: 'Korea Republic', norsk: 'Sør Korea', flagg: '🇰🇷' },
     {
         engelsk: 'Mexico',
         norsk: 'Mexico',
         flagg: '🇲🇽',
     },
-    { engelsk: 'Morocco', norsk: 'Morocco', flagg: '🇲🇦' },
+    { engelsk: 'Morocco', norsk: 'Marokko', flagg: '🇲🇦' },
     {
         engelsk: 'Netherlands',
-        norsk: 'Netherlands',
+        norsk: 'Nederland',
         flagg: '🇳🇱',
     },
-    { engelsk: 'Poland', norsk: 'Poland', flagg: '🇵🇱' },
+    { engelsk: 'Poland', norsk: 'Polen', flagg: '🇵🇱' },
     {
         engelsk: 'Portugal',
         norsk: 'Portugal',
@@ -83,10 +83,10 @@ const alle: Lag[] = [
         norsk: 'Serbia',
         flagg: '🇷🇸',
     },
-    { engelsk: 'Spain', norsk: 'Spain', flagg: '🇪🇸' },
+    { engelsk: 'Spain', norsk: 'Spania', flagg: '🇪🇸' },
     {
         engelsk: 'Switzerland',
-        norsk: 'Switzerland',
+        norsk: 'Sveits',
         flagg: '🇨🇭',
     },
     {
@@ -113,4 +113,8 @@ alle.forEach((l) => {
 
 export function hentFlag(engelskLag: string) {
     return engelskMap.get(engelskLag)?.flagg || '🤔'
+}
+
+export function hentNorsk(engelskLag: string) {
+    return engelskMap.get(engelskLag)?.norsk || '🤔'
 }

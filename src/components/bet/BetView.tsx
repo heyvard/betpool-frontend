@@ -5,7 +5,7 @@ import { useState } from 'react'
 import SaveIcon from '@mui/icons-material/Save'
 import { UseMutateBet } from '../../queries/mutateBet'
 import LoadingButton from '@mui/lab/LoadingButton'
-import { hentFlag } from '../../utils/lag'
+import { hentFlag, hentNorsk } from '../../utils/lag'
 
 export const BetView = ({ bet }: { bet: Bet }) => {
     const numberPropTilString = (prop: number | null) => {
@@ -134,5 +134,5 @@ export const BetView = ({ bet }: { bet: Bet }) => {
 }
 
 function fixLand(s: string): string {
-    return hentFlag(s) + ' ' + s
+    return hentFlag(s) + ' ' + hentNorsk(s)
 }

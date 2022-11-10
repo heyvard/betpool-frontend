@@ -29,9 +29,6 @@ const Home: NextPage = () => {
         return <Spinner></Spinner>
     }
 
-    const charity = stats.map((a) => (a.charity / 100.0) * 300).reduce((partialSum, a) => partialSum + a, 0)
-    const pot = stats.length * 300 - charity
-
     return (
         <>
             <Container maxWidth="md" sx={{ mt: 1 }}>
@@ -42,7 +39,7 @@ const Home: NextPage = () => {
                     <CardContent>
                         <FormControl disabled={lagrer}>
                             <FormLabel id="demo-row-radio-buttons-group-label">
-                                Prosent av ditt innskudd til amnesty
+                                Andel av dine 300kr til Amnesty
                             </FormLabel>
                             <RadioGroup
                                 row
@@ -50,7 +47,6 @@ const Home: NextPage = () => {
                                 onChange={async (e) => {
                                     try {
                                         setLagrer(true)
-                                        console.log(e)
                                         const idtoken = await user?.getIdToken()
                                         const responsePromise = await fetch(
                                             `https://betpool-2022-backend.vercel.app/api/v1/me/`,
@@ -81,21 +77,21 @@ const Home: NextPage = () => {
                 <Card sx={{ mt: 1 }}>
                     <CardContent>
                         <Typography variant="h4" component="h4" align={'center'}>
-                            Totalt innskudd:
+                            Totalt innskudd
                         </Typography>
                     </CardContent>
                 </Card>
                 <Card sx={{ mt: 1 }}>
                     <CardContent>
                         <Typography variant="h5" component="h5" align={'center'}>
-                            {charity} kr til amnesty
+                            {stats.charity} kr til Amnesty 🫴
                         </Typography>
                     </CardContent>
                 </Card>
                 <Card sx={{ mt: 1 }}>
                     <CardContent>
                         <Typography variant="h5" component="h5" align={'center'}>
-                            {pot} kr i premiepenger
+                            {stats.pot} kr i premiepenger 💰
                         </Typography>
                     </CardContent>
                 </Card>

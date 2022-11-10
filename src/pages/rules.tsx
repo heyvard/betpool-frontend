@@ -2,8 +2,15 @@ import type { NextPage } from 'next'
 import Head from 'next/head'
 
 import { Typography, Container } from '@mui/material'
+import { UseStats } from '../queries/useStats'
+import { Spinner } from '../components/loading/Spinner'
+import React from 'react'
 
 const Home: NextPage = () => {
+    const { data: stats } = UseStats()
+    if (!stats) {
+        return <Spinner></Spinner>
+    }
     return (
         <>
             <Head>
@@ -14,21 +21,22 @@ const Home: NextPage = () => {
                     Regler!
                 </Typography>
                 <h3>Innskudd</h3>
-                Det koster 250 kr å delta.
+                Det koster 300 kr å delta.
                 <br />
-                Pengene må være overført innen første kamp på vipps til 467 90 000
+                Pengene må være overført innen første kamp på vipps til 467 90 000 . Donasjon til Amnesty vippses
+                videre.
                 <h3>Premier</h3>
-                Potten er på: 5.500 kr
+                Potten er på: {stats.pot} kr.
                 <br />
-                1. plass får 45% av potten: 2.475 kr
+                1. plass får 45% av potten: {stats.premier[0]} kr
                 <br />
-                2. plass får 25% av potten: 1.375 kr
+                2. plass får 25% av potten: {stats.premier[1]} kr
                 <br />
-                3. plass får 15% av potten: 825 kr
+                3. plass får 15% av potten: {stats.premier[2]} kr
                 <br />
-                4. plass får 10% av potten: 550 kr
+                4. plass får 10% av potten: {stats.premier[3]} kr
                 <br />
-                5. plass får 5% av potten: 275 kr
+                5. plass får 5% av potten: {stats.premier[4]} kr
                 <br />
                 <br />
                 Hvis flere personer får like mange poeng så deles premiepottene for de aktuelle plassene.
@@ -48,18 +56,17 @@ const Home: NextPage = () => {
                 uavgjort).
                 <br />
                 <br />
-                Treffer man riktig resultat får man 2-5 poeng avhengig av hvor mange andre som hadde riktig resultat
+                Treffer man riktig resultat får man 2-5 poeng avhengig av hvor mange andre som hadde riktig resultat.
+                Dette ganges med kampverdien.
                 <h2>Tidsfrister</h2>
                 Du kan bette helt frem til kampstart. Bets sendt inn etter kampstart blir ikke lagret.
                 <h3>Kampverdier</h3>
-                <b>Fase 1:</b> Gruppespill
+                <b>Gruppespill</b>
                 <br />
-                Kampverdien er 1. Maksimal poengfangst er TBA poeng.
+                Kampverdien er 1.
                 <br />
                 <br />
-                <b>Fase 2:</b> Sluttspill
-                <br />
-                Sluttspillet er i gang og nervene er i høyspenn!
+                <b>Sluttspill</b>
                 <br />
                 I sluttspillet tipper man på stillingen etter ordinær spilletid (90 min)
                 <br />
