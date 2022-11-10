@@ -81,14 +81,21 @@ const Home: NextPage = () => {
                 <Card sx={{ mt: 1 }}>
                     <CardContent>
                         <Typography variant="h4" component="h4" align={'center'}>
+                            Totalt innskudd:
+                        </Typography>
+                    </CardContent>
+                </Card>
+                <Card sx={{ mt: 1 }}>
+                    <CardContent>
+                        <Typography variant="h5" component="h5" align={'center'}>
                             {charity} kr til amnesty
                         </Typography>
                     </CardContent>
                 </Card>
                 <Card sx={{ mt: 1 }}>
                     <CardContent>
-                        <Typography variant="h4" component="h4" align={'center'}>
-                            Potten er på {pot} kr
+                        <Typography variant="h5" component="h5" align={'center'}>
+                            {pot} kr i premiepenger
                         </Typography>
                     </CardContent>
                 </Card>
