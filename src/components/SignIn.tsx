@@ -17,6 +17,8 @@ const uiConfig = {
 }
 
 export function SignInScreen() {
+    const isFacebookInAppBrowser =
+        /FB_IAB/.test(navigator.userAgent) || /FBAN/.test(navigator.userAgent) || /FBAV/.test(navigator.userAgent)
     return (
         <>
             <Container maxWidth="md">
@@ -59,7 +61,16 @@ export function SignInScreen() {
                         </Typography>
                     </CardContent>
                 </Card>
-                <StyledFirebaseAuth uiConfig={uiConfig} firebaseAuth={firebase.auth()} />
+                {isFacebookInAppBrowser && (
+                    <Card sx={{ mt: 1 }}>
+                        <CardContent>
+                            <Typography variant="subtitle2" align={'center'}>
+                                For å logge på må du åpne denne siden utenfor facebook messenger, i vanlig browser.
+                            </Typography>
+                        </CardContent>
+                    </Card>
+                )}
+                {!isFacebookInAppBrowser && <StyledFirebaseAuth uiConfig={uiConfig} firebaseAuth={firebase.auth()} />}
             </Container>
             <Paper sx={{ position: 'fixed', bottom: 0, left: 0, right: 0 }} elevation={3}>
                 <BottomNavigation showLabels>
