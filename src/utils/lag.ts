@@ -4,7 +4,7 @@ interface Lag {
     flagg: string
 }
 
-const alle: Lag[] = [
+export const alleLag: Lag[] = [
     { engelsk: 'Argentina', norsk: 'Argentina', flagg: '🇦🇷' },
     {
         engelsk: 'Australia',
@@ -106,7 +106,7 @@ const alle: Lag[] = [
 const engelskMap = new Map<string, Lag>()
 const norsk = new Map<string, Lag>()
 
-alle.forEach((l) => {
+alleLag.forEach((l) => {
     engelskMap.set(l.engelsk, l)
     norsk.set(l.norsk, l)
 })

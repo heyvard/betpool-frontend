@@ -9,8 +9,11 @@ import {
     FormControl,
     FormControlLabel,
     FormLabel,
+    InputLabel,
+    MenuItem,
     Radio,
     RadioGroup,
+    Select,
     Typography,
 } from '@mui/material'
 import React, { useState } from 'react'
@@ -18,6 +21,7 @@ import { useAuthState } from 'react-firebase-hooks/auth'
 import firebase from '../auth/clientApp'
 import { useQueryClient } from 'react-query'
 import { UseStats } from '../queries/useStats'
+import { alleLag } from '../utils/lag'
 
 const Home: NextPage = () => {
     const { data: megselv } = UseUser()
@@ -93,6 +97,49 @@ const Home: NextPage = () => {
                         <Typography variant="h5" component="h5" align={'center'}>
                             {stats.pot} kr i premiepenger 💰
                         </Typography>
+                    </CardContent>
+                </Card>
+                <Card sx={{ mt: 1 }}>
+                    <CardContent>
+                        <FormControl fullWidth>
+                            <InputLabel id="demo-simple-select-label">Hvem vinner VM?</InputLabel>
+                            <Select
+                                labelId="demo-simple-select-label"
+                                disabled={lagrer}
+                                id="demo-simple-select"
+                                value={megselv.winner}
+                                label="Hvem winner VM?"
+                                onChange={async (e) => {
+                                    try {
+                                        setLagrer(true)
+                                        const idtoken = await user?.getIdToken()
+                                        const responsePromise = await fetch(
+                                            `https://betpool-2022-backend.vercel.app/api/v1/me/`,
+                                            {
+                                                method: 'PUT',
+                                                body: JSON.stringify({ winner: e.target.value }),
+                                                headers: { Authorization: `Bearer ${idtoken}` },
+                                            },
+                                        )
+                                        if (!responsePromise.ok) {
+                                            window.alert('oops, feil ved lagring')
+                                        }
+                                        queryClient.invalidateQueries('user-me').then()
+                                        queryClient.invalidateQueries('stats').then()
+                                    } finally {
+                                        setLagrer(false)
+                                    }
+                                }}
+                            >
+                                {alleLag.map((l) => {
+                                    return (
+                                        <MenuItem key={l.engelsk} value={l.engelsk}>
+                                            {l.flagg + ' ' + l.norsk}
+                                        </MenuItem>
+                                    )
+                                })}
+                            </Select>
+                        </FormControl>
                     </CardContent>
                 </Card>
             </Container>
