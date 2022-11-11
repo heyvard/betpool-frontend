@@ -57,7 +57,7 @@ export function SignInScreen() {
                 <Card sx={{ mt: 1 }}>
                     <CardContent>
                         <Typography variant="subtitle2" align={'center'}>
-                            Hvem kan bli med? Hvem som helst som har denne lenken. 🤝
+                            Hvem kan bli med? Hvem som helst som har denne lenken. 🤝 Bruk din vanlige browser på mobil.
                         </Typography>
                     </CardContent>
                 </Card>
