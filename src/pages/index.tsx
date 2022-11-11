@@ -83,17 +83,9 @@ const Home: NextPage = () => {
                         <Typography variant="h4" component="h4" align={'center'}>
                             Totalt innskudd
                         </Typography>
-                    </CardContent>
-                </Card>
-                <Card sx={{ mt: 1 }}>
-                    <CardContent>
                         <Typography variant="h5" component="h5" align={'center'}>
                             {stats.charity} kr til Amnesty 🫴
                         </Typography>
-                    </CardContent>
-                </Card>
-                <Card sx={{ mt: 1 }}>
-                    <CardContent>
                         <Typography variant="h5" component="h5" align={'center'}>
                             {stats.pot} kr i premiepenger 💰
                         </Typography>
