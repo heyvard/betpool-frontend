@@ -53,7 +53,7 @@ const Home: NextPage = () => {
                 <br />
                 <h3>Poengsystem</h3>
                 Man får 1 poeng ganget med kampverdien for å gjette riktig utfall av kampen (hvem som vinner eller
-                uavgjort).
+                uavgjort). Dette ganges med kampverdien.
                 <br />
                 <br />
                 Treffer man riktig resultat får man 2-5 poeng avhengig av hvor mange andre som hadde riktig resultat.
