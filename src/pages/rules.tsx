@@ -58,7 +58,7 @@ const Home: NextPage = () => {
                 <br />
                 Treffer man riktig resultat får man 2-5 poeng avhengig av hvor mange andre som hadde riktig resultat.
                 Dette ganges med kampverdien.
-                <h2>Tidsfrister</h2>
+                <h3>Tidsfrister</h3>
                 Du kan bette helt frem til kampstart. Bets sendt inn etter kampstart blir ikke lagret.
                 <h3>Kampverdier</h3>
                 <b>Gruppespill</b>
@@ -80,6 +80,9 @@ const Home: NextPage = () => {
                 </ul>
                 Kampverdien økes til 2, I finalen er den 3<br />
                 <br />
+                <h3>Vinner og toppscorer</h3>
+                Du kan endre bet hele første runde av greuppespillet, deretter er de låst. Riktig vinner gir 30 poeng.
+                Riktig toppscorer gir 30 poeng.
             </Container>
         </>
     )
