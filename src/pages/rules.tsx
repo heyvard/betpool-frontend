@@ -14,7 +14,7 @@ const Home: NextPage = () => {
     return (
         <>
             <Head>
-                <title>Rules</title>
+                <title>Regler</title>
             </Head>
             <Container maxWidth="md" sx={{ mt: 2, mb: 2 }}>
                 <Typography variant="h4" component="h2">
@@ -23,7 +23,7 @@ const Home: NextPage = () => {
                 <h3>Innskudd</h3>
                 Det koster 300 kr å delta.
                 <br />
-                Pengene må være overført innen første kamp på vipps til 467 90 000 . Donasjon til Amnesty vippses
+                Pengene må være overført innen første kamp på vipps til 467 90 000 . Riktig donasjon til Amnesty vippses
                 videre.
                 <h3>Premier</h3>
                 Potten er på: {stats.pot} kr.
@@ -46,9 +46,9 @@ const Home: NextPage = () => {
                 <br />
                 To personer kommer på delt 2. plass.
                 <br />
-                Premien for 2. plass er 1.125 kr og 3. plass er 675 kr.
+                Premien for 2. plass er 200 kr og 3. plass er 100 kr.
                 <br />
-                Begge får da 900 kr.
+                Begge får da 150 kr.
                 <br />
                 <br />
                 <h3>Poengsystem</h3>
@@ -63,13 +63,21 @@ const Home: NextPage = () => {
                 <h3>Kampverdier</h3>
                 <b>Gruppespill</b>
                 <br />
-                Kampverdien er 1.
+                Kampverdien er 1 i runde 1 og 2. I runde 3 er kampverdien 3.
                 <br />
                 <br />
                 <b>Sluttspill</b>
                 <br />
                 I sluttspillet tipper man på stillingen etter ordinær spilletid (90 min)
                 <br />
+                Kampverdier
+                <ul>
+                    <li>Åttenedelsfinaler: 4</li>
+                    <li>Kvartfinaler: 5</li>
+                    <li>Semifinaler: 7</li>
+                    <li>Bronsefinale: 7</li>
+                    <li>Finale: 10</li>
+                </ul>
                 Kampverdien økes til 2, I finalen er den 3<br />
                 <br />
             </Container>
