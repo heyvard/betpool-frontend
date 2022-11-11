@@ -76,7 +76,6 @@ export const BetView = ({ bet }: { bet: Bet }) => {
                             }
                             const number = Number(e.currentTarget.value)
                             if (number >= 0 && number <= 99) {
-                                console.log('Setter number', number)
                                 setHjemmescore(String(number))
                             }
                         }}

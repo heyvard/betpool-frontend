@@ -10,4 +10,5 @@ export interface User {
     updated_at: string
     charity: number
     winner: string
+    topscorer: string | undefined
 }

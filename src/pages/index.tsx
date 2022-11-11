@@ -14,6 +14,7 @@ import {
     Radio,
     RadioGroup,
     Select,
+    TextField,
     Typography,
 } from '@mui/material'
 import React, { useState } from 'react'
@@ -22,6 +23,8 @@ import firebase from '../auth/clientApp'
 import { useQueryClient } from 'react-query'
 import { UseStats } from '../queries/useStats'
 import { alleLag } from '../utils/lag'
+import LoadingButton from '@mui/lab/LoadingButton'
+import SaveIcon from '@mui/icons-material/Save'
 
 const Home: NextPage = () => {
     const { data: megselv } = UseUser()
@@ -29,6 +32,8 @@ const Home: NextPage = () => {
     const [lagrer, setLagrer] = useState(false)
     const queryClient = useQueryClient()
     const { data: stats } = UseStats()
+    const [topscorer, setTopscorer] = useState(megselv?.topscorer)
+
     if (!megselv || !stats) {
         return <Spinner></Spinner>
     }
@@ -131,6 +136,50 @@ const Home: NextPage = () => {
                                     )
                                 })}
                             </Select>
+                        </FormControl>
+                    </CardContent>
+                </Card>
+                <Card sx={{ mt: 1 }}>
+                    <CardContent>
+                        <FormControl fullWidth>
+                            <TextField
+                                id="outlined-required"
+                                label="Hvilken spiller scorer flest mål?"
+                                value={topscorer}
+                                onChange={(e) => {
+                                    setTopscorer(e.target.value)
+                                }}
+                            />
+                            {topscorer != megselv.topscorer && (
+                                <LoadingButton
+                                    sx={{ mt: 2 }}
+                                    variant="contained"
+                                    onClick={async () => {
+                                        try {
+                                            setLagrer(true)
+                                            const idtoken = await user?.getIdToken()
+                                            const responsePromise = await fetch(
+                                                `https://betpool-2022-backend.vercel.app/api/v1/me/`,
+                                                {
+                                                    method: 'PUT',
+                                                    body: JSON.stringify({ topscorer: topscorer }),
+                                                    headers: { Authorization: `Bearer ${idtoken}` },
+                                                },
+                                            )
+                                            if (!responsePromise.ok) {
+                                                window.alert('oops, feil ved lagring')
+                                            }
+                                            queryClient.invalidateQueries('user-me').then()
+                                        } finally {
+                                            setLagrer(false)
+                                        }
+                                    }}
+                                    loading={lagrer}
+                                    endIcon={<SaveIcon />}
+                                >
+                                    Lagre
+                                </LoadingButton>
+                            )}
                         </FormControl>
                     </CardContent>
                 </Card>
