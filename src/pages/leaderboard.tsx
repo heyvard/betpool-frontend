@@ -58,6 +58,7 @@ const Leaderboard: NextPage = () => {
                                                     height={'40vw'}
                                                 />
                                             )}
+                                            {!row.picture && <Typography variant="h2">😄</Typography>}
                                         </TableCell>
                                         <TableCell component="th" scope="row">
                                             {row.name}
