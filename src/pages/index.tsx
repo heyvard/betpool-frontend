@@ -37,6 +37,7 @@ const Home: NextPage = () => {
     if (!megselv || !stats) {
         return <Spinner></Spinner>
     }
+    const alleLagSortert = alleLag.sort((a, b) => a.norsk.localeCompare(b.norsk))
 
     return (
         <>
@@ -128,7 +129,7 @@ const Home: NextPage = () => {
                                     }
                                 }}
                             >
-                                {alleLag.map((l) => {
+                                {alleLagSortert.map((l) => {
                                     return (
                                         <MenuItem key={l.engelsk} value={l.engelsk}>
                                             {l.flagg + ' ' + l.norsk}

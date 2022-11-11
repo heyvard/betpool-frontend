@@ -15,6 +15,7 @@ import { UseUser } from '../queries/useUser'
 import { useRouter } from 'next/router'
 import { Spinner } from '../components/loading/Spinner'
 import SportsSoccerIcon from '@mui/icons-material/SportsSoccer'
+import GavelIcon from '@mui/icons-material/Gavel'
 import Head from 'next/head'
 
 function UserFetchInnlogging(props: { children: React.ReactNode }) {
@@ -53,7 +54,7 @@ function UserFetchInnlogging(props: { children: React.ReactNode }) {
                     <BottomNavigationAction value="/" icon={<HomeIcon />} />
                     <BottomNavigationAction label="Bets" value="/my-bets" icon={<SportsSoccerIcon />} />
                     <BottomNavigationAction label="Resultater" value="/leaderboard" icon={<EmojiEvents />} />
-                    <BottomNavigationAction label="Chat" value="/chat" icon={<Chat />} />
+                    <BottomNavigationAction label="Regler" value="/rules" icon={<GavelIcon />} />
                     <BottomNavigationAction value="meny" icon={anchorEl != null ? <MenuOpenIcon /> : <MenuIcon />} />
 
                     <Menu
@@ -87,8 +88,17 @@ function UserFetchInnlogging(props: { children: React.ReactNode }) {
                                 router.push('rules')
                             }}
                         >
-                            <EmojiEvents />
+                            <GavelIcon />
                             Regler
+                        </MenuItem>
+                        <MenuItem
+                            onClick={() => {
+                                handleClose()
+                                router.push('chat')
+                            }}
+                        >
+                            <Chat />
+                            Chat
                         </MenuItem>
                         <MenuItem
                             onClick={async () => {
