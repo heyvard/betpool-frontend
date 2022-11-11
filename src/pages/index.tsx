@@ -86,7 +86,7 @@ const Home: NextPage = () => {
                 <Card sx={{ mt: 1 }}>
                     <CardContent>
                         <Typography variant="h4" component="h4" align={'center'}>
-                            Totalt innskudd
+                            Totalt innskudd fra alle
                         </Typography>
                         <Typography variant="h5" component="h5" align={'center'}>
                             {stats.charity} kr til Amnesty 🫴
