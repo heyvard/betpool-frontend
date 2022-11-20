@@ -12,6 +12,13 @@ export interface MatchBet {
     user_id: string
     match_id: string
     game_start: string
+    away_score: string | null
+    away_team: string
+    home_score: string | null
+    away_result: string | null
+    home_result: string | null
+    home_team: string
+    round: string
 }
 export interface AllBets {
     users: OtherUser[]

@@ -17,7 +17,6 @@ export interface Bet {
     away_score: number | null
     match_id: string
     bet_id: string
-    channel: string
 }
 
 export interface Chat {

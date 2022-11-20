@@ -7,6 +7,7 @@ import { Container } from '@mui/system'
 import { Spinner } from '../components/loading/Spinner'
 import { UseAllBets } from '../queries/useAllBets'
 import arrayShuffle from 'array-shuffle'
+import Link from 'next/link'
 
 function plassVisning(plass: number) {
     switch (plass) {
@@ -61,7 +62,7 @@ const Leaderboard: NextPage = () => {
                                             {!row.picture && <Typography variant="h2">😄</Typography>}
                                         </TableCell>
                                         <TableCell component="th" scope="row">
-                                            {row.name}
+                                            <Link href={'/user/' + row.id}>{row.name}</Link>
                                         </TableCell>
                                         <TableCell align="right">0</TableCell>
                                     </TableRow>
