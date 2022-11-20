@@ -6,8 +6,9 @@ import SaveIcon from '@mui/icons-material/Save'
 import { UseMutateBet } from '../../queries/mutateBet'
 import LoadingButton from '@mui/lab/LoadingButton'
 import { hentFlag, hentNorsk } from '../../utils/lag'
+import Link from 'next/link'
 
-export const BetView = ({ bet }: { bet: Bet }) => {
+export const BetView = ({ bet, matchside }: { bet: Bet; matchside: boolean }) => {
     const numberPropTilString = (prop: number | null) => {
         if (prop == null) {
             return ''
@@ -127,6 +128,7 @@ export const BetView = ({ bet }: { bet: Bet }) => {
                         Lagre
                     </LoadingButton>
                 )}
+                {disabled && !matchside && <Link href={'/match/' + bet.match_id}>Se alles bets på denne kampen</Link>}
             </CardContent>
         </Card>
     )

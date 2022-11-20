@@ -3,12 +3,10 @@ import type { NextPage } from 'next'
 import { Container } from '@mui/system'
 import { BetView } from '../../components/bet/BetView'
 import { Spinner } from '../../components/loading/Spinner'
-import dayjs from 'dayjs'
 import { useRouter } from 'next/router'
 import { UseAllBets } from '../../queries/useAllBets'
 import { Typography } from '@mui/material'
 import React from 'react'
-import { Bet } from '../../types/types'
 
 const Home: NextPage = () => {
     const { data, isLoading } = UseAllBets()
@@ -18,7 +16,6 @@ const Home: NextPage = () => {
     if (!data || isLoading) {
         return <Spinner />
     }
-    const user = data.users.find((a) => a.id == id)!
     const stringTilNumber = (prop: string | null): number | null => {
         if (prop == '') {
             return null
@@ -28,15 +25,17 @@ const Home: NextPage = () => {
         }
         return Number(prop!)
     }
+
+    const match = data.bets.find((a) => a.match_id == id)!
+
     return (
         <>
             <Container maxWidth="md" sx={{ mt: 1 }}>
                 <Typography variant="h4" component="h1" align={'center'}>
-                    {user.name} sine bets
+                    {match.home_team} vs {match.away_team}
                 </Typography>
                 {data.bets
-                    .filter((a) => a.user_id == id)
-                    .sort((b, a) => dayjs(a.game_start).unix() - dayjs(b.game_start).unix())
+                    .filter((a) => a.match_id == id)
                     .map((a) => {
                         return {
                             bet_id: a.match_id + a.user_id,
@@ -46,10 +45,18 @@ const Home: NextPage = () => {
                             home_score: stringTilNumber(a.home_score),
                             away_score: stringTilNumber(a.away_score),
                             match_id: a.match_id,
-                        } as Bet
+                            user: data.users.find((u) => u.id == a.user_id)!,
+                        }
                     })
+                    .filter((a) => a.user)
+
+                    .sort((b, a) => b.user.name.localeCompare(a.user.name))
+
                     .map((a) => (
-                        <BetView key={a.bet_id} bet={a} matchside={false} />
+                        <>
+                            <h4>{a.user.name}</h4>
+                            <BetView key={a.bet_id} bet={a} matchside={true} />
+                        </>
                     ))}
             </Container>
         </>
