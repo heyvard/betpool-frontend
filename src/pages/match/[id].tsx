@@ -34,6 +34,9 @@ const Home: NextPage = () => {
                 <Typography variant="h4" component="h1" align={'center'}>
                     {match.home_team} vs {match.away_team}
                 </Typography>
+                <Typography variant="h6" component="h2" align={'center'}>
+                    {match.home_result} - {match.away_result}
+                </Typography>
                 {data.bets
                     .filter((a) => a.match_id == id)
                     .map((a) => {
