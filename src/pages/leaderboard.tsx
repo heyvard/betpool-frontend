@@ -1,14 +1,25 @@
 import type { NextPage } from 'next'
 import Head from 'next/head'
-import Image from 'next/image'
 
-import { Box, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Typography } from '@mui/material'
+import {
+    Avatar,
+    Box,
+    Paper,
+    Table,
+    TableBody,
+    TableCell,
+    TableContainer,
+    TableHead,
+    TableRow,
+    Typography,
+} from '@mui/material'
 import { Container } from '@mui/system'
 import { Spinner } from '../components/loading/Spinner'
 import { UseAllBets } from '../queries/useAllBetsExtended'
 import Link from 'next/link'
 import { calculateLeaderboard } from '../components/results/calculateAllScores'
 import { default as MUILink } from '@mui/material/Link'
+import { deepOrange } from '@mui/material/colors'
 
 function plassVisning(plass: number) {
     switch (plass) {
@@ -62,26 +73,31 @@ const Leaderboard: NextPage = () => {
                                         >
                                             <TableCell align="center" sx={{ pt: 1, pb: 2 }}>
                                                 <Typography variant="h2" sx={{ p: 0 }}>
-                                                    {' '}
                                                     {plassVisning(i + 1)}
                                                 </Typography>
                                             </TableCell>
                                             <TableCell align="left" sx={{ p: 0 }}>
                                                 {user?.picture && (
-                                                    <Image
-                                                        src={user?.picture}
+                                                    <Avatar
                                                         alt={user?.name}
-                                                        width={'40vw'}
-                                                        height={'40vw'}
+                                                        src={user?.picture}
+                                                        sx={{ width: '50px', height: '50px' }}
                                                     />
                                                 )}
                                                 {!user?.picture && (
-                                                    <Typography variant="h2" sx={{ p: 0 }}>
-                                                        😄
-                                                    </Typography>
+                                                    <Avatar
+                                                        alt={user?.name}
+                                                        sx={{
+                                                            width: '50px',
+                                                            bgcolor: deepOrange[500],
+                                                            height: '50px',
+                                                        }}
+                                                    >
+                                                        {user?.name?.substring(0, 1)}
+                                                    </Avatar>
                                                 )}
                                             </TableCell>
-                                            <TableCell component="th" scope="row" sx={{ p: 0 }}>
+                                            <TableCell component="th" scope="row" sx={{ p: 0, pl: 1 }}>
                                                 <Link href={'/user/' + user?.id}>
                                                     <MUILink underline={'hover'} sx={{ cursor: 'pointer' }}>
                                                         {user?.name}
