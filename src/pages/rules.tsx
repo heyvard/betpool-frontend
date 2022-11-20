@@ -74,7 +74,6 @@ const Home: NextPage = () => {
                     <li>Bronsefinale: 7</li>
                     <li>Finale: 10</li>
                 </ul>
-                Kampverdien økes til 2, I finalen er den 3<br />
                 <br />
                 <h3>Vinner</h3>
                 Du kan endre bet hele første runde av greuppespillet, deretter er det låst. Det deles ut totalt{' '}

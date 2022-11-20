@@ -36,7 +36,7 @@ const Leaderboard: NextPage = () => {
                 <title>Leaderboard</title>
             </Head>
             <Box display="flex" justifyContent="center" alignItems="center" minHeight="80vh">
-                <Container maxWidth="md">
+                <Container maxWidth="md" sx={{ p: 0 }}>
                     <TableContainer component={Paper}>
                         <Table>
                             <TableHead>
@@ -56,12 +56,17 @@ const Leaderboard: NextPage = () => {
                                     return (
                                         <TableRow
                                             key={row.userid}
-                                            sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+                                            sx={{
+                                                '&:last-child td, &:last-child th': { border: 0 },
+                                            }}
                                         >
-                                            <TableCell align="center">
-                                                <Typography variant="h2"> {plassVisning(i + 1)}</Typography>
+                                            <TableCell align="center" sx={{ pt: 1, pb: 2 }}>
+                                                <Typography variant="h2" sx={{ p: 0 }}>
+                                                    {' '}
+                                                    {plassVisning(i + 1)}
+                                                </Typography>
                                             </TableCell>
-                                            <TableCell align="left">
+                                            <TableCell align="left" sx={{ p: 0 }}>
                                                 {user?.picture && (
                                                     <Image
                                                         src={user?.picture}
@@ -70,16 +75,22 @@ const Leaderboard: NextPage = () => {
                                                         height={'40vw'}
                                                     />
                                                 )}
-                                                {!user?.picture && <Typography variant="h2">😄</Typography>}
+                                                {!user?.picture && (
+                                                    <Typography variant="h2" sx={{ p: 0 }}>
+                                                        😄
+                                                    </Typography>
+                                                )}
                                             </TableCell>
-                                            <TableCell component="th" scope="row">
+                                            <TableCell component="th" scope="row" sx={{ p: 0 }}>
                                                 <Link href={'/user/' + user?.id}>
                                                     <MUILink underline={'hover'} sx={{ cursor: 'pointer' }}>
                                                         {user?.name}
                                                     </MUILink>
                                                 </Link>
                                             </TableCell>
-                                            <TableCell align="right">{row.poeng}</TableCell>
+                                            <TableCell align="right" sx={{ p: 0, pr: 3 }}>
+                                                {row.poeng}
+                                            </TableCell>
                                         </TableRow>
                                     )
                                 })}
