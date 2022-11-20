@@ -6,8 +6,9 @@ import { Box, Paper, Table, TableBody, TableCell, TableContainer, TableHead, Tab
 import { Container } from '@mui/system'
 import { Spinner } from '../components/loading/Spinner'
 import { UseAllBets } from '../queries/useAllBets'
-import arrayShuffle from 'array-shuffle'
 import Link from 'next/link'
+import { regnUtScoreForKamp } from '../components/results/matchScoreCalculator'
+import { calculateLeaderboard } from '../components/results/calculateAllScores'
 
 function plassVisning(plass: number) {
     switch (plass) {
@@ -26,7 +27,10 @@ const Leaderboard: NextPage = () => {
     if (!data || isLoading) {
         return <Spinner />
     }
-    const shufflet = arrayShuffle(data.users)
+    let scoreForKamp = regnUtScoreForKamp(data.bets)
+    const lista = calculateLeaderboard(data.bets, scoreForKamp)
+    lista.sort((a, b) => b.poeng - a.poeng)
+
     return (
         <>
             <Head>
@@ -45,28 +49,37 @@ const Leaderboard: NextPage = () => {
                                 </TableRow>
                             </TableHead>
                             <TableBody>
-                                {shufflet.map((row, i) => (
-                                    <TableRow key={row.id} sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
-                                        <TableCell align="center">
-                                            <Typography variant="h2"> {plassVisning(i + 1)}</Typography>
-                                        </TableCell>
-                                        <TableCell align="left">
-                                            {row.picture && (
-                                                <Image
-                                                    src={row.picture}
-                                                    alt={row.name}
-                                                    width={'40vw'}
-                                                    height={'40vw'}
-                                                />
-                                            )}
-                                            {!row.picture && <Typography variant="h2">😄</Typography>}
-                                        </TableCell>
-                                        <TableCell component="th" scope="row">
-                                            <Link href={'/user/' + row.id}>{row.name}</Link>
-                                        </TableCell>
-                                        <TableCell align="right">0</TableCell>
-                                    </TableRow>
-                                ))}
+                                {lista.map((row, i) => {
+                                    const user = data.users.find((a) => a.id == row.userid)
+                                    if (!user) {
+                                        return null
+                                    }
+                                    return (
+                                        <TableRow
+                                            key={row.userid}
+                                            sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+                                        >
+                                            <TableCell align="center">
+                                                <Typography variant="h2"> {plassVisning(i + 1)}</Typography>
+                                            </TableCell>
+                                            <TableCell align="left">
+                                                {user?.picture && (
+                                                    <Image
+                                                        src={user?.picture}
+                                                        alt={user?.name}
+                                                        width={'40vw'}
+                                                        height={'40vw'}
+                                                    />
+                                                )}
+                                                {!user?.picture && <Typography variant="h2">😄</Typography>}
+                                            </TableCell>
+                                            <TableCell component="th" scope="row">
+                                                <Link href={'/user/' + user?.id}>{user?.name}</Link>
+                                            </TableCell>
+                                            <TableCell align="right">{row.poeng}</TableCell>
+                                        </TableRow>
+                                    )
+                                })}
                             </TableBody>
                         </Table>
                     </TableContainer>
