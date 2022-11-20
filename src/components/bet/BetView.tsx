@@ -7,6 +7,7 @@ import { UseMutateBet } from '../../queries/mutateBet'
 import LoadingButton from '@mui/lab/LoadingButton'
 import { hentFlag, hentNorsk } from '../../utils/lag'
 import Link from 'next/link'
+import { default as MUILink } from '@mui/material/Link/Link'
 
 export const BetView = ({ bet, matchside }: { bet: Bet; matchside: boolean }) => {
     const numberPropTilString = (prop: number | null) => {
@@ -128,7 +129,13 @@ export const BetView = ({ bet, matchside }: { bet: Bet; matchside: boolean }) =>
                         Lagre
                     </LoadingButton>
                 )}
-                {disabled && !matchside && <Link href={'/match/' + bet.match_id}>Se alles bets på denne kampen</Link>}
+                {disabled && !matchside && (
+                    <Link href={'/match/' + bet.match_id}>
+                        <MUILink underline={'hover'} sx={{ cursor: 'pointer' }}>
+                            Se alles bets på denne kampen
+                        </MUILink>
+                    </Link>
+                )}
             </CardContent>
         </Card>
     )

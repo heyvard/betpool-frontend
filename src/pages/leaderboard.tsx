@@ -9,6 +9,7 @@ import { UseAllBets } from '../queries/useAllBets'
 import Link from 'next/link'
 import { regnUtScoreForKamp } from '../components/results/matchScoreCalculator'
 import { calculateLeaderboard } from '../components/results/calculateAllScores'
+import { default as MUILink } from '@mui/material/Link'
 
 function plassVisning(plass: number) {
     switch (plass) {
@@ -74,7 +75,11 @@ const Leaderboard: NextPage = () => {
                                                 {!user?.picture && <Typography variant="h2">😄</Typography>}
                                             </TableCell>
                                             <TableCell component="th" scope="row">
-                                                <Link href={'/user/' + user?.id}>{user?.name}</Link>
+                                                <Link href={'/user/' + user?.id}>
+                                                    <MUILink underline={'hover'} sx={{ cursor: 'pointer' }}>
+                                                        {user?.name}
+                                                    </MUILink>
+                                                </Link>
                                             </TableCell>
                                             <TableCell align="right">{row.poeng}</TableCell>
                                         </TableRow>

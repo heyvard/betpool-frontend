@@ -52,9 +52,7 @@ const Home: NextPage = () => {
                         }
                     })
                     .filter((a) => a.user)
-
                     .sort((b, a) => b.user.name.localeCompare(a.user.name))
-
                     .map((a) => (
                         <>
                             <h4>{a.user.name}</h4>
