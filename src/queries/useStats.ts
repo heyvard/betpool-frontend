@@ -6,6 +6,7 @@ import { UserCharity } from '../types/types'
 type Stats = {
     charity: number
     pot: number
+    deltakere: number
     premier: number[]
 }
 
@@ -22,17 +23,12 @@ export function UseStats() {
 
         const charity = stats.map((a) => (a.charity / 100.0) * 300).reduce((partialSum, a) => partialSum + a, 0)
         const pot = stats.length * 300 - charity
-
+        const deltakere = stats.length
         return {
             charity,
             pot,
-            premier: [
-                Math.round(pot * 0.45),
-                Math.round(pot * 0.25),
-                Math.round(pot * 0.15),
-                Math.round(pot * 0.1),
-                Math.round(pot * 0.05),
-            ],
+            deltakere,
+            premier: [Math.round(pot * 0.5), Math.round(pot * 0.3), Math.round(pot * 0.2)],
         }
     })
 }

@@ -28,15 +28,11 @@ const Home: NextPage = () => {
                 <h3>Premier</h3>
                 Potten er på: {stats.pot} kr.
                 <br />
-                1. plass får 45% av potten: {stats.premier[0]} kr
+                1. plass får 50% av potten: {stats.premier[0]} kr
                 <br />
-                2. plass får 25% av potten: {stats.premier[1]} kr
+                2. plass får 30% av potten: {stats.premier[1]} kr
                 <br />
-                3. plass får 15% av potten: {stats.premier[2]} kr
-                <br />
-                4. plass får 10% av potten: {stats.premier[3]} kr
-                <br />
-                5. plass får 5% av potten: {stats.premier[4]} kr
+                3. plass får 20% av potten: {stats.premier[2]} kr
                 <br />
                 <br />
                 Hvis flere personer får like mange poeng så deles premiepottene for de aktuelle plassene.
@@ -80,9 +76,14 @@ const Home: NextPage = () => {
                 </ul>
                 Kampverdien økes til 2, I finalen er den 3<br />
                 <br />
-                <h3>Vinner og toppscorer</h3>
-                Du kan endre bet hele første runde av greuppespillet, deretter er de låst. Riktig vinner gir 30 poeng.
-                Riktig toppscorer gir 30 poeng.
+                <h3>Vinner</h3>
+                Du kan endre bet hele første runde av greuppespillet, deretter er det låst. Det deles ut totalt{' '}
+                {stats.deltakere * 10} poeng. Disse splittes på alle som har riktig svar. Summen er antall deltagere
+                ganger 10.
+                <h3>Toppscorer</h3>
+                Du kan endre bet hele første runde av greuppespillet, deretter er det låst. Det deles ut totalt{' '}
+                {stats.deltakere * 10} poeng. Disse splittes på alle som har riktig svar. Summen er antall deltagere
+                ganger 10.
             </Container>
         </>
     )
