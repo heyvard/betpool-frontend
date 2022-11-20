@@ -19,7 +19,6 @@ import { UseAllBets } from '../queries/useAllBetsExtended'
 import Link from 'next/link'
 import { calculateLeaderboard } from '../components/results/calculateAllScores'
 import { default as MUILink } from '@mui/material/Link'
-import { deepOrange } from '@mui/material/colors'
 
 function plassVisning(plass: number) {
     switch (plass) {
@@ -89,7 +88,6 @@ const Leaderboard: NextPage = () => {
                                                         alt={user?.name}
                                                         sx={{
                                                             width: '50px',
-                                                            bgcolor: deepOrange[500],
                                                             height: '50px',
                                                         }}
                                                     >
