@@ -1,13 +1,12 @@
-import { MatchBet } from '../../queries/useAllBets'
-import { finnUtfall, MatchPoeng } from './matchScoreCalculator'
+import { MatchBetMedScore } from '../../queries/useAllBetsExtended'
 
 interface LeaderBoard {
     userid: string
     poeng: number
 }
 
-export function calculateLeaderboard(bets: MatchBet[], matchPoeng: Map<string, MatchPoeng>): LeaderBoard[] {
-    const userMap = new Map<string, MatchBet[]>()
+export function calculateLeaderboard(bets: MatchBetMedScore[]): LeaderBoard[] {
+    const userMap = new Map<string, MatchBetMedScore[]>()
 
     bets.forEach((bet) => userMap.set(bet.user_id, []))
     bets.forEach((bet) => userMap.get(bet.user_id)?.push(bet))
@@ -16,18 +15,7 @@ export function calculateLeaderboard(bets: MatchBet[], matchPoeng: Map<string, M
     userMap.forEach((bets, user) => {
         let poeng = 0
         bets.forEach((b) => {
-            if (b.home_score == null || b.away_score == null) {
-            } else {
-                const utfall = finnUtfall(b.home_score, b.away_score)
-                const riktig = b.home_result == b.home_score && b.away_result == b.away_score
-
-                if (utfall == matchPoeng.get(b.match_id)!.utfall) {
-                    poeng = poeng + matchPoeng.get(b.match_id)!.riktigUtfall
-                }
-                if (riktig) {
-                    poeng = poeng + matchPoeng.get(b.match_id)!.riktigResultat
-                }
-            }
+            poeng = poeng + b.poeng
         })
 
         res.push({

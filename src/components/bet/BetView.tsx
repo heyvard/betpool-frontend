@@ -141,6 +141,6 @@ export const BetView = ({ bet, matchside }: { bet: Bet; matchside: boolean }) =>
     )
 }
 
-function fixLand(s: string): string {
+export function fixLand(s: string): string {
     return hentFlag(s) + ' ' + hentNorsk(s)
 }

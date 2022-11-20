@@ -1,10 +1,10 @@
 import type { NextPage } from 'next'
 
 import { Container } from '@mui/system'
-import { BetView } from '../../components/bet/BetView'
+import { BetView, fixLand } from '../../components/bet/BetView'
 import { Spinner } from '../../components/loading/Spinner'
 import { useRouter } from 'next/router'
-import { UseAllBets } from '../../queries/useAllBets'
+import { UseAllBets } from '../../queries/useAllBetsExtended'
 import { Typography } from '@mui/material'
 import React from 'react'
 
@@ -32,7 +32,7 @@ const Home: NextPage = () => {
         <>
             <Container maxWidth="md" sx={{ mt: 1 }}>
                 <Typography variant="h4" component="h1" align={'center'}>
-                    {match.home_team} vs {match.away_team}
+                    {fixLand(match.home_team)} vs {fixLand(match.away_team)}
                 </Typography>
                 <Typography variant="h6" component="h2" align={'center'}>
                     {match.home_result} - {match.away_result}

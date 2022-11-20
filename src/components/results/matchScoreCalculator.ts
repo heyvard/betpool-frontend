@@ -1,4 +1,4 @@
-import { MatchBet } from '../../queries/useAllBets'
+import { MatchBet } from '../../queries/useAllBetsExtended'
 
 export type Utfall = 'H' | 'U' | 'B'
 

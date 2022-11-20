@@ -5,9 +5,8 @@ import Image from 'next/image'
 import { Box, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Typography } from '@mui/material'
 import { Container } from '@mui/system'
 import { Spinner } from '../components/loading/Spinner'
-import { UseAllBets } from '../queries/useAllBets'
+import { UseAllBets } from '../queries/useAllBetsExtended'
 import Link from 'next/link'
-import { regnUtScoreForKamp } from '../components/results/matchScoreCalculator'
 import { calculateLeaderboard } from '../components/results/calculateAllScores'
 import { default as MUILink } from '@mui/material/Link'
 
@@ -28,8 +27,7 @@ const Leaderboard: NextPage = () => {
     if (!data || isLoading) {
         return <Spinner />
     }
-    let scoreForKamp = regnUtScoreForKamp(data.bets)
-    const lista = calculateLeaderboard(data.bets, scoreForKamp)
+    const lista = calculateLeaderboard(data.bets)
     lista.sort((a, b) => b.poeng - a.poeng)
 
     return (
