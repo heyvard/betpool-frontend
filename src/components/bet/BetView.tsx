@@ -47,6 +47,9 @@ export const BetView = ({ bet, matchside }: { bet: Bet; matchside: boolean }) =>
 
     const disabled = kampstart.isBefore(dayjs())
     const lagreknappSynlig = (hjemmescore !== hjemmescoreProp || bortescore !== bortescoreProp) && !nyligLagret
+    const selectAllFocus = (e: any) => {
+        e.target.select()
+    }
     return (
         <Card sx={{ mt: 1 }}>
             <CardContent>
@@ -71,6 +74,7 @@ export const BetView = ({ bet, matchside }: { bet: Bet; matchside: boolean }) =>
                         }}
                         sx={{ width: 40 }}
                         value={hjemmescore}
+                        onFocus={selectAllFocus}
                         onChange={(e) => {
                             if (!e.currentTarget.value) {
                                 setHjemmescore('')
@@ -104,6 +108,7 @@ export const BetView = ({ bet, matchside }: { bet: Bet; matchside: boolean }) =>
                         error={lagreknappSynlig}
                         sx={{ width: 40 }}
                         value={bortescore}
+                        onFocus={selectAllFocus}
                         onChange={(e) => {
                             if (!e.currentTarget.value) {
                                 setBortescore('')
