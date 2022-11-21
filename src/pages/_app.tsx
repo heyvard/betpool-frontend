@@ -109,7 +109,7 @@ function UserFetchInnlogging(props: { children: React.ReactNode }) {
                                 }}
                             >
                                 <EditIcon />
-                                Resultatservice
+                                Rediger resultater
                             </MenuItem>
                         )}
                         <MenuItem
