@@ -27,3 +27,12 @@ export interface Chat {
     picture: string
     user_id: string
 }
+
+export interface Match {
+    game_start: string
+    away_team: string
+    home_team: string
+    home_score: number | null
+    away_score: number | null
+    id: string
+}

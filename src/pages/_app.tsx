@@ -17,9 +17,10 @@ import { Spinner } from '../components/loading/Spinner'
 import SportsSoccerIcon from '@mui/icons-material/SportsSoccer'
 import GavelIcon from '@mui/icons-material/Gavel'
 import Head from 'next/head'
+import EditIcon from '@mui/icons-material/Edit'
 
 function UserFetchInnlogging(props: { children: React.ReactNode }) {
-    const { isLoading } = UseUser()
+    const { data: me, isLoading } = UseUser()
     const [user] = useAuthState(firebase.auth())
 
     const router = useRouter()
@@ -33,7 +34,7 @@ function UserFetchInnlogging(props: { children: React.ReactNode }) {
     const handleClose = () => {
         setAnchorEl(null)
     }
-    if (isLoading || !user) {
+    if (isLoading || !user || !me) {
         return <Spinner />
     }
     return (
@@ -100,6 +101,17 @@ function UserFetchInnlogging(props: { children: React.ReactNode }) {
                             <Chat />
                             Chat
                         </MenuItem>
+                        {me.admin && (
+                            <MenuItem
+                                onClick={() => {
+                                    handleClose()
+                                    router.push('resultatservice')
+                                }}
+                            >
+                                <EditIcon />
+                                Resultatservice
+                            </MenuItem>
+                        )}
                         <MenuItem
                             onClick={async () => {
                                 await firebase.auth().signOut()
