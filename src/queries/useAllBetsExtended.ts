@@ -2,6 +2,7 @@ import { useQuery } from 'react-query'
 import { useAuthState } from 'react-firebase-hooks/auth'
 import firebase from '../auth/clientApp'
 import { finnUtfall, MatchPoeng, regnUtScoreForKamp } from '../components/results/matchScoreCalculator'
+import { stringTilNumber } from '../utils/stringnumber'
 
 export interface OtherUser {
     id: string
@@ -26,9 +27,9 @@ export interface MatchBetMedScore {
     user_id: string
     match_id: string
     game_start: string
-    away_score: string | null
+    away_score: number | null
     away_team: string
-    home_score: string | null
+    home_score: number | null
     away_result: string | null
     home_result: string | null
     home_team: string
@@ -63,6 +64,8 @@ export function UseAllBets() {
             if (b.home_score == null || b.away_score == null) {
                 return {
                     ...b,
+                    away_score: stringTilNumber(b.away_score),
+                    home_score: stringTilNumber(b.home_score),
                     poeng: 0,
                     riktigResultat: false,
                     riktigUtfall: false,
@@ -81,6 +84,8 @@ export function UseAllBets() {
                 }
                 return {
                     ...b,
+                    away_score: stringTilNumber(b.away_score),
+                    home_score: stringTilNumber(b.home_score),
                     poeng: poeng,
                     riktigResultat: riktigResultat,
                     riktigUtfall: riktigUtfall,

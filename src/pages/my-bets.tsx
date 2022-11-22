@@ -5,7 +5,7 @@ import { Container } from '@mui/system'
 import { BetView } from '../components/bet/BetView'
 import { Spinner } from '../components/loading/Spinner'
 import dayjs from 'dayjs'
-import { Card, CardContent } from '@mui/material'
+import { Card, CardContent, Typography } from '@mui/material'
 import Link from 'next/link'
 import { default as MUILink } from '@mui/material/Link/Link'
 import React from 'react'
@@ -22,6 +22,9 @@ const Home: NextPage = () => {
     return (
         <>
             <Container maxWidth="md" sx={{ mt: 2 }}>
+                <Typography variant="h4" component="h1" align={'center'}>
+                    Mine bets
+                </Typography>
                 <Card sx={{ mt: 1 }}>
                     <CardContent>
                         <Link href={'/user/' + megselv.id}>
