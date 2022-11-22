@@ -5,7 +5,7 @@ import { fixLand } from '../../components/bet/BetView'
 import { Spinner } from '../../components/loading/Spinner'
 import { useRouter } from 'next/router'
 import { UseAllBets } from '../../queries/useAllBetsExtended'
-import { Typography } from '@mui/material'
+import { List, ListItem, ListItemText, Typography } from '@mui/material'
 import React from 'react'
 import { PastBetView } from '../../components/bet/PastBetView'
 
@@ -29,6 +29,24 @@ const Home: NextPage = () => {
                 <Typography variant="h6" component="h2" align={'center'}>
                     {match.home_result} - {match.away_result}
                 </Typography>
+                <List dense={true}>
+                    <ListItem>
+                        <ListItemText primary={match.matchpoeng.antallRiktigeSvar + ' hadde helt rett'} />
+                    </ListItem>
+                    <ListItem>
+                        <ListItemText
+                            primary={
+                                match.matchpoeng.riktigResultat +
+                                match.matchpoeng.riktigUtfall +
+                                ' poeng for riktig resultat'
+                            }
+                        />
+                    </ListItem>
+                    <ListItem>
+                        <ListItemText primary={match.matchpoeng.riktigUtfall + ' poeng for riktig utfall'} />
+                    </ListItem>
+                </List>
+
                 {data.bets
                     .filter((a) => a.match_id == id)
                     .map((a) => ({
