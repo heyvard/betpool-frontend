@@ -8,12 +8,17 @@ import { useEffect, useRef, useState } from 'react'
 import { UseMutateChat } from '../queries/mutateChat'
 import { MessageLeft, MessageRight } from '../components/chat/bubbles'
 import { UseUser } from '../queries/useUser'
+import SportsBarIcon from '@mui/icons-material/SportsBar'
 
 const TextInput = () => {
     const [input, setInput] = useState<string>('')
     const { mutate, isLoading } = UseMutateChat(input, () => {
         setInput('')
     })
+    const { data: megselv } = UseUser()
+    const [beer, setBeer] = useState<boolean>(false)
+
+    const { mutate: mutateBeer } = UseMutateChat(megselv?.name + ' is drinking beer 🍻', () => {})
     return (
         <>
             <form
@@ -39,6 +44,19 @@ const TextInput = () => {
                     color="primary"
                 >
                     <SendIcon />
+                </Button>
+                <Button
+                    variant="contained"
+                    disabled={beer}
+                    type={'submit'}
+                    onClick={(e) => {
+                        e.preventDefault()
+                        setBeer(true)
+                        mutateBeer()
+                    }}
+                    color="primary"
+                >
+                    <SportsBarIcon />
                 </Button>
             </form>
         </>
