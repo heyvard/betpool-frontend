@@ -77,22 +77,26 @@ const Leaderboard: NextPage = () => {
                                             </TableCell>
                                             <TableCell align="left" sx={{ p: 0 }}>
                                                 {user?.picture && (
-                                                    <Avatar
-                                                        alt={user?.name}
-                                                        src={user?.picture}
-                                                        sx={{ width: '50px', height: '50px' }}
-                                                    />
+                                                    <Link href={'/user/' + user?.id}>
+                                                        <Avatar
+                                                            alt={user?.name}
+                                                            src={user?.picture}
+                                                            sx={{ width: '50px', height: '50px' }}
+                                                        />
+                                                    </Link>
                                                 )}
                                                 {!user?.picture && (
-                                                    <Avatar
-                                                        alt={user?.name}
-                                                        sx={{
-                                                            width: '50px',
-                                                            height: '50px',
-                                                        }}
-                                                    >
-                                                        {user?.name?.substring(0, 1)}
-                                                    </Avatar>
+                                                    <Link href={'/user/' + user?.id}>
+                                                        <Avatar
+                                                            alt={user?.name}
+                                                            sx={{
+                                                                width: '50px',
+                                                                height: '50px',
+                                                            }}
+                                                        >
+                                                            {user?.name?.substring(0, 1)}
+                                                        </Avatar>
+                                                    </Link>
                                                 )}
                                             </TableCell>
                                             <TableCell component="th" scope="row" sx={{ p: 0, pl: 1 }}>
