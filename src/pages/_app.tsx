@@ -86,7 +86,7 @@ function UserFetchInnlogging(props: { children: React.ReactNode }) {
                         <MenuItem
                             onClick={() => {
                                 handleClose()
-                                router.push('rules')
+                                router.push('/rules')
                             }}
                         >
                             <GavelIcon />
@@ -95,7 +95,7 @@ function UserFetchInnlogging(props: { children: React.ReactNode }) {
                         <MenuItem
                             onClick={() => {
                                 handleClose()
-                                router.push('chat')
+                                router.push('/chat')
                             }}
                         >
                             <Chat />
@@ -105,7 +105,7 @@ function UserFetchInnlogging(props: { children: React.ReactNode }) {
                             <MenuItem
                                 onClick={() => {
                                     handleClose()
-                                    router.push('resultatservice')
+                                    router.push('/resultatservice')
                                 }}
                             >
                                 <EditIcon />
