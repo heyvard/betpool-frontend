@@ -26,6 +26,8 @@ const Home: NextPage = () => {
     const { data: stats } = UseStats()
     const [topscorer, setTopscorer] = useState(megselv?.topscorer)
     const { data: matches, isLoading: isLoading2 } = UseMatches()
+    const kanEndres = dayjs('2022-11-25T10:00:00.000Z')
+
     if (!matches || isLoading2) {
         return <Spinner />
     }
@@ -73,13 +75,22 @@ const Home: NextPage = () => {
                         </Card>
                     )
                 })}
+                {kanEndres.isAfter(dayjs()) && (
+                    <Card sx={{ mt: 1 }}>
+                        <CardContent>
+                            <Typography variant="h6" component="h6" align={'center'}>
+                                Vinner og toppscorer kan endres frem til {kanEndres.format('ddd, D MMM  kl HH:mm')}
+                            </Typography>
+                        </CardContent>
+                    </Card>
+                )}
                 <Card sx={{ mt: 1 }}>
                     <CardContent>
                         <FormControl fullWidth>
                             <InputLabel id="demo-simple-select-label">Hvem vinner VM?</InputLabel>
                             <Select
                                 labelId="demo-simple-select-label"
-                                disabled={lagrer}
+                                disabled={lagrer || kanEndres.isBefore(dayjs())}
                                 id="demo-simple-select"
                                 value={megselv.winner}
                                 label="Hvem winner VM?"
@@ -122,6 +133,7 @@ const Home: NextPage = () => {
                             <TextField
                                 id="outlined-required"
                                 label="Hvilken spiller scorer flest mål?"
+                                disabled={kanEndres.isBefore(dayjs())}
                                 value={topscorer}
                                 onChange={(e) => {
                                     setTopscorer(e.target.value)
