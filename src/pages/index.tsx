@@ -37,7 +37,9 @@ const Home: NextPage = () => {
     const kamper = matches.filter((a) => {
         return dayjs(a.game_start).isAfter(dayjs().subtract(2, 'hours')) && dayjs(a.game_start).isBefore(dayjs())
     })
-
+    const snartKamper = matches.filter((a) => {
+        return dayjs(a.game_start).isAfter(dayjs()) && dayjs(a.game_start).isBefore(dayjs().add(2, 'hours'))
+    })
     return (
         <>
             <Container maxWidth="md" sx={{ mt: 1 }}>
@@ -51,6 +53,20 @@ const Home: NextPage = () => {
                                 <Link href={'/match/' + k.id}>
                                     <MUILink underline={'hover'} sx={{ cursor: 'pointer' }}>
                                         Nå pågår {fixLand(k.home_team)} vs {fixLand(k.away_team)}
+                                    </MUILink>
+                                </Link>
+                            </CardContent>
+                        </Card>
+                    )
+                })}
+                {snartKamper.map((k) => {
+                    return (
+                        <Card key={k.id} sx={{ mt: 1 }}>
+                            <CardContent>
+                                <Link href={'/my-bets/'}>
+                                    <MUILink underline={'hover'} sx={{ cursor: 'pointer' }}>
+                                        {fixLand(k.home_team)} vs {fixLand(k.away_team)} starter kl{' '}
+                                        {dayjs(k.game_start).format('HH:mm')}
                                     </MUILink>
                                 </Link>
                             </CardContent>
