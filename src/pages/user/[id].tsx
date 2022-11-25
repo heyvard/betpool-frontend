@@ -5,9 +5,10 @@ import { Spinner } from '../../components/loading/Spinner'
 import dayjs from 'dayjs'
 import { useRouter } from 'next/router'
 import { UseAllBets } from '../../queries/useAllBetsExtended'
-import { Typography } from '@mui/material'
+import { Card, CardContent, Typography } from '@mui/material'
 import React from 'react'
 import { PastBetView } from '../../components/bet/PastBetView'
+import { fixLand } from '../../components/bet/BetView'
 
 const Home: NextPage = () => {
     const { data, isLoading } = UseAllBets()
@@ -25,6 +26,15 @@ const Home: NextPage = () => {
                 <Typography variant="h4" component="h1" align={'center'}>
                     {user.name} sine bets
                 </Typography>
+                {user.winner && (
+                    <Card sx={{ mt: 1 }}>
+                        <CardContent>
+                            <Typography>Vinner: {fixLand(user.winner || '')}</Typography>
+                            <Typography sx={{ mt: 1 }}>Toppscorer: {user.topscorer}</Typography>
+                        </CardContent>
+                    </Card>
+                )}
+
                 {data.bets
                     .filter((a) => a.user_id == id)
                     .sort((b, a) => dayjs(a.game_start).unix() - dayjs(b.game_start).unix())

@@ -29,7 +29,7 @@ export const alleLag: Lag[] = [
         norsk: 'Kroatia',
         flagg: '🇭🇷',
     },
-    { engelsk: 'Denmark', norsk: 'Denmark', flagg: '🇩🇰' },
+    { engelsk: 'Denmark', norsk: 'Danmark', flagg: '🇩🇰' },
     {
         engelsk: 'Ecuador',
         norsk: 'Equador',

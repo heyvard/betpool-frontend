@@ -8,6 +8,8 @@ export interface OtherUser {
     id: string
     name: string
     picture: string | null
+    winner?: string
+    topscorer?: string
 }
 
 export interface MatchBet {
