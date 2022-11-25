@@ -9,6 +9,8 @@ import { Card, CardContent, Typography } from '@mui/material'
 import React from 'react'
 import { PastBetView } from '../../components/bet/PastBetView'
 import { fixLand } from '../../components/bet/BetView'
+import Link from 'next/link'
+import { default as MUILink } from '@mui/material/Link/Link'
 
 const Home: NextPage = () => {
     const { data, isLoading } = UseAllBets()
@@ -29,8 +31,17 @@ const Home: NextPage = () => {
                 {user.winner && (
                     <Card sx={{ mt: 1 }}>
                         <CardContent>
-                            <Typography>Vinner: {fixLand(user.winner || '')}</Typography>
-                            <Typography sx={{ mt: 1 }}>Toppscorer: {user.topscorer}</Typography>
+                            <Link href={'/winnerbets'}>
+                                <MUILink underline={'hover'} sx={{ cursor: 'pointer' }}>
+                                    Vinner: {fixLand(user.winner || '')}
+                                </MUILink>
+                            </Link>
+                            <br />
+                            <Link href={'/toppscorer'}>
+                                <MUILink underline={'hover'} sx={{ cursor: 'pointer' }}>
+                                    Toppscorer: {user.topscorer}
+                                </MUILink>
+                            </Link>
                         </CardContent>
                     </Card>
                 )}
