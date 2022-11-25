@@ -59,7 +59,7 @@ const Home: NextPage = () => {
                 <h3>Kampverdier</h3>
                 <b>Gruppespill</b>
                 <br />
-                Kampverdien er 1 i runde 1 og 2. I runde 3 er kampverdien 3.
+                Kampverdien er 1 i runde 1 og 2. I runde 3 er kampverdien 1,5.
                 <br />
                 <br />
                 <b>Sluttspill</b>
@@ -68,11 +68,11 @@ const Home: NextPage = () => {
                 <br />
                 Kampverdier
                 <ul>
-                    <li>Åttenedelsfinaler: 4</li>
-                    <li>Kvartfinaler: 5</li>
-                    <li>Semifinaler: 7</li>
-                    <li>Bronsefinale: 7</li>
-                    <li>Finale: 10</li>
+                    <li>Åttenedelsfinaler: 2</li>
+                    <li>Kvartfinaler: 2,5</li>
+                    <li>Semifinaler: 3</li>
+                    <li>Bronsefinale: 3</li>
+                    <li>Finale: 5</li>
                 </ul>
                 <br />
                 <h3>Vinner</h3>
