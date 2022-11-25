@@ -80,7 +80,7 @@ export function regnUtScoreForKamp(bets: MatchBet[]): Map<string, MatchPoeng> {
                 return 1
             }
 
-            const _skalDobles = riktigeUtfall < faktiskeBets * 0.4
+            const _skalDobles = riktigeUtfall < faktiskeBets * 0.2
 
             res.push({
                 matchid: match,
