@@ -14,6 +14,7 @@ const Leaderboard: NextPage = () => {
     if (!data || isLoading) {
         return <Spinner />
     }
+    data.users.sort((a, b) => a.winner?.localeCompare(b.winner || '') || 0)
 
     return (
         <>

@@ -14,6 +14,8 @@ const Leaderboard: NextPage = () => {
         return <Spinner />
     }
 
+    data.users.sort((a, b) => a.topscorer?.localeCompare(b.topscorer || '') || 0)
+
     return (
         <>
             <Head>
