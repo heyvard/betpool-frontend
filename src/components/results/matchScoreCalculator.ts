@@ -7,6 +7,7 @@ export interface MatchPoeng {
     riktigUtfall: number
     riktigResultat: number
     antallRiktigeSvar: number
+    antallRiktigeUtfall: number
     utfall: Utfall | null
 }
 
@@ -39,17 +40,27 @@ export function regnUtScoreForKamp(bets: MatchBet[]): Map<string, MatchPoeng> {
                 riktigUtfall: 0,
                 riktigResultat: 0,
                 antallRiktigeSvar: 0,
+                antallRiktigeUtfall: 0,
                 utfall: null,
             })
         } else {
             let riktigeSvar = 0
+            let riktigeUtfall = 0
+            let utfall = finnUtfall(homeResult, awayResult)
 
             const vekting = 1 //TODO endres senere
-
+            let faktiskeBets = 0
             bets.forEach((b) => {
                 const riktig = b.home_result == b.home_score && b.away_result == b.away_score
                 if (riktig) {
                     riktigeSvar++
+                }
+                if (b.home_score && b.away_score) {
+                    faktiskeBets++
+                    const betUtfall = finnUtfall(b.home_score, b.away_score)
+                    if (betUtfall == utfall) {
+                        riktigeUtfall++
+                    }
                 }
             })
 
@@ -69,12 +80,15 @@ export function regnUtScoreForKamp(bets: MatchBet[]): Map<string, MatchPoeng> {
                 return 1
             }
 
+            const _skalDobles = riktigeUtfall < faktiskeBets * 0.4
+
             res.push({
                 matchid: match,
-                riktigUtfall: vekting,
+                riktigUtfall: vekting, // * (_skalDobles ? 2 : 1),
                 riktigResultat: riktigResultat() * vekting,
                 antallRiktigeSvar: riktigeSvar,
-                utfall: finnUtfall(homeResult, awayResult),
+                antallRiktigeUtfall: riktigeUtfall,
+                utfall: utfall,
             })
         }
     })
