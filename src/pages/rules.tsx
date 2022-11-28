@@ -49,7 +49,8 @@ const Home: NextPage = () => {
                 <br />
                 <h3>Poengsystem</h3>
                 Man får 1 poeng ganget med kampverdien for å gjette riktig utfall av kampen (hvem som vinner eller
-                uavgjort). Dette ganges med kampverdien.
+                uavgjort). Dette ganges med kampverdien. Fra og med runde 3 dobles også denne verdien dersom antallet
+                som har riktig utfall er under 20%.
                 <br />
                 <br />
                 Treffer man riktig resultat får man 2-5 poeng avhengig av hvor mange andre som hadde riktig resultat.
