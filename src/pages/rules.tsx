@@ -77,12 +77,12 @@ const Home: NextPage = () => {
                 <br />
                 <h3>Vinner</h3>
                 Du kan endre bet hele første runde av greuppespillet, deretter er det låst. Det deles ut totalt{' '}
-                {stats.deltakere * 10} poeng. Disse splittes på alle som har riktig svar. Summen er antall deltagere
-                ganger 10.
+                {stats.deltakere * 3} poeng. Disse splittes på alle som har riktig svar. Summen er antall deltagere
+                ganger 3.
                 <h3>Toppscorer</h3>
                 Du kan endre bet hele første runde av greuppespillet, deretter er det låst. Det deles ut totalt{' '}
-                {stats.deltakere * 10} poeng. Disse splittes på alle som har riktig svar. Summen er antall deltagere
-                ganger 10.
+                {stats.deltakere * 3} poeng. Disse splittes på alle som har riktig svar. Summen er antall deltagere
+                ganger 3.
             </Container>
         </>
     )

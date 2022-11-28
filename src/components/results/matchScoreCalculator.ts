@@ -48,7 +48,26 @@ export function regnUtScoreForKamp(bets: MatchBet[]): Map<string, MatchPoeng> {
             let riktigeUtfall = 0
             let utfall = finnUtfall(homeResult, awayResult)
 
-            const vekting = 1 //TODO endres senere
+            const round = Number(bets[0].round)
+
+            const finnVekting = () => {
+                switch (round) {
+                    case 3:
+                        return 1.5
+                    case 4:
+                        return 2
+                    case 5:
+                        return 2.5
+                    case 6:
+                        return 3
+                    case 7:
+                        return 3
+                    case 8:
+                        return 5
+                }
+                return 1
+            }
+            const vekting = finnVekting()
             let faktiskeBets = 0
             bets.forEach((b) => {
                 const riktig = b.home_result == b.home_score && b.away_result == b.away_score
@@ -80,11 +99,11 @@ export function regnUtScoreForKamp(bets: MatchBet[]): Map<string, MatchPoeng> {
                 return 1
             }
 
-            const _skalDobles = riktigeUtfall < faktiskeBets * 0.2
+            const _skalDobles = riktigeUtfall < faktiskeBets * 0.2 && round > 2
 
             res.push({
                 matchid: match,
-                riktigUtfall: vekting, // * (_skalDobles ? 2 : 1),
+                riktigUtfall: vekting * (_skalDobles ? 2 : 1),
                 riktigResultat: riktigResultat() * vekting,
                 antallRiktigeSvar: riktigeSvar,
                 antallRiktigeUtfall: riktigeUtfall,
