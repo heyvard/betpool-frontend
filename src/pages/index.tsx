@@ -86,6 +86,15 @@ const Home: NextPage = () => {
                 )}
                 <Card sx={{ mt: 1 }}>
                     <CardContent>
+                        <Link href={'/chat'}>
+                            <MUILink underline={'hover'} sx={{ cursor: 'pointer' }}>
+                                ℹ️️ Litt justeringer i poengsystem fremover, se chatten
+                            </MUILink>
+                        </Link>
+                    </CardContent>
+                </Card>
+                <Card sx={{ mt: 1 }}>
+                    <CardContent>
                         <FormControl fullWidth>
                             <InputLabel id="demo-simple-select-label">Hvem vinner VM?</InputLabel>
                             <Select
