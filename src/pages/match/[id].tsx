@@ -34,6 +34,9 @@ const Home: NextPage = () => {
                         <ListItemText primary={match.matchpoeng.antallRiktigeSvar + ' hadde helt rett'} />
                     </ListItem>
                     <ListItem>
+                        <ListItemText primary={match.matchpoeng.antallRiktigeUtfall + ' hadde riktig utfall'} />
+                    </ListItem>
+                    <ListItem>
                         <ListItemText
                             primary={
                                 match.matchpoeng.riktigResultat +
