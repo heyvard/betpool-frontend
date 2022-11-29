@@ -17,6 +17,7 @@ export interface Bet {
     away_score: number | null
     match_id: string
     bet_id: string
+    round: string
 }
 
 export interface Chat {

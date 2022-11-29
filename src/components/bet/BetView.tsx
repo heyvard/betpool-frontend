@@ -1,13 +1,14 @@
 import { Box, Card, CardContent, TextField, Typography } from '@mui/material'
 import { Bet } from '../../types/types'
 import dayjs from 'dayjs'
-import { useState } from 'react'
+import React, { useState } from 'react'
 import SaveIcon from '@mui/icons-material/Save'
 import { UseMutateBet } from '../../queries/mutateBet'
 import LoadingButton from '@mui/lab/LoadingButton'
 import { hentFlag, hentNorsk } from '../../utils/lag'
 import Link from 'next/link'
 import { default as MUILink } from '@mui/material/Link/Link'
+import { rundeTilTekst } from '../../utils/rundeTilTekst'
 
 export const BetView = ({ bet, matchside }: { bet: Bet; matchside: boolean }) => {
     const numberPropTilString = (prop: number | null) => {
@@ -54,6 +55,8 @@ export const BetView = ({ bet, matchside }: { bet: Bet; matchside: boolean }) =>
         <Card sx={{ mt: 1 }}>
             <CardContent>
                 {kampstart.format('ddd, D MMM  HH:mm')}
+                <br />
+                {rundeTilTekst(bet.round)}
                 <Box sx={{ display: 'flex', alignItems: 'flex-end' }}>
                     <Typography width={140}> {fixLand(bet.home_team)}</Typography>
                     <TextField

@@ -1,13 +1,14 @@
 import { Box, Card, CardContent, TextField, Typography } from '@mui/material'
 import { Match } from '../../types/types'
 import dayjs from 'dayjs'
-import { useState } from 'react'
+import React, { useState } from 'react'
 import SaveIcon from '@mui/icons-material/Save'
 import LoadingButton from '@mui/lab/LoadingButton'
 import { hentFlag, hentNorsk } from '../../utils/lag'
 import Link from 'next/link'
 import { default as MUILink } from '@mui/material/Link/Link'
 import { UseMutateMatch } from '../../queries/mutateMatch'
+import { rundeTilTekst } from '../../utils/rundeTilTekst'
 
 export const MatchView = ({ match }: { match: Match }) => {
     const numberPropTilString = (prop: number | null) => {
@@ -53,6 +54,8 @@ export const MatchView = ({ match }: { match: Match }) => {
         <Card sx={{ mt: 1 }}>
             <CardContent>
                 {kampstart.format('ddd, D MMM  HH:mm')}
+                <br />
+                {rundeTilTekst(match.round)}
                 <Box sx={{ display: 'flex', alignItems: 'flex-end' }}>
                     <Typography width={140}> {fixLand(match.home_team)}</Typography>
                     <TextField

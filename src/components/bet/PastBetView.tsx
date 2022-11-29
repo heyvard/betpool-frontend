@@ -5,6 +5,8 @@ import { default as MUILink } from '@mui/material/Link/Link'
 import { MatchBetMedScore } from '../../queries/useAllBetsExtended'
 import { fixLand } from './BetView'
 import { red, lime, green } from '@mui/material/colors'
+import { rundeTilTekst } from '../../utils/rundeTilTekst'
+import React from 'react'
 
 export const PastBetView = ({ bet, matchside }: { bet: MatchBetMedScore; matchside: boolean }) => {
     const kampstart = dayjs(bet.game_start)
@@ -21,6 +23,8 @@ export const PastBetView = ({ bet, matchside }: { bet: MatchBetMedScore; matchsi
         <Card sx={{ mt: 1, backgroundColor: bg() }}>
             <CardContent>
                 {kampstart.format('ddd, D MMM  HH:mm')}
+                <br />
+                {rundeTilTekst(bet.round)}
                 <Box sx={{ display: 'flex', alignItems: 'flex-end' }}>
                     <Typography width={140}> {fixLand(bet.home_team)}</Typography>
                     <TextField

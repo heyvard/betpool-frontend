@@ -8,6 +8,7 @@ import { UseAllBets } from '../../queries/useAllBetsExtended'
 import { List, ListItem, ListItemText, Typography } from '@mui/material'
 import React from 'react'
 import { PastBetView } from '../../components/bet/PastBetView'
+import { rundeTilTekst } from '../../utils/rundeTilTekst'
 
 const Home: NextPage = () => {
     const { data, isLoading } = UseAllBets()
@@ -27,6 +28,9 @@ const Home: NextPage = () => {
                     {fixLand(match.home_team)} vs {fixLand(match.away_team)}
                 </Typography>
                 <Typography variant="h6" component="h2" align={'center'}>
+                    {rundeTilTekst(match.round)}
+                </Typography>{' '}
+                <Typography variant="h6" component="h2" align={'center'}>
                     {match.home_result} - {match.away_result}
                 </Typography>
                 <List dense={true}>
@@ -37,19 +41,12 @@ const Home: NextPage = () => {
                         <ListItemText primary={match.matchpoeng.antallRiktigeUtfall + ' hadde riktig utfall'} />
                     </ListItem>
                     <ListItem>
-                        <ListItemText
-                            primary={
-                                match.matchpoeng.riktigResultat +
-                                match.matchpoeng.riktigUtfall +
-                                ' poeng for riktig resultat'
-                            }
-                        />
+                        <ListItemText primary={match.matchpoeng.riktigResultat + ' poeng for riktig resultat'} />
                     </ListItem>
                     <ListItem>
                         <ListItemText primary={match.matchpoeng.riktigUtfall + ' poeng for riktig utfall'} />
                     </ListItem>
                 </List>
-
                 {data.bets
                     .filter((a) => a.match_id == id)
                     .map((a) => ({

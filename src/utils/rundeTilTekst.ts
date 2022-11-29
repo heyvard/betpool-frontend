@@ -16,5 +16,5 @@ export function rundeTilTekst(runde: string) {
             return 'Finale'
         }
     }
-    return 'gruppespill'
+    return 'Gruppespill'
 }
