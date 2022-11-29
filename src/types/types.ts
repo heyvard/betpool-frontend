@@ -35,4 +35,5 @@ export interface Match {
     home_score: number | null
     away_score: number | null
     id: string
+    round: string
 }

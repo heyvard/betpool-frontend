@@ -9,7 +9,7 @@ import { useAuthState } from 'react-firebase-hooks/auth'
 import firebase from '../auth/clientApp'
 import { useQueryClient } from 'react-query'
 import { UseStats } from '../queries/useStats'
-import { alleLag } from '../utils/lag'
+import { alleLagSortert } from '../utils/lag'
 import LoadingButton from '@mui/lab/LoadingButton'
 import SaveIcon from '@mui/icons-material/Save'
 import { UseMatches } from '../queries/useMatches'
@@ -34,8 +34,6 @@ const Home: NextPage = () => {
     if (!megselv || !stats) {
         return <Spinner></Spinner>
     }
-    const alleLagSortert = alleLag.sort((a, b) => a.norsk.localeCompare(b.norsk))
-
     const kamper = matches.filter((a) => {
         return dayjs(a.game_start).isAfter(dayjs().subtract(2, 'hours')) && dayjs(a.game_start).isBefore(dayjs())
     })

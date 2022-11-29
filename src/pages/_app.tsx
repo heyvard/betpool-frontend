@@ -112,6 +112,17 @@ function UserFetchInnlogging(props: { children: React.ReactNode }) {
                                 Rediger resultater
                             </MenuItem>
                         )}
+                        {me.admin && (
+                            <MenuItem
+                                onClick={() => {
+                                    handleClose()
+                                    router.push('/sluttspill')
+                                }}
+                            >
+                                <EditIcon />
+                                Rediger sluttspill
+                            </MenuItem>
+                        )}
                         <MenuItem
                             onClick={async () => {
                                 await firebase.auth().signOut()

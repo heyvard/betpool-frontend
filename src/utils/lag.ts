@@ -118,3 +118,5 @@ export function hentFlag(engelskLag: string) {
 export function hentNorsk(engelskLag: string) {
     return engelskMap.get(engelskLag)?.norsk || '🤔'
 }
+
+export const alleLagSortert = alleLag.sort((a, b) => a.norsk.localeCompare(b.norsk))
