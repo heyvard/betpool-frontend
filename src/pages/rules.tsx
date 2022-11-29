@@ -25,6 +25,9 @@ const Home: NextPage = () => {
                 <br />
                 Pengene må være overført innen første kamp på vipps til 467 90 000 . Riktig donasjon til Amnesty vippses
                 videre.
+                <br />
+                Donasjonen er på: {stats.charity} kr.
+                <br />
                 <h3>Premier</h3>
                 Potten er på: {stats.pot} kr.
                 <br />
