@@ -107,7 +107,7 @@ const Leaderboard: NextPage = () => {
                                                 </Link>
                                             </TableCell>
                                             <TableCell align="right" sx={{ p: 0, pr: 3 }}>
-                                                {row.poeng}
+                                                {row.poeng.toFixed(1)}
                                             </TableCell>
                                         </TableRow>
                                     )
