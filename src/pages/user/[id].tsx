@@ -33,13 +33,13 @@ const Home: NextPage = () => {
                         <CardContent>
                             <Link href={'/winnerbets'}>
                                 <MUILink underline={'hover'} sx={{ cursor: 'pointer' }}>
-                                    Vinner: {fixLand(user.winner || '')}
+                                    Vinner: {fixLand(user.winner || '')} ({user.winnerPoints} poeng)
                                 </MUILink>
                             </Link>
                             <br />
                             <Link href={'/toppscorer'}>
                                 <MUILink underline={'hover'} sx={{ cursor: 'pointer' }}>
-                                    Toppscorer: {user.topscorer}
+                                    Toppscorer: {user.topscorer} ({user.topscorerPoints} poeng)
                                 </MUILink>
                             </Link>
                         </CardContent>

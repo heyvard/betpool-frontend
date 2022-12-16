@@ -29,6 +29,7 @@ const Leaderboard: NextPage = () => {
                                 <TableRow>
                                     <TableCell>Navn</TableCell>
                                     <TableCell>Toppscorer</TableCell>
+                                    <TableCell>Poeng</TableCell>
                                 </TableRow>
                             </TableHead>
                             <TableBody>
@@ -48,6 +49,7 @@ const Leaderboard: NextPage = () => {
                                                 </Link>
                                             </TableCell>
                                             <TableCell sx={{ p: 0, pr: 3 }}>{user.topscorer}</TableCell>
+                                            <TableCell sx={{ p: 0, pr: 3 }}>{user.topscorerPoints}</TableCell>
                                         </TableRow>
                                     )
                                 })}

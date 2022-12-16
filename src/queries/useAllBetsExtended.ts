@@ -10,6 +10,9 @@ export interface OtherUser {
     picture: string | null
     winner?: string
     topscorer?: string
+
+    winnerPoints?: number
+    topscorerPoints?: number
 }
 
 export interface MatchBet {
@@ -46,10 +49,15 @@ export interface AllBets {
     users: OtherUser[]
     bets: MatchBet[]
 }
+
+const winner = 'Spain'
+
 export interface AllBetsExtended {
     users: OtherUser[]
     bets: MatchBetMedScore[]
 }
+
+const topscorer = ['Neymar']
 
 export function UseAllBets() {
     const [user] = useAuthState(firebase.auth())
@@ -95,8 +103,38 @@ export function UseAllBets() {
                 }
             }
         })
+        const winnerPointsFun = () => {
+            const antallOk = allBets.users.filter((u) => u.winner == winner).length
+            if (antallOk == 0) {
+                return 0
+            }
+            return (allBets.users.length * 3) / antallOk
+        }
+        const poengPerVinner = winnerPointsFun()
+        const topscorerPointsFun = () => {
+            const antallOk = allBets.users.filter((u) => topscorer.includes(u.topscorer || 'blah')).length
+            if (antallOk == 0) {
+                return 0
+            }
+            return (allBets.users.length * 3) / antallOk
+        }
+        const poengPerTopscorer = topscorerPointsFun()
         return {
-            users: allBets.users,
+            users: allBets.users.map((u) => {
+                let winnerPoints = 0
+                let topscorerPoints = 0
+                if (u.winner == winner) {
+                    winnerPoints = poengPerVinner
+                }
+                if (u.topscorer && topscorer.includes(u.topscorer)) {
+                    topscorerPoints = poengPerTopscorer
+                }
+                return {
+                    ...u,
+                    winnerPoints: winnerPoints,
+                    topscorerPoints: topscorerPoints,
+                }
+            }),
             bets: betsMedScore,
         }
     })

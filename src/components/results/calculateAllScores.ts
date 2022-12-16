@@ -1,11 +1,11 @@
-import { MatchBetMedScore } from '../../queries/useAllBetsExtended'
+import { MatchBetMedScore, OtherUser } from '../../queries/useAllBetsExtended'
 
 interface LeaderBoard {
     userid: string
     poeng: number
 }
 
-export function calculateLeaderboard(bets: MatchBetMedScore[]): LeaderBoard[] {
+export function calculateLeaderboard(bets: MatchBetMedScore[], users: OtherUser[]): LeaderBoard[] {
     const userMap = new Map<string, MatchBetMedScore[]>()
 
     bets.forEach((bet) => userMap.set(bet.user_id, []))
@@ -16,6 +16,11 @@ export function calculateLeaderboard(bets: MatchBetMedScore[]): LeaderBoard[] {
         let poeng = 0
         bets.forEach((b) => {
             poeng = poeng + b.poeng
+        })
+        users.forEach((u) => {
+            if (u.id == user) {
+                poeng = poeng + (u.winnerPoints || 0) + (u.topscorerPoints || 0)
+            }
         })
 
         res.push({

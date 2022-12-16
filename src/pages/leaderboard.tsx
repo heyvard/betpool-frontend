@@ -37,7 +37,7 @@ const Leaderboard: NextPage = () => {
     if (!data || isLoading) {
         return <Spinner />
     }
-    const lista = calculateLeaderboard(data.bets)
+    const lista = calculateLeaderboard(data.bets, data.users)
     lista.sort((a, b) => b.poeng - a.poeng)
 
     return (
