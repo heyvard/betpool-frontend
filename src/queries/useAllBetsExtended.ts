@@ -50,14 +50,14 @@ export interface AllBets {
     bets: MatchBet[]
 }
 
-const winner = 'Norge'
+const winner = 'Argentine'
 
 export interface AllBetsExtended {
     users: OtherUser[]
     bets: MatchBetMedScore[]
 }
 
-const topscorer = ['solskjaet']
+const topscorer = ['Messi']
 
 export function UseAllBets() {
     const [user] = useAuthState(firebase.auth())
