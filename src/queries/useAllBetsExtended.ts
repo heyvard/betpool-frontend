@@ -50,7 +50,7 @@ export interface AllBets {
     bets: MatchBet[]
 }
 
-const winner = 'Argentine'
+const winner = 'Argentina'
 
 export interface AllBetsExtended {
     users: OtherUser[]
