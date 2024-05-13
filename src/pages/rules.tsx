@@ -23,8 +23,7 @@ const Home: NextPage = () => {
                 <h3>Innskudd</h3>
                 Det koster 300 kr å delta.
                 <br />
-                Pengene må være overført innen slutten av første runde i gruppespillet på vipps til 467 90 000 .
-                videre.
+                Pengene må være overført innen slutten av første runde i gruppespillet på vipps til 467 90 000 . videre.
                 <br />
                 <h3>Premier</h3>
                 Potten er på: {stats.pot} kr.

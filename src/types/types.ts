@@ -5,8 +5,6 @@ export interface LeaderboardLinje {
     score: number
 }
 
-
-
 export interface Bet {
     game_start: string
     away_team: string
