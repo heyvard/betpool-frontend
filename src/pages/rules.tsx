@@ -23,10 +23,8 @@ const Home: NextPage = () => {
                 <h3>Innskudd</h3>
                 Det koster 300 kr å delta.
                 <br />
-                Pengene må være overført innen første kamp på vipps til 467 90 000 . Riktig donasjon til Amnesty vippses
+                Pengene må være overført innen slutten av første runde i gruppespillet på vipps til 467 90 000 .
                 videre.
-                <br />
-                Donasjonen er på: {stats.charity} kr.
                 <br />
                 <h3>Premier</h3>
                 Potten er på: {stats.pot} kr.

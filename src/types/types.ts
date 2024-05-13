@@ -5,9 +5,7 @@ export interface LeaderboardLinje {
     score: number
 }
 
-export interface UserCharity {
-    charity: number
-}
+
 
 export interface Bet {
     game_start: string

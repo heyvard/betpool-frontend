@@ -40,16 +40,6 @@ export function SignInScreen() {
                 <Card sx={{ mt: 1 }}>
                     <CardContent>
                         <Typography variant="subtitle2" align={'center'}>
-                            Qatar VM er kontroversielt. 🧐
-                            <br />
-                            Derfor velger du selv mellom 10% og 75% av innskuddet ditt som går til Amnesty og ikke i
-                            premiepotten.
-                        </Typography>
-                    </CardContent>
-                </Card>
-                <Card sx={{ mt: 1 }}>
-                    <CardContent>
-                        <Typography variant="subtitle2" align={'center'}>
                             Bet frem til kampstart ⚽
                         </Typography>
                     </CardContent>
