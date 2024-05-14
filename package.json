@@ -13,8 +13,6 @@
         "format": "npm run prettier:write && npm run lint:fix"
     },
     "dependencies": {
-        "@emotion/react": "^11.10.4",
-        "@emotion/styled": "^11.10.4",
         "@navikt/ds-css": "^6.3.6",
         "@navikt/ds-react": "^6.3.6",
         "@navikt/ds-tailwind": "^6.3.6",
