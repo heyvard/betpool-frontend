@@ -16,7 +16,7 @@ import dayjs from 'dayjs'
 import NextLink from 'next/link'
 import { fixLand } from '../components/bet/BetView'
 import { getFirebaseAuth } from '../auth/clientApp'
-import { Link } from '@navikt/ds-react'
+import { Alert, Link } from '@navikt/ds-react'
 
 const Home: NextPage = () => {
     const { data: megselv } = UseUser()
@@ -83,13 +83,9 @@ const Home: NextPage = () => {
                     )
                 })}
                 {kanEndres.isAfter(dayjs()) && (
-                    <Card sx={{ mt: 1 }}>
-                        <CardContent>
-                            <Typography variant="h6" component="h6" align={'center'}>
-                                Vinner og toppscorer kan endres frem til {kanEndres.format('ddd, D MMM  kl HH:mm')}
-                            </Typography>
-                        </CardContent>
-                    </Card>
+                    <Alert variant={'info'}>
+                        Vinner og toppscorer kan endres frem til {kanEndres.format('ddd, D MMM  kl HH:mm')}
+                    </Alert>
                 )}
                 <Card sx={{ mt: 1 }}>
                     <CardContent>
