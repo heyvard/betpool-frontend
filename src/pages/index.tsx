@@ -26,7 +26,6 @@ const Home: NextPage = () => {
     const { data: stats } = UseStats()
     const [topscorer, setTopscorer] = useState(megselv?.topscorer)
     const { data: matches, isLoading: isLoading2 } = UseMatches()
-    const kanEndres = dayjs('2022-11-25T10:00:00.000Z')
 
     if (!matches || isLoading2) {
         return <Spinner />
@@ -34,6 +33,16 @@ const Home: NextPage = () => {
     if (!megselv || !stats) {
         return <Spinner></Spinner>
     }
+    const kanEndres = dayjs(
+        matches
+            .sort((a, b) => {
+                return dayjs(a.game_start).diff(dayjs(b.game_start))
+            })
+            .find((a) => {
+                return a.round == '2'
+            })!.game_start,
+    )
+
     const kamper = matches.filter((a) => {
         return dayjs(a.game_start).isAfter(dayjs().subtract(2, 'hours')) && dayjs(a.game_start).isBefore(dayjs())
     })
