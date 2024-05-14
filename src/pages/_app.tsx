@@ -1,6 +1,5 @@
 import type { AppProps } from 'next/app'
 import { useAuthState } from 'react-firebase-hooks/auth'
-import firebase from '../auth/clientApp'
 import { SignInScreen } from '../components/SignIn'
 import LogoutIcon from '@mui/icons-material/Logout'
 import MenuOpenIcon from '@mui/icons-material/MenuOpen'
@@ -19,9 +18,12 @@ import GavelIcon from '@mui/icons-material/Gavel'
 import Head from 'next/head'
 import EditIcon from '@mui/icons-material/Edit'
 
+import '../styles/global.css'
+import { getFirebaseAuth } from '../auth/clientApp'
+
 function UserFetchInnlogging(props: { children: React.ReactNode }) {
     const { data: me, isLoading } = UseUser()
-    const [user] = useAuthState(firebase.auth())
+    const [user] = useAuthState(getFirebaseAuth())
 
     const router = useRouter()
 
@@ -125,7 +127,7 @@ function UserFetchInnlogging(props: { children: React.ReactNode }) {
                         )}
                         <MenuItem
                             onClick={async () => {
-                                await firebase.auth().signOut()
+                                await getFirebaseAuth().signOut()
                                 handleClose()
                             }}
                         >
@@ -140,7 +142,7 @@ function UserFetchInnlogging(props: { children: React.ReactNode }) {
 }
 
 function UserInnlogging(props: { children: React.ReactNode }) {
-    const [user, loading, error] = useAuthState(firebase.auth())
+    const [user, loading, error] = useAuthState(getFirebaseAuth())
     if (loading) {
         return (
             <Box display="flex" justifyContent="center" alignItems="center" minHeight="100vh">

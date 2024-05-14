@@ -1,11 +1,11 @@
 import { useQuery } from 'react-query'
 import { useAuthState } from 'react-firebase-hooks/auth'
-import firebase from '../auth/clientApp'
+import { getFirebaseAuth } from '../auth/clientApp'
 import { Match } from '../types/types'
 import dayjs from 'dayjs'
 
 export function UseMatches() {
-    const [user] = useAuthState(firebase.auth())
+    const [user] = useAuthState(getFirebaseAuth())
 
     return useQuery<Match[], Error>('matches', async () => {
         const idtoken = await user?.getIdToken()

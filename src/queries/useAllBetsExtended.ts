@@ -1,6 +1,6 @@
 import { useQuery } from 'react-query'
 import { useAuthState } from 'react-firebase-hooks/auth'
-import firebase from '../auth/clientApp'
+import { getFirebaseAuth } from '../auth/clientApp'
 import { finnUtfall, MatchPoeng, regnUtScoreForKamp } from '../components/results/matchScoreCalculator'
 import { stringTilNumber } from '../utils/stringnumber'
 
@@ -60,7 +60,7 @@ export interface AllBetsExtended {
 const topscorer = ['TODO']
 
 export function UseAllBets() {
-    const [user] = useAuthState(firebase.auth())
+    const [user] = useAuthState(getFirebaseAuth())
 
     return useQuery<AllBetsExtended, Error>('all-bets', async () => {
         const idtoken = await user?.getIdToken()

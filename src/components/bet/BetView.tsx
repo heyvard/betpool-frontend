@@ -6,9 +6,9 @@ import SaveIcon from '@mui/icons-material/Save'
 import { UseMutateBet } from '../../queries/mutateBet'
 import LoadingButton from '@mui/lab/LoadingButton'
 import { hentFlag, hentNorsk } from '../../utils/lag'
-import Link from 'next/link'
-import { default as MUILink } from '@mui/material/Link/Link'
+import NextLink from 'next/link'
 import { rundeTilTekst } from '../../utils/rundeTilTekst'
+import { Link } from '@navikt/ds-react'
 
 export const BetView = ({ bet, matchside }: { bet: Bet; matchside: boolean }) => {
     const numberPropTilString = (prop: number | null) => {
@@ -138,11 +138,9 @@ export const BetView = ({ bet, matchside }: { bet: Bet; matchside: boolean }) =>
                     </LoadingButton>
                 )}
                 {disabled && !matchside && (
-                    <Link href={'/match/' + bet.match_id}>
-                        <MUILink underline={'hover'} sx={{ cursor: 'pointer' }}>
-                            Se alles bets på denne kampen
-                        </MUILink>
-                    </Link>
+                    <NextLink href={'/match/' + bet.match_id}>
+                        <Link>Se alles bets på denne kampen</Link>
+                    </NextLink>
                 )}
             </CardContent>
         </Card>

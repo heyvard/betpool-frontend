@@ -1,6 +1,6 @@
 import { useQuery } from 'react-query'
 import { useAuthState } from 'react-firebase-hooks/auth'
-import firebase from '../auth/clientApp'
+import { getFirebaseAuth } from '../auth/clientApp'
 
 type Stats = {
     pot: number
@@ -9,7 +9,7 @@ type Stats = {
 }
 
 export function UseStats() {
-    const [user] = useAuthState(firebase.auth())
+    const [user] = useAuthState(getFirebaseAuth())
 
     return useQuery<Stats, Error>('stats', async () => {
         const idtoken = await user?.getIdToken()

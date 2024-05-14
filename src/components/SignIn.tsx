@@ -1,19 +1,19 @@
 import React from 'react'
-import StyledFirebaseAuth from 'react-firebaseui/StyledFirebaseAuth'
-import firebase from '../auth/clientApp'
 import { Container } from '@mui/system'
 import { BottomNavigation, BottomNavigationAction, Card, CardContent, Paper, Typography } from '@mui/material'
 import HomeIcon from '@mui/icons-material/Home'
 import SportsSoccerIcon from '@mui/icons-material/SportsSoccer'
 import { Chat, EmojiEvents } from '@mui/icons-material'
 import MenuIcon from '@mui/icons-material/Menu'
+import { EmailAuthProvider, GoogleAuthProvider } from 'firebase/auth'
+import StyledFirebaseAuth from '../auth/StyledFirebaseAuth'
 
 // Configure FirebaseUI.
 const uiConfig = {
     // Redirect to / after sign in is successful. Alternatively you can provide a callbacks.signInSuccess function.
     signInSuccessUrl: '/',
     signInFlow: 'popup',
-    signInOptions: [firebase.auth.GoogleAuthProvider.PROVIDER_ID, firebase.auth.EmailAuthProvider.PROVIDER_ID],
+    signInOptions: [GoogleAuthProvider.PROVIDER_ID, EmailAuthProvider.PROVIDER_ID],
 }
 
 export function SignInScreen() {
@@ -60,7 +60,7 @@ export function SignInScreen() {
                         </CardContent>
                     </Card>
                 )}
-                {!isFacebookInAppBrowser && <StyledFirebaseAuth uiConfig={uiConfig} firebaseAuth={firebase.auth()} />}
+                {!isFacebookInAppBrowser && <StyledFirebaseAuth uiConfig={uiConfig} />}
             </Container>
             <Paper sx={{ position: 'fixed', bottom: 0, left: 0, right: 0 }} elevation={3}>
                 <BottomNavigation showLabels>

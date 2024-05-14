@@ -1,13 +1,13 @@
 import { useMutation, useQueryClient } from 'react-query'
 
 import { useAuthState } from 'react-firebase-hooks/auth'
-import firebase from '../auth/clientApp'
+import { getFirebaseAuth } from '../auth/clientApp'
 import { Chat } from '../types/types'
 import { UseUser } from './useUser'
 
 export function UseMutateChat(message: string, successCallback: () => void) {
     const queryClient = useQueryClient()
-    const [user] = useAuthState(firebase.auth())
+    const [user] = useAuthState(getFirebaseAuth())
     const { data: megselv } = UseUser()
     if (!megselv) {
         throw Error('Meg selv skal være satt')

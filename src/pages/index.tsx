@@ -6,7 +6,6 @@ import { Spinner } from '../components/loading/Spinner'
 import { Card, CardContent, FormControl, InputLabel, MenuItem, Select, TextField, Typography } from '@mui/material'
 import React, { useState } from 'react'
 import { useAuthState } from 'react-firebase-hooks/auth'
-import firebase from '../auth/clientApp'
 import { useQueryClient } from 'react-query'
 import { UseStats } from '../queries/useStats'
 import { alleLagSortert } from '../utils/lag'
@@ -14,13 +13,14 @@ import LoadingButton from '@mui/lab/LoadingButton'
 import SaveIcon from '@mui/icons-material/Save'
 import { UseMatches } from '../queries/useMatches'
 import dayjs from 'dayjs'
-import Link from 'next/link'
-import { default as MUILink } from '@mui/material/Link/Link'
+import NextLink from 'next/link'
 import { fixLand } from '../components/bet/BetView'
+import { getFirebaseAuth } from '../auth/clientApp'
+import { Link } from '@navikt/ds-react'
 
 const Home: NextPage = () => {
     const { data: megselv } = UseUser()
-    const [user] = useAuthState(firebase.auth())
+    const [user] = useAuthState(getFirebaseAuth())
     const [lagrer, setLagrer] = useState(false)
     const queryClient = useQueryClient()
     const { data: stats } = UseStats()
@@ -59,11 +59,11 @@ const Home: NextPage = () => {
                     return (
                         <Card key={k.id} sx={{ mt: 1 }}>
                             <CardContent>
-                                <Link href={'/match/' + k.id}>
-                                    <MUILink underline={'hover'} sx={{ cursor: 'pointer' }}>
+                                <NextLink href={'/match/' + k.id}>
+                                    <Link>
                                         Nå pågår {fixLand(k.home_team)} vs {fixLand(k.away_team)}
-                                    </MUILink>
-                                </Link>
+                                    </Link>
+                                </NextLink>
                             </CardContent>
                         </Card>
                     )
@@ -72,12 +72,12 @@ const Home: NextPage = () => {
                     return (
                         <Card key={k.id} sx={{ mt: 1 }}>
                             <CardContent>
-                                <Link href={'/my-bets/'}>
-                                    <MUILink underline={'hover'} sx={{ cursor: 'pointer' }}>
+                                <NextLink href={'/my-bets/'}>
+                                    <Link>
                                         {fixLand(k.home_team)} vs {fixLand(k.away_team)} starter kl{' '}
                                         {dayjs(k.game_start).format('HH:mm')}
-                                    </MUILink>
-                                </Link>
+                                    </Link>
+                                </NextLink>
                             </CardContent>
                         </Card>
                     )

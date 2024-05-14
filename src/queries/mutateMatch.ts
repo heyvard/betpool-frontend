@@ -1,7 +1,7 @@
 import { useMutation, useQueryClient } from 'react-query'
 
 import { useAuthState } from 'react-firebase-hooks/auth'
-import firebase from '../auth/clientApp'
+import { getFirebaseAuth } from '../auth/clientApp'
 
 export function UseMutateMatch(
     id: string,
@@ -10,7 +10,7 @@ export function UseMutateMatch(
     successCallback: () => void,
 ) {
     const queryClient = useQueryClient()
-    const [user] = useAuthState(firebase.auth())
+    const [user] = useAuthState(getFirebaseAuth())
 
     return useMutation<unknown, Error>(
         async () => {

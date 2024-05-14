@@ -4,15 +4,15 @@ import dayjs from 'dayjs'
 import React, { useState } from 'react'
 import { alleLagSortert } from '../../utils/lag'
 import { useAuthState } from 'react-firebase-hooks/auth'
-import firebase from '../../auth/clientApp'
 import { useQueryClient } from 'react-query'
 import { rundeTilTekst } from '../../utils/rundeTilTekst'
+import { getFirebaseAuth } from '../../auth/clientApp'
 
 export const SluttspillView = ({ match }: { match: Match }) => {
     const kampstart = dayjs(match.game_start)
 
     const [lagrer, setLagrer] = useState(false)
-    const [user] = useAuthState(firebase.auth())
+    const [user] = useAuthState(getFirebaseAuth())
     const queryClient = useQueryClient()
 
     function endreHjemmelag(lag: 'home_team' | 'away_team') {
