@@ -8,7 +8,6 @@ import HomeIcon from '@mui/icons-material/Home'
 import { BottomNavigation, BottomNavigationAction, Box, CircularProgress, Menu, MenuItem, Paper } from '@mui/material'
 import React, { SyntheticEvent, useState } from 'react'
 import { EmojiEvents, Chat, Person } from '@mui/icons-material'
-import { Theme } from '../components/theme/Theme'
 import { QueryClient, QueryClientProvider } from 'react-query'
 import { UseUser } from '../queries/useUser'
 import { useRouter } from 'next/router'
@@ -182,15 +181,13 @@ function MyApp({ Component, pageProps }: AppProps) {
             <Head>
                 <title>Betpool 2022</title>
             </Head>
-            <Theme>
-                <QueryClientProvider client={queryClient}>
-                    <Box sx={{ pb: 7 }}>
-                        <UserInnlogging>
-                            <Component {...pageProps} />
-                        </UserInnlogging>
-                    </Box>
-                </QueryClientProvider>
-            </Theme>
+            <QueryClientProvider client={queryClient}>
+                <Box sx={{ pb: 7 }}>
+                    <UserInnlogging>
+                        <Component {...pageProps} />
+                    </UserInnlogging>
+                </Box>
+            </QueryClientProvider>
         </>
     )
 }

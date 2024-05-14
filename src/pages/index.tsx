@@ -3,20 +3,18 @@ import type { NextPage } from 'next'
 import { Container } from '@mui/system'
 import { UseUser } from '../queries/useUser'
 import { Spinner } from '../components/loading/Spinner'
-import { Card, CardContent, FormControl, InputLabel, MenuItem, Select, TextField, Typography } from '@mui/material'
+import { Card, CardContent, FormControl, InputLabel, MenuItem, Select, TextField } from '@mui/material'
 import React, { useState } from 'react'
 import { useAuthState } from 'react-firebase-hooks/auth'
 import { useQueryClient } from 'react-query'
 import { UseStats } from '../queries/useStats'
 import { alleLagSortert } from '../utils/lag'
-import LoadingButton from '@mui/lab/LoadingButton'
-import SaveIcon from '@mui/icons-material/Save'
 import { UseMatches } from '../queries/useMatches'
 import dayjs from 'dayjs'
 import NextLink from 'next/link'
 import { fixLand } from '../components/bet/BetView'
 import { getFirebaseAuth } from '../auth/clientApp'
-import { Alert, Link } from '@navikt/ds-react'
+import { Alert, Button, Heading, Link } from '@navikt/ds-react'
 
 const Home: NextPage = () => {
     const { data: megselv } = UseUser()
@@ -52,9 +50,9 @@ const Home: NextPage = () => {
     return (
         <>
             <Container maxWidth="md" sx={{ mt: 1 }}>
-                <Typography variant="h4" component="h1" align={'center'}>
+                <Heading level={'1'} className={'mb-8'} size={'medium'}>
                     Hei {megselv.name} 👋
-                </Typography>
+                </Heading>
                 {kamper.map((k) => {
                     return (
                         <Card key={k.id} sx={{ mt: 1 }}>
@@ -143,9 +141,8 @@ const Home: NextPage = () => {
                                 }}
                             />
                             {topscorer != megselv.topscorer && (
-                                <LoadingButton
-                                    sx={{ mt: 2 }}
-                                    variant="contained"
+                                <Button
+                                    className={'mt-4'}
                                     onClick={async () => {
                                         try {
                                             setLagrer(true)
@@ -167,10 +164,9 @@ const Home: NextPage = () => {
                                         }
                                     }}
                                     loading={lagrer}
-                                    endIcon={<SaveIcon />}
                                 >
                                     Lagre
-                                </LoadingButton>
+                                </Button>
                             )}
                         </FormControl>
                     </CardContent>
