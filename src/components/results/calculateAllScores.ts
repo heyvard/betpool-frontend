@@ -7,7 +7,14 @@ interface LeaderBoard {
 
 export function calculateLeaderboard(bets: MatchBetMedScore[], users: OtherUser[]): LeaderBoard[] {
     const userMap = new Map<string, MatchBetMedScore[]>()
-
+    if (bets.length == 0) {
+        return users.map((u) => {
+            return {
+                userid: u.id,
+                poeng: 0,
+            }
+        })
+    }
     bets.forEach((bet) => userMap.set(bet.user_id, []))
     bets.forEach((bet) => userMap.get(bet.user_id)?.push(bet))
 
