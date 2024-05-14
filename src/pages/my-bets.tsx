@@ -6,10 +6,10 @@ import { BetView } from '../components/bet/BetView'
 import { Spinner } from '../components/loading/Spinner'
 import dayjs from 'dayjs'
 import { Card, CardContent, Typography } from '@mui/material'
-import Link from 'next/link'
-import { default as MUILink } from '@mui/material/Link/Link'
+import NextLink from 'next/link'
 import React from 'react'
 import { UseUser } from '../queries/useUser'
+import { Link } from '@navikt/ds-react'
 
 const Home: NextPage = () => {
     const { data: myBets } = UseMyBets()
@@ -27,11 +27,9 @@ const Home: NextPage = () => {
                 </Typography>
                 <Card sx={{ mt: 1 }}>
                     <CardContent>
-                        <Link href={'/user/' + megselv.id}>
-                            <MUILink underline={'hover'} sx={{ cursor: 'pointer' }}>
-                                Mine tidligere bets
-                            </MUILink>
-                        </Link>
+                        <NextLink href={'/user/' + megselv.id}>
+                            <Link>Mine tidligere bets</Link>
+                        </NextLink>
                     </CardContent>
                 </Card>
                 {myBets

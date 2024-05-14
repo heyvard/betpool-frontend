@@ -2,13 +2,12 @@ import { Box, Card, CardContent, TextField, Typography } from '@mui/material'
 import { Match } from '../../types/types'
 import dayjs from 'dayjs'
 import React, { useState } from 'react'
-import SaveIcon from '@mui/icons-material/Save'
-import LoadingButton from '@mui/lab/LoadingButton'
 import { hentFlag, hentNorsk } from '../../utils/lag'
-import Link from 'next/link'
-import { default as MUILink } from '@mui/material/Link/Link'
+import NextLink from 'next/link'
 import { UseMutateMatch } from '../../queries/mutateMatch'
 import { rundeTilTekst } from '../../utils/rundeTilTekst'
+import { Button, Link } from '@navikt/ds-react'
+import { FloppydiskIcon } from '@navikt/aksel-icons'
 
 export const MatchView = ({ match }: { match: Match }) => {
     const numberPropTilString = (prop: number | null) => {
@@ -122,25 +121,21 @@ export const MatchView = ({ match }: { match: Match }) => {
                     />
                 </Box>
                 {lagreknappSynlig && (
-                    <LoadingButton
-                        sx={{ mt: 2 }}
-                        variant="contained"
+                    <Button
                         onClick={() => {
                             mutate()
                         }}
                         loading={isLoading}
-                        endIcon={<SaveIcon />}
+                        icon={<FloppydiskIcon />}
                     >
                         Lagre
-                    </LoadingButton>
+                    </Button>
                 )}
                 <br />
 
-                <Link href={'/match/' + match.id}>
-                    <MUILink underline={'hover'} sx={{ cursor: 'pointer' }}>
-                        Se alles bets på denne kampen
-                    </MUILink>
-                </Link>
+                <NextLink href={'/match/' + match.id}>
+                    <Link>Se alles bets på denne kampen</Link>
+                </NextLink>
             </CardContent>
         </Card>
     )

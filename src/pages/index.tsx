@@ -15,6 +15,7 @@ import NextLink from 'next/link'
 import { fixLand } from '../components/bet/BetView'
 import { getFirebaseAuth } from '../auth/clientApp'
 import { Alert, Button, Heading, Link } from '@navikt/ds-react'
+import { FloppydiskIcon } from '@navikt/aksel-icons'
 
 const Home: NextPage = () => {
     const { data: megselv } = UseUser()
@@ -164,6 +165,7 @@ const Home: NextPage = () => {
                                         }
                                     }}
                                     loading={lagrer}
+                                    icon={<FloppydiskIcon />}
                                 >
                                     Lagre
                                 </Button>

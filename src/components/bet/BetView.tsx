@@ -2,13 +2,12 @@ import { Box, Card, CardContent, TextField, Typography } from '@mui/material'
 import { Bet } from '../../types/types'
 import dayjs from 'dayjs'
 import React, { useState } from 'react'
-import SaveIcon from '@mui/icons-material/Save'
 import { UseMutateBet } from '../../queries/mutateBet'
-import LoadingButton from '@mui/lab/LoadingButton'
 import { hentFlag, hentNorsk } from '../../utils/lag'
 import NextLink from 'next/link'
 import { rundeTilTekst } from '../../utils/rundeTilTekst'
-import { Link } from '@navikt/ds-react'
+import { Button, Link } from '@navikt/ds-react'
+import { FloppydiskIcon } from '@navikt/aksel-icons'
 
 export const BetView = ({ bet, matchside }: { bet: Bet; matchside: boolean }) => {
     const numberPropTilString = (prop: number | null) => {
@@ -125,17 +124,17 @@ export const BetView = ({ bet, matchside }: { bet: Bet; matchside: boolean }) =>
                     />
                 </Box>
                 {lagreknappSynlig && (
-                    <LoadingButton
-                        sx={{ mt: 2 }}
-                        variant="contained"
+                    <Button
+                        size={'small'}
+                        className={'mt-2'}
                         onClick={() => {
                             mutate()
                         }}
                         loading={isLoading}
-                        endIcon={<SaveIcon />}
+                        icon={<FloppydiskIcon />}
                     >
                         Lagre
-                    </LoadingButton>
+                    </Button>
                 )}
                 {disabled && !matchside && (
                     <NextLink href={'/match/' + bet.match_id}>

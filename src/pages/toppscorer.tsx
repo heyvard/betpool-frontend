@@ -5,8 +5,8 @@ import { Box, Paper, Table, TableBody, TableCell, TableContainer, TableHead, Tab
 import { Container } from '@mui/system'
 import { Spinner } from '../components/loading/Spinner'
 import { UseAllBets } from '../queries/useAllBetsExtended'
-import Link from 'next/link'
-import { default as MUILink } from '@mui/material/Link'
+import NextLink from 'next/link'
+import { Link } from '@navikt/ds-react'
 
 const Leaderboard: NextPage = () => {
     const { data, isLoading } = UseAllBets()
@@ -42,11 +42,9 @@ const Leaderboard: NextPage = () => {
                                             }}
                                         >
                                             <TableCell component="th" scope="row" sx={{ p: 0, pl: 1 }}>
-                                                <Link href={'/user/' + user?.id}>
-                                                    <MUILink underline={'hover'} sx={{ cursor: 'pointer' }}>
-                                                        {user?.name}
-                                                    </MUILink>
-                                                </Link>
+                                                <NextLink href={'/user/' + user?.id}>
+                                                    <Link>{user?.name}</Link>
+                                                </NextLink>
                                             </TableCell>
                                             <TableCell sx={{ p: 0, pr: 3 }}>{user.topscorer}</TableCell>
                                             <TableCell sx={{ p: 0, pr: 3 }}>{user.topscorerPoints}</TableCell>
