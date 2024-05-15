@@ -1,10 +1,6 @@
 import React from 'react'
 import { Container } from '@mui/system'
-import { BottomNavigation, BottomNavigationAction, Card, CardContent, Paper, Typography } from '@mui/material'
-import HomeIcon from '@mui/icons-material/Home'
-import SportsSoccerIcon from '@mui/icons-material/SportsSoccer'
-import { Chat, EmojiEvents } from '@mui/icons-material'
-import MenuIcon from '@mui/icons-material/Menu'
+import { Card, CardContent, Typography } from '@mui/material'
 import { EmailAuthProvider, GoogleAuthProvider } from 'firebase/auth'
 import StyledFirebaseAuth from '../auth/StyledFirebaseAuth'
 
@@ -62,15 +58,6 @@ export function SignInScreen() {
                 )}
                 {!isFacebookInAppBrowser && <StyledFirebaseAuth uiConfig={uiConfig} />}
             </Container>
-            <Paper sx={{ position: 'fixed', bottom: 0, left: 0, right: 0 }} elevation={3}>
-                <BottomNavigation showLabels>
-                    <BottomNavigationAction disabled icon={<HomeIcon />} />
-                    <BottomNavigationAction label="Bets" disabled icon={<SportsSoccerIcon />} />
-                    <BottomNavigationAction label="Resultater" disabled icon={<EmojiEvents />} />
-                    <BottomNavigationAction label="Chat" icon={<Chat />} />
-                    <BottomNavigationAction disabled icon={<MenuIcon />} />
-                </BottomNavigation>
-            </Paper>
         </>
     )
 }
