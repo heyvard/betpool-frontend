@@ -1,24 +1,18 @@
 import type { AppProps } from 'next/app'
 import { useAuthState } from 'react-firebase-hooks/auth'
 import { SignInScreen } from '../components/SignIn'
-import LogoutIcon from '@mui/icons-material/Logout'
-import MenuOpenIcon from '@mui/icons-material/MenuOpen'
-import MenuIcon from '@mui/icons-material/Menu'
-import HomeIcon from '@mui/icons-material/Home'
-import { BottomNavigation, BottomNavigationAction, Box, CircularProgress, Menu, MenuItem, Paper } from '@mui/material'
-import React, { SyntheticEvent, useState } from 'react'
-import { EmojiEvents, Chat, Person } from '@mui/icons-material'
+import { Box, CircularProgress } from '@mui/material'
+import React, { useState } from 'react'
 import { QueryClient, QueryClientProvider } from 'react-query'
 import { UseUser } from '../queries/useUser'
 import { useRouter } from 'next/router'
 import { Spinner } from '../components/loading/Spinner'
-import SportsSoccerIcon from '@mui/icons-material/SportsSoccer'
-import GavelIcon from '@mui/icons-material/Gavel'
 import Head from 'next/head'
-import EditIcon from '@mui/icons-material/Edit'
 
 import '../styles/global.css'
 import { getFirebaseAuth } from '../auth/clientApp'
+import { Dropdown, InternalHeader } from '@navikt/ds-react'
+import { HouseIcon } from '@navikt/aksel-icons'
 
 function UserFetchInnlogging(props: { children: React.ReactNode }) {
     const { data: me, isLoading } = UseUser()
@@ -26,116 +20,68 @@ function UserFetchInnlogging(props: { children: React.ReactNode }) {
 
     const router = useRouter()
 
-    const [anchorEl, setAnchorEl] = useState<null | Element>(null)
-
-    const handleMenu = (event: SyntheticEvent<Element, Event>) => {
-        setAnchorEl(event.currentTarget)
-    }
-
-    const handleClose = () => {
-        setAnchorEl(null)
-    }
     if (isLoading || !user || !me) {
         return <Spinner />
     }
+
+    function FooterKnapp(props: { tekst: string; url: string }) {
+        return (
+            <InternalHeader.Button defaultChecked={true} type="button" onClick={() => router.push(props.url)}>
+                <HouseIcon />
+                {props.tekst}
+            </InternalHeader.Button>
+        )
+    }
+
     return (
         <>
             {props.children}
-            <Paper sx={{ position: 'fixed', bottom: 0, left: 0, right: 0 }} elevation={3}>
-                <BottomNavigation
-                    showLabels
-                    value={router.pathname}
-                    onChange={(event, newValue) => {
-                        if (newValue == 'meny') {
-                            handleMenu(event)
-                            return
-                        }
-                        router.push(newValue)
-                    }}
-                >
-                    <BottomNavigationAction value="/" icon={<HomeIcon />} />
-                    <BottomNavigationAction label="Bets" value="/my-bets" icon={<SportsSoccerIcon />} />
-                    <BottomNavigationAction label="Resultater" value="/leaderboard" icon={<EmojiEvents />} />
-                    <BottomNavigationAction label="Regler" value="/rules" icon={<GavelIcon />} />
-                    <BottomNavigationAction value="meny" icon={anchorEl != null ? <MenuOpenIcon /> : <MenuIcon />} />
+            <InternalHeader className="fixed bottom-0 left-0 z-50 w-full h-16 flex ">
+                <FooterKnapp url={'/'} tekst={''} />
+                <FooterKnapp tekst={'Bets'} url={'/my-bets'} />
+                <FooterKnapp tekst={'Resultater'} url={'/leaderboard'} />
+                <FooterKnapp tekst={'Regler'} url={'/rules'} />
+                <Dropdown>
+                    <InternalHeader.UserButton as={Dropdown.Toggle} name="Velg en underside" className="ml-auto">
+                        df
+                    </InternalHeader.UserButton>
 
-                    <Menu
-                        id="menu-appbar"
-                        anchorEl={anchorEl}
-                        anchorOrigin={{
-                            vertical: 'top',
-                            horizontal: 'right',
-                        }}
-                        keepMounted
-                        transformOrigin={{
-                            vertical: 'bottom',
-                            horizontal: 'right',
-                        }}
-                        open={Boolean(anchorEl)}
-                        onClose={handleClose}
-                    >
-                        <MenuItem
-                            onClick={async () => {
-                                handleClose()
-                                router.push('/')
-                            }}
-                        >
-                            <Person />
-                            {user.displayName}
-                        </MenuItem>
-
-                        <MenuItem
-                            onClick={() => {
-                                handleClose()
-                                router.push('/rules')
-                            }}
-                        >
-                            <GavelIcon />
-                            Regler
-                        </MenuItem>
-                        <MenuItem
-                            onClick={() => {
-                                handleClose()
-                                router.push('/chat')
-                            }}
-                        >
-                            <Chat />
-                            Chat
-                        </MenuItem>
-                        {me.admin && (
-                            <MenuItem
+                    <Dropdown.Menu>
+                        <Dropdown.Menu.List>
+                            <Dropdown.Menu.List.Item
                                 onClick={() => {
-                                    handleClose()
-                                    router.push('/resultatservice')
+                                    router.push('/')
                                 }}
                             >
-                                <EditIcon />
-                                Rediger resultater
-                            </MenuItem>
-                        )}
-                        {me.admin && (
-                            <MenuItem
+                                {user.displayName}
+                            </Dropdown.Menu.List.Item>
+                            <Dropdown.Menu.List.Item
                                 onClick={() => {
-                                    handleClose()
-                                    router.push('/sluttspill')
+                                    router.push('/rules')
                                 }}
                             >
-                                <EditIcon />
-                                Rediger sluttspill
-                            </MenuItem>
-                        )}
-                        <MenuItem
-                            onClick={async () => {
-                                await getFirebaseAuth().signOut()
-                                handleClose()
-                            }}
-                        >
-                            <LogoutIcon />
-                            Logout
-                        </MenuItem>
-                    </Menu>
-                </BottomNavigation>
-            </Paper>
+                                Regler
+                            </Dropdown.Menu.List.Item>
+                            {me.admin && (
+                                <Dropdown.Menu.List.Item
+                                    onClick={() => {
+                                        router.push('/sluttspill')
+                                    }}
+                                >
+                                    Rediger sluttspill
+                                </Dropdown.Menu.List.Item>
+                            )}
+                            <Dropdown.Menu.List.Item
+                                onClick={async () => {
+                                    await getFirebaseAuth().signOut()
+                                }}
+                            >
+                                Logout
+                            </Dropdown.Menu.List.Item>
+                        </Dropdown.Menu.List>
+                    </Dropdown.Menu>
+                </Dropdown>
+            </InternalHeader>
         </>
     )
 }
