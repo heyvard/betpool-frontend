@@ -12,13 +12,7 @@ import Head from 'next/head'
 import '../styles/global.css'
 import { getFirebaseAuth } from '../auth/clientApp'
 import { Dropdown, InternalHeader } from '@navikt/ds-react'
-import {
-    BankNoteIcon,
-    HouseIcon,
-    MenuHamburgerIcon,
-    NumberListIcon,
-    ParagraphIcon,
-} from '@navikt/aksel-icons'
+import { BankNoteIcon, HouseIcon, MenuHamburgerIcon, NumberListIcon, ParagraphIcon } from '@navikt/aksel-icons'
 
 function UserFetchInnlogging(props: { children: React.ReactNode }) {
     const { data: me, isLoading } = UseUser()
