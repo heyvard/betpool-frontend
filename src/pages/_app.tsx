@@ -2,7 +2,7 @@ import type { AppProps } from 'next/app'
 import { useAuthState } from 'react-firebase-hooks/auth'
 import { SignInScreen } from '../components/SignIn'
 import { Box, CircularProgress } from '@mui/material'
-import React, { useState } from 'react'
+import React, { FC, useState } from 'react'
 import { QueryClient, QueryClientProvider } from 'react-query'
 import { UseUser } from '../queries/useUser'
 import { useRouter } from 'next/router'
@@ -12,7 +12,13 @@ import Head from 'next/head'
 import '../styles/global.css'
 import { getFirebaseAuth } from '../auth/clientApp'
 import { Dropdown, InternalHeader } from '@navikt/ds-react'
-import { HouseIcon } from '@navikt/aksel-icons'
+import {
+    BankNoteIcon,
+    HouseIcon,
+    MenuHamburgerIcon,
+    NumberListIcon,
+    ParagraphIcon,
+} from '@navikt/aksel-icons'
 
 function UserFetchInnlogging(props: { children: React.ReactNode }) {
     const { data: me, isLoading } = UseUser()
@@ -24,11 +30,25 @@ function UserFetchInnlogging(props: { children: React.ReactNode }) {
         return <Spinner />
     }
 
-    function FooterKnapp(props: { tekst: string; url: string }) {
+    const FooterKnapp: FC<{
+        icon: React.ForwardRefExoticComponent<React.SVGProps<SVGSVGElement> & React.RefAttributes<SVGSVGElement>>
+        text?: string
+        url: string
+        borderRight?: boolean
+    }> = ({ icon: Icon, text, url, borderRight }) => {
+        const router = useRouter()
+        const isActive = router.pathname === url
+
         return (
-            <InternalHeader.Button defaultChecked={true} type="button" onClick={() => router.push(props.url)}>
-                <HouseIcon />
-                {props.tekst}
+            <InternalHeader.Button
+                className={`flex flex-col items-center w-full ${!text ? 'justify-center' : 'p-2'} ${
+                    borderRight ? 'border-r' : ''
+                } ${isActive ? 'bg-gray-600 text-white' : ''}`}
+                type="button"
+                onClick={() => router.push(url)}
+            >
+                <Icon className="w-8 h-8" />
+                <span className="text-sm">{text}</span>
             </InternalHeader.Button>
         )
     }
@@ -37,14 +57,18 @@ function UserFetchInnlogging(props: { children: React.ReactNode }) {
         <>
             {props.children}
             <InternalHeader className="fixed bottom-0 left-0 z-50 w-full h-16 flex ">
-                <FooterKnapp url={'/'} tekst={''} />
-                <FooterKnapp tekst={'Bets'} url={'/my-bets'} />
-                <FooterKnapp tekst={'Resultater'} url={'/leaderboard'} />
-                <FooterKnapp tekst={'Regler'} url={'/rules'} />
+                <FooterKnapp url={'/'} text={''} icon={HouseIcon} />
+                <FooterKnapp text={'Bets'} url={'/my-bets'} icon={BankNoteIcon} />
+                <FooterKnapp text={'Resultater'} url={'/leaderboard'} icon={NumberListIcon} />
+                <FooterKnapp text={'Regler'} url={'/rules'} icon={ParagraphIcon} />
                 <Dropdown>
-                    <InternalHeader.UserButton as={Dropdown.Toggle} name="Velg en underside" className="ml-auto">
-                        df
-                    </InternalHeader.UserButton>
+                    <InternalHeader.Button
+                        as={Dropdown.Toggle}
+                        name="Velg en underside"
+                        className="flex-col items-center w-full justify-center"
+                    >
+                        <MenuHamburgerIcon className="w-8 h-8" />
+                    </InternalHeader.Button>
 
                     <Dropdown.Menu>
                         <Dropdown.Menu.List>
