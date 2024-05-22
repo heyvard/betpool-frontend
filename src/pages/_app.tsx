@@ -48,7 +48,7 @@ function UserFetchInnlogging(props: { children: React.ReactNode }) {
 
     return (
         <>
-            <div className={'px-2 max-w-md pt-4 mx-auto'}>{props.children}</div>
+            <div className="px-2 pt-4 mx-auto max-w-full sm:max-w-lg md:max-w-2xl">{props.children}</div>
             <InternalHeader className="fixed bottom-0 left-0 z-50 w-full h-16 flex ">
                 <FooterKnapp url={'/'} text={''} icon={HouseIcon} />
                 <FooterKnapp text={'Bets'} url={'/my-bets'} icon={BankNoteIcon} />
