@@ -1,7 +1,6 @@
 import type { AppProps } from 'next/app'
 import { useAuthState } from 'react-firebase-hooks/auth'
 import { SignInScreen } from '../components/SignIn'
-import { Box, CircularProgress } from '@mui/material'
 import React, { FC, useState } from 'react'
 import { QueryClient, QueryClientProvider } from 'react-query'
 import { UseUser } from '../queries/useUser'
@@ -11,7 +10,7 @@ import Head from 'next/head'
 
 import '../styles/global.css'
 import { getFirebaseAuth } from '../auth/clientApp'
-import { Dropdown, InternalHeader } from '@navikt/ds-react'
+import { Dropdown, InternalHeader, Loader } from '@navikt/ds-react'
 import { BankNoteIcon, HouseIcon, MenuHamburgerIcon, NumberListIcon, ParagraphIcon } from '@navikt/aksel-icons'
 
 function UserFetchInnlogging(props: { children: React.ReactNode }) {
@@ -49,7 +48,7 @@ function UserFetchInnlogging(props: { children: React.ReactNode }) {
 
     return (
         <>
-            {props.children}
+            <div className={'px-2 max-w-md pt-4 mx-auto'}>{props.children}</div>
             <InternalHeader className="fixed bottom-0 left-0 z-50 w-full h-16 flex ">
                 <FooterKnapp url={'/'} text={''} icon={HouseIcon} />
                 <FooterKnapp text={'Bets'} url={'/my-bets'} icon={BankNoteIcon} />
@@ -89,6 +88,15 @@ function UserFetchInnlogging(props: { children: React.ReactNode }) {
                                     Rediger sluttspill
                                 </Dropdown.Menu.List.Item>
                             )}
+                            {me.admin && (
+                                <Dropdown.Menu.List.Item
+                                    onClick={() => {
+                                        router.push('/resultatservice')
+                                    }}
+                                >
+                                    Rediger resultater
+                                </Dropdown.Menu.List.Item>
+                            )}
                             <Dropdown.Menu.List.Item
                                 onClick={async () => {
                                     await getFirebaseAuth().signOut()
@@ -108,9 +116,9 @@ function UserInnlogging(props: { children: React.ReactNode }) {
     const [user, loading, error] = useAuthState(getFirebaseAuth())
     if (loading) {
         return (
-            <Box display="flex" justifyContent="center" alignItems="center" minHeight="100vh">
-                <CircularProgress />
-            </Box>
+            <div className="flex justify-center items-center min-h-screen">
+                <Loader size="3xlarge" title="Venter..." />
+            </div>
         )
     }
     if (!user) {
@@ -143,14 +151,12 @@ function MyApp({ Component, pageProps }: AppProps) {
     return (
         <>
             <Head>
-                <title>Betpool 2022</title>
+                <title>Betpool 2024</title>
             </Head>
             <QueryClientProvider client={queryClient}>
-                <Box sx={{ pb: 7 }}>
-                    <UserInnlogging>
-                        <Component {...pageProps} />
-                    </UserInnlogging>
-                </Box>
+                <UserInnlogging>
+                    <Component {...pageProps} />
+                </UserInnlogging>
             </QueryClientProvider>
         </>
     )

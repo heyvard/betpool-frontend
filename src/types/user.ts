@@ -6,6 +6,7 @@ export interface User {
     email: string
     name: string
     admin: boolean
+    paid: boolean
     created_at: string
     updated_at: string
     winner: string
