@@ -10,7 +10,7 @@ export interface OtherUser {
     picture: string | null
     winner?: string
     topscorer?: string
-
+    paid: boolean
     winnerPoints?: number
     topscorerPoints?: number
 }
