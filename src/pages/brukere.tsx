@@ -7,7 +7,7 @@ import { UseMutateUser } from '../queries/mutateUser'
 
 const Brukere: NextPage = () => {
     const { data } = UseUsers()
-    const muteteUser = UseMutateUser()
+    const { mutate, isPending } = UseMutateUser()
 
     if (!data) {
         return <Spinner />
@@ -36,9 +36,11 @@ const Brukere: NextPage = () => {
                                     <Button
                                         type={'button'}
                                         variant={'danger'}
+                                        loading={isPending}
+
                                         size={'xsmall'}
                                         onClick={() =>
-                                            muteteUser.mutate({
+                                            mutate({
                                                 id: user.id,
                                                 request: { active: false },
                                             })
@@ -51,9 +53,11 @@ const Brukere: NextPage = () => {
                                     <Button
                                         type={'button'}
                                         variant={'secondary'}
+                                        loading={isPending}
+
                                         size={'xsmall'}
                                         onClick={() =>
-                                            muteteUser.mutate({
+                                            mutate({
                                                 id: user.id,
                                                 request: { active: true },
                                             })
@@ -66,8 +70,10 @@ const Brukere: NextPage = () => {
                             <Table.DataCell>
                                 <Switch
                                     checked={user.admin}
+                                    loading={isPending}
+
                                     onChange={() =>
-                                        muteteUser.mutate({
+                                        mutate({
                                             id: user.id,
                                             request: { admin: !user.admin },
                                         })
@@ -79,8 +85,9 @@ const Brukere: NextPage = () => {
                             <Table.DataCell align="right">
                                 <Switch
                                     checked={user.paid}
+                                    loading={isPending}
                                     onChange={() =>
-                                        muteteUser.mutate({
+                                        mutate({
                                             id: user.id,
                                             request: { paid: !user.paid },
                                         })
