@@ -3,7 +3,6 @@ import { getFirebaseAuth } from '../auth/clientApp'
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 
 interface MuteteUserReq {
-    id: string
     request: {
         paid?: boolean
         admin?: boolean
@@ -11,14 +10,14 @@ interface MuteteUserReq {
     }
 }
 
-export function UseMutateUser() {
+export function UseMutateUser(id: string) {
     const queryClient = useQueryClient()
     const [user] = useAuthState(getFirebaseAuth())
 
     return useMutation<any, unknown, MuteteUserReq>({
         mutationFn: async (req) => {
             const idtoken = await user?.getIdToken()
-            const responsePromise = await fetch(`https://betpool-2022-backend.vercel.app/api/v1/users/${req.id}`, {
+            const responsePromise = await fetch(`https://betpool-2022-backend.vercel.app/api/v1/users/${id}`, {
                 method: 'PUT',
                 body: JSON.stringify(req.request),
                 headers: { Authorization: `Bearer ${idtoken}` },

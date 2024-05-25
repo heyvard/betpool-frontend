@@ -1,15 +1,72 @@
 import type { NextPage } from 'next'
 import { Spinner } from '../components/loading/Spinner'
 import React from 'react'
-import { Button, Heading, Switch, Table } from '@navikt/ds-react'
+import { BodyShort, Heading, Switch } from '@navikt/ds-react'
 import { UseUsers } from '../queries/useUsers'
 import { UseMutateUser } from '../queries/mutateUser'
+import { UseUser } from '../queries/useUser'
+import { UserForAdmin } from '../types/types'
+import { User } from '../types/user'
+
+function BrukerView({ me, user }: { user: UserForAdmin; me: User }) {
+    const { mutate, isPending } = UseMutateUser(user.id)
+
+    const disabled = user.id === me.id
+
+    return (
+        <div key={user.id} className={' py-4'}>
+            <BodyShort spacing>{user.name}</BodyShort>
+            <div className={'flex justify-between'}>
+                <Switch
+                    checked={user.paid}
+                    size={'small'}
+                    loading={isPending}
+                    onChange={() =>
+                        mutate({
+                            request: { paid: !user.paid },
+                        })
+                    }
+                >
+                    Betalt
+                </Switch>
+                <Switch
+                    checked={user.admin}
+                    loading={isPending}
+                    disabled={disabled}
+                    size={'small'}
+                    onChange={() =>
+                        mutate({
+                            request: { admin: !user.admin },
+                        })
+                    }
+                >
+                    Admin
+                </Switch>
+
+                <Switch
+                    checked={user.active}
+                    loading={isPending}
+                    size={'small'}
+                    disabled={disabled}
+                    onChange={() =>
+                        mutate({
+                            request: { active: !user.active },
+                        })
+                    }
+                >
+                    Aktiv
+                </Switch>
+            </div>
+        </div>
+    )
+}
 
 const Brukere: NextPage = () => {
     const { data } = UseUsers()
-    const { mutate, isPending } = UseMutateUser()
 
-    if (!data) {
+    const { data: me } = UseUser()
+
+    if (!data || !me) {
         return <Spinner />
     }
 
@@ -18,88 +75,12 @@ const Brukere: NextPage = () => {
             <Heading size="small" level={'1'} spacing>
                 Brukere
             </Heading>
-            <Table>
-                <Table.Header>
-                    <Table.Row>
-                        <Table.HeaderCell>Navn</Table.HeaderCell>
-                        <Table.HeaderCell></Table.HeaderCell>
-                        <Table.HeaderCell></Table.HeaderCell>
-                        <Table.HeaderCell></Table.HeaderCell>
-                    </Table.Row>
-                </Table.Header>
-                <Table.Body>
-                    {data.map((user) => (
-                        <Table.Row key={user.id}>
-                            <Table.DataCell>{user.name}</Table.DataCell>
-                            <Table.DataCell>
-                                {user.active && (
-                                    <Button
-                                        type={'button'}
-                                        variant={'danger'}
-                                        loading={isPending}
 
-                                        size={'xsmall'}
-                                        onClick={() =>
-                                            mutate({
-                                                id: user.id,
-                                                request: { active: false },
-                                            })
-                                        }
-                                    >
-                                        Deaktiver
-                                    </Button>
-                                )}
-                                {!user.active && (
-                                    <Button
-                                        type={'button'}
-                                        variant={'secondary'}
-                                        loading={isPending}
-
-                                        size={'xsmall'}
-                                        onClick={() =>
-                                            mutate({
-                                                id: user.id,
-                                                request: { active: true },
-                                            })
-                                        }
-                                    >
-                                        Aktiver
-                                    </Button>
-                                )}
-                            </Table.DataCell>
-                            <Table.DataCell>
-                                <Switch
-                                    checked={user.admin}
-                                    loading={isPending}
-
-                                    onChange={() =>
-                                        mutate({
-                                            id: user.id,
-                                            request: { admin: !user.admin },
-                                        })
-                                    }
-                                >
-                                    Admin
-                                </Switch>
-                            </Table.DataCell>
-                            <Table.DataCell align="right">
-                                <Switch
-                                    checked={user.paid}
-                                    loading={isPending}
-                                    onChange={() =>
-                                        mutate({
-                                            id: user.id,
-                                            request: { paid: !user.paid },
-                                        })
-                                    }
-                                >
-                                    Betalt
-                                </Switch>
-                            </Table.DataCell>
-                        </Table.Row>
-                    ))}
-                </Table.Body>
-            </Table>
+            <div className={'divide-y divide-gray-200 space-y-5'}>
+                {data.map((user) => (
+                    <BrukerView key={user.id} user={user} me={me} />
+                ))}
+            </div>
         </>
     )
 }
