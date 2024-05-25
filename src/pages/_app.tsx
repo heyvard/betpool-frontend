@@ -80,23 +80,31 @@ function UserFetchInnlogging(props: { children: React.ReactNode }) {
                                 Regler
                             </Dropdown.Menu.List.Item>
                             {me.admin && (
-                                <Dropdown.Menu.List.Item
-                                    onClick={() => {
-                                        router.push('/sluttspill')
-                                    }}
-                                >
-                                    Rediger sluttspill
-                                </Dropdown.Menu.List.Item>
+                                <>
+                                    <Dropdown.Menu.List.Item
+                                        onClick={() => {
+                                            router.push('/sluttspill')
+                                        }}
+                                    >
+                                        Rediger sluttspill
+                                    </Dropdown.Menu.List.Item>
+                                    <Dropdown.Menu.List.Item
+                                        onClick={() => {
+                                            router.push('/resultatservice')
+                                        }}
+                                    >
+                                        Rediger resultater
+                                    </Dropdown.Menu.List.Item>
+                                    <Dropdown.Menu.List.Item
+                                        onClick={() => {
+                                            router.push('/brukere')
+                                        }}
+                                    >
+                                        Brukere
+                                    </Dropdown.Menu.List.Item>
+                                </>
                             )}
-                            {me.admin && (
-                                <Dropdown.Menu.List.Item
-                                    onClick={() => {
-                                        router.push('/resultatservice')
-                                    }}
-                                >
-                                    Rediger resultater
-                                </Dropdown.Menu.List.Item>
-                            )}
+
                             <Dropdown.Menu.List.Item
                                 onClick={async () => {
                                     await getFirebaseAuth().signOut()

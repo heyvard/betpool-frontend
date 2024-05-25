@@ -34,3 +34,12 @@ export interface Match {
     id: string
     round: string
 }
+
+export interface UserForAdmin {
+    id: string
+    name: string
+    email: string
+    paid: boolean
+    admin: boolean
+    active: boolean
+}
