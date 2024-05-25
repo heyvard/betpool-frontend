@@ -3,9 +3,12 @@ import { Spinner } from '../components/loading/Spinner'
 import React from 'react'
 import { Button, Heading, Table } from '@navikt/ds-react'
 import { UseUsers } from '../queries/useUsers'
+import { UseMutateUser } from '../queries/mutateUser'
 
 const Brukere: NextPage = () => {
     const { data } = UseUsers()
+    const muteteUser = UseMutateUser()
+
     if (!data) {
         return <Spinner />
     }
@@ -30,12 +33,22 @@ const Brukere: NextPage = () => {
                             <Table.DataCell>{user.name}</Table.DataCell>
                             <Table.DataCell>
                                 {user.active && (
-                                    <Button type={'button'} variant={'danger'} size={'xsmall'}>
+                                    <Button type={'button'} variant={'danger'} size={'xsmall'}
+                                            onClick={() => muteteUser.mutate({
+                                                id: user.id,
+                                                request: { active: false },
+                                            })}
+                                    >
                                         Deaktiver
                                     </Button>
                                 )}
                                 {!user.active && (
-                                    <Button type={'button'} variant={'secondary'} size={'xsmall'}>
+                                    <Button type={'button'} variant={'secondary'} size={'xsmall'}
+                                            onClick={() => muteteUser.mutate({
+                                                id: user.id,
+                                                request: { active: true },
+                                            })}
+                                    >
                                         Aktiver
                                     </Button>
                                 )}
