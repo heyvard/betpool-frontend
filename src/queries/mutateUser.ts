@@ -2,13 +2,12 @@ import { useAuthState } from 'react-firebase-hooks/auth'
 import { getFirebaseAuth } from '../auth/clientApp'
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 
-
 interface MuteteUserReq {
-    id: string,
+    id: string
     request: {
-        paid?: boolean,
-        admin?: boolean,
-        active?: boolean,
+        paid?: boolean
+        admin?: boolean
+        active?: boolean
     }
 }
 
@@ -30,7 +29,6 @@ export function UseMutateUser() {
         onSuccess: () => {
             queryClient.invalidateQueries({ queryKey: ['users'] }).then()
             queryClient.invalidateQueries({ queryKey: ['all-bets'] }).then()
-
         },
     })
 }
