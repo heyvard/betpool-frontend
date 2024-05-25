@@ -38,7 +38,7 @@ export const MatchView = ({ match }: { match: Match }) => {
         return Number(prop!)
     }
 
-    const { mutate, isLoading } = UseMutateMatch(
+    const { mutate, isPending } = UseMutateMatch(
         match.id,
         stringTilNumber(hjemmescore),
         stringTilNumber(bortescore),
@@ -125,7 +125,7 @@ export const MatchView = ({ match }: { match: Match }) => {
                         onClick={() => {
                             mutate()
                         }}
-                        loading={isLoading}
+                        loading={isPending}
                         icon={<FloppydiskIcon />}
                     >
                         Lagre

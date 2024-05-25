@@ -38,7 +38,7 @@ export const BetView = ({ bet, matchside }: { bet: Bet; matchside: boolean }) =>
         return Number(prop!)
     }
 
-    const { mutate, isLoading } = UseMutateBet(
+    const { mutate, isPending } = UseMutateBet(
         bet.bet_id,
         stringTilNumber(hjemmescore),
         stringTilNumber(bortescore),
@@ -130,7 +130,7 @@ export const BetView = ({ bet, matchside }: { bet: Bet; matchside: boolean }) =>
                         onClick={() => {
                             mutate()
                         }}
-                        loading={isLoading}
+                        loading={isPending}
                         icon={<FloppydiskIcon />}
                     >
                         Lagre

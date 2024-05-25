@@ -4,9 +4,9 @@ import dayjs from 'dayjs'
 import React, { useState } from 'react'
 import { alleLagSortert } from '../../utils/lag'
 import { useAuthState } from 'react-firebase-hooks/auth'
-import { useQueryClient } from 'react-query'
 import { rundeTilTekst } from '../../utils/rundeTilTekst'
 import { getFirebaseAuth } from '../../auth/clientApp'
+import { useQueryClient } from '@tanstack/react-query'
 
 export const SluttspillView = ({ match }: { match: Match }) => {
     const kampstart = dayjs(match.game_start)
@@ -41,7 +41,7 @@ export const SluttspillView = ({ match }: { match: Match }) => {
                             if (!responsePromise.ok) {
                                 window.alert('oops, feil ved lagring')
                             }
-                            queryClient.invalidateQueries('matches').then()
+                            queryClient.invalidateQueries({ queryKey: ['matches'] }).then()
                         } finally {
                             setLagrer(false)
                         }

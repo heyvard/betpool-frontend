@@ -5,7 +5,6 @@ import { Spinner } from '../components/loading/Spinner'
 import { Card, CardContent, FormControl, InputLabel, MenuItem, Select, TextField } from '@mui/material'
 import React, { useState } from 'react'
 import { useAuthState } from 'react-firebase-hooks/auth'
-import { useQueryClient } from 'react-query'
 import { UseStats } from '../queries/useStats'
 import { alleLagSortert } from '../utils/lag'
 import { UseMatches } from '../queries/useMatches'
@@ -15,6 +14,7 @@ import { fixLand } from '../components/bet/BetView'
 import { getFirebaseAuth } from '../auth/clientApp'
 import { Alert, Button, LinkPanel } from '@navikt/ds-react'
 import { FloppydiskIcon } from '@navikt/aksel-icons'
+import { useQueryClient } from '@tanstack/react-query'
 
 const Home: NextPage = () => {
     const { data: megselv } = UseUser()
@@ -109,8 +109,16 @@ const Home: NextPage = () => {
                                     if (!responsePromise.ok) {
                                         window.alert('oops, feil ved lagring')
                                     }
-                                    queryClient.invalidateQueries('user-me').then()
-                                    queryClient.invalidateQueries('stats').then()
+                                    queryClient
+                                        .invalidateQueries({
+                                            queryKey: ['user-me'],
+                                        })
+                                        .then()
+                                    queryClient
+                                        .invalidateQueries({
+                                            queryKey: ['stats'],
+                                        })
+                                        .then()
                                 } finally {
                                     setLagrer(false)
                                 }
@@ -157,7 +165,11 @@ const Home: NextPage = () => {
                                         if (!responsePromise.ok) {
                                             window.alert('oops, feil ved lagring')
                                         }
-                                        queryClient.invalidateQueries('user-me').then()
+                                        queryClient
+                                            .invalidateQueries({
+                                                queryKey: ['user-me'],
+                                            })
+                                            .then()
                                     } finally {
                                         setLagrer(false)
                                     }

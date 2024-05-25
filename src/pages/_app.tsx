@@ -2,7 +2,6 @@ import type { AppProps } from 'next/app'
 import { useAuthState } from 'react-firebase-hooks/auth'
 import { SignInScreen } from '../components/SignIn'
 import React, { FC, useState } from 'react'
-import { QueryClient, QueryClientProvider } from 'react-query'
 import { UseUser } from '../queries/useUser'
 import { useRouter } from 'next/router'
 import { Spinner } from '../components/loading/Spinner'
@@ -12,6 +11,7 @@ import '../styles/global.css'
 import { getFirebaseAuth } from '../auth/clientApp'
 import { Dropdown, InternalHeader, Loader } from '@navikt/ds-react'
 import { BankNoteIcon, HouseIcon, MenuHamburgerIcon, NumberListIcon, ParagraphIcon } from '@navikt/aksel-icons'
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 
 function UserFetchInnlogging(props: { children: React.ReactNode }) {
     const { data: me, isLoading } = UseUser()

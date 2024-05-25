@@ -1,7 +1,6 @@
-import { useMutation, useQueryClient } from 'react-query'
-
 import { useAuthState } from 'react-firebase-hooks/auth'
 import { getFirebaseAuth } from '../auth/clientApp'
+import { useMutation, useQueryClient } from '@tanstack/react-query'
 
 export function UseMutateMatch(
     id: string,
@@ -12,8 +11,8 @@ export function UseMutateMatch(
     const queryClient = useQueryClient()
     const [user] = useAuthState(getFirebaseAuth())
 
-    return useMutation<unknown, Error>(
-        async () => {
+    return useMutation({
+        mutationFn: async () => {
             const idtoken = await user?.getIdToken()
             const responsePromise = await fetch(`https://betpool-2022-backend.vercel.app/api/v1/matches/${id}`, {
                 method: 'PUT',
@@ -22,12 +21,13 @@ export function UseMutateMatch(
             })
             return responsePromise.json()
         },
-        {
-            onSuccess: () => {
-                queryClient.invalidateQueries('matches').then()
-                queryClient.invalidateQueries('all-bets').then()
-                successCallback()
-            },
+
+        onSuccess: () => {
+            queryClient.invalidateQueries({ queryKey: ['matches'] }).then()
+            queryClient.invalidateQueries({ queryKey: ['all-bets'] }).then()
+            queryClient.invalidateQueries({ queryKey: ['my-bets'] }).then()
+
+            successCallback()
         },
-    )
+    })
 }

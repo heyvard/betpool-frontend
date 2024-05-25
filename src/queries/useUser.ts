@@ -1,17 +1,20 @@
-import { useQuery } from 'react-query'
 import { useAuthState } from 'react-firebase-hooks/auth'
 import { getFirebaseAuth } from '../auth/clientApp'
-import { User } from '../types/user'
+import { useQuery } from '@tanstack/react-query'
 
 export function UseUser() {
     const [user] = useAuthState(getFirebaseAuth())
 
-    return useQuery<User, Error>('user-me', async () => {
-        const idtoken = await user?.getIdToken()
-        let responsePromise = await fetch('https://betpool-2022-backend.vercel.app/api/v1/me', {
-            method: 'GET',
-            headers: { Authorization: `Bearer ${idtoken}` },
-        })
-        return responsePromise.json()
+    return useQuery({
+        queryKey: ['user-me'],
+
+        queryFn: async () => {
+            const idtoken = await user?.getIdToken()
+            let responsePromise = await fetch('https://betpool-2022-backend.vercel.app/api/v1/me', {
+                method: 'GET',
+                headers: { Authorization: `Bearer ${idtoken}` },
+            })
+            return responsePromise.json()
+        },
     })
 }

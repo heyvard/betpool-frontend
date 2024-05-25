@@ -13,12 +13,13 @@
         "format": "npm run prettier:write && npm run lint:fix"
     },
     "dependencies": {
+        "@mui/material": "^5.15.15",
         "@navikt/ds-css": "^6.3.6",
         "@navikt/ds-react": "^6.3.6",
         "@navikt/ds-tailwind": "^6.3.6",
         "@navikt/ds-tokens": "^6.3.2",
-        "@mui/material": "^5.15.15",
         "@next/env": "^12.3.1",
+        "@tanstack/react-query": "^5.37.1",
         "array-shuffle": "^3.0.0",
         "dayjs": "^1.11.6",
         "firebase": "^10.6.0",
@@ -26,8 +27,7 @@
         "next": "14.1.4",
         "react": "18.2.0",
         "react-dom": "18.2.0",
-        "react-firebase-hooks": "^5.1.1",
-        "react-query": "^3.39.2"
+        "react-firebase-hooks": "^5.1.1"
     },
     "devDependencies": {
         "@types/node": "18.11.0",
