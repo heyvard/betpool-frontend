@@ -11,8 +11,6 @@ import { User } from '../types/user'
 function BrukerView({ me, user }: { user: UserForAdmin; me: User }) {
     const { mutate, isPending } = UseMutateUser(user.id)
 
-    const disabled = user.id === me.id
-
     return (
         <div key={user.id} className={' py-4'}>
             <BodyShort spacing>{user.name}</BodyShort>
@@ -29,33 +27,46 @@ function BrukerView({ me, user }: { user: UserForAdmin; me: User }) {
                 >
                     Betalt
                 </Switch>
-                <Switch
-                    checked={user.admin}
-                    loading={isPending}
-                    disabled={disabled}
-                    size={'small'}
-                    onChange={() =>
-                        mutate({
-                            request: { admin: !user.admin },
-                        })
-                    }
-                >
-                    Admin
-                </Switch>
-
-                <Switch
-                    checked={user.active}
-                    loading={isPending}
-                    size={'small'}
-                    disabled={disabled}
-                    onChange={() =>
-                        mutate({
-                            request: { active: !user.active },
-                        })
-                    }
-                >
-                    Aktiv
-                </Switch>
+                {me.superadmin && (
+                    <>
+                        <Switch
+                            checked={user.scoreadmin}
+                            loading={isPending}
+                            size={'small'}
+                            onChange={() =>
+                                mutate({
+                                    request: { scoreadmin: !user.scoreadmin },
+                                })
+                            }
+                        >
+                            Scoreadmin
+                        </Switch>
+                        <Switch
+                            checked={user.paymentadmin}
+                            loading={isPending}
+                            size={'small'}
+                            onChange={() =>
+                                mutate({
+                                    request: { paymentadmin: !user.paymentadmin },
+                                })
+                            }
+                        >
+                            Paymentadmin
+                        </Switch>
+                        <Switch
+                            checked={user.active}
+                            loading={isPending}
+                            size={'small'}
+                            onChange={() =>
+                                mutate({
+                                    request: { active: !user.active },
+                                })
+                            }
+                        >
+                            Aktiv
+                        </Switch>
+                    </>
+                )}
             </div>
         </div>
     )

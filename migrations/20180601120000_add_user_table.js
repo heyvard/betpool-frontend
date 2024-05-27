@@ -8,7 +8,7 @@ exports.up = async (knex) => {
         t.boolean('active').notNullable()
         t.string('email').unique().notNullable()
         t.string('name').notNullable()
-        t.boolean('admin').notNullable()
+        t.boolean('scoreadmin').notNullable()
         t.boolean('paymentadmin').notNullable()
         t.boolean('superadmin').notNullable()
         t.boolean('paid').notNullable()

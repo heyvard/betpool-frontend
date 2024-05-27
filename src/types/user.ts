@@ -5,7 +5,9 @@ export interface User {
     active: boolean
     email: string
     name: string
-    admin: boolean
+    superadmin: boolean
+    scoreadmin: boolean
+    paymentadmin: boolean
     paid: boolean
     created_at: string
     updated_at: string

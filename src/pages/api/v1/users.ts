@@ -9,7 +9,7 @@ const handler = async function handler(opts: ApiHandlerOpts): Promise<void> {
         return
     }
 
-    if (!user.admin) {
+    if (!(user.superadmin || user.scoreadmin)) {
         res.status(403)
         return
     }
@@ -21,7 +21,9 @@ const handler = async function handler(opts: ApiHandlerOpts): Promise<void> {
                        u.email,
                        u.name,
                        u.paid,
-                       u.admin,
+                       u.superadmin,
+                       u.paymentadmin,
+                       u.scoreadmin,
                        u.active
                 FROM users u`,
         )

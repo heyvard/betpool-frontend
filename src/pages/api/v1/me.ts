@@ -39,14 +39,16 @@ const handler = async function handler(opts: ApiHandlerOpts): Promise<void> {
 
     const nyBruker = await client.query(
         `
-        INSERT INTO users (firebase_user_id, picture, active, email, name, admin, paid, winner)
-        VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING *`,
+        INSERT INTO users (firebase_user_id, picture, active, email, name, scoreadmin, paymentadmin, superadmin, paid, winner)
+        VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10) RETURNING *`,
         [
             jwtPayload.sub,
             jwtPayload.picture,
             true,
             jwtPayload.email,
             jwtPayload.name || jwtPayload.email,
+            false,
+            false,
             false,
             false,
             'Ukraine',

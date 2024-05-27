@@ -9,7 +9,7 @@ const handler = async function handler(opts: ApiHandlerOpts): Promise<void> {
         return
     }
 
-    if (!user.admin) {
+    if (!user.scoreadmin) {
         res.status(403)
         return
     }

@@ -3,7 +3,10 @@ export interface User {
     email: string
     picture: string
     firebase_user_id: string
-    admin: boolean
+    superadmin: boolean
+    paymentadmin: boolean
+    paid: boolean
+    scoreadmin: boolean
     active: boolean
     id: string
 }

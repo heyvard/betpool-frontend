@@ -5,7 +5,8 @@ import { useMutation, useQueryClient } from '@tanstack/react-query'
 interface MuteteUserReq {
     request: {
         paid?: boolean
-        admin?: boolean
+        paymentadmin?: boolean
+        scoreadmin?: boolean
         active?: boolean
     }
 }

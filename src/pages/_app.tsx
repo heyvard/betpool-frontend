@@ -79,7 +79,7 @@ function UserFetchInnlogging(props: { children: React.ReactNode }) {
                             >
                                 Regler
                             </Dropdown.Menu.List.Item>
-                            {me.admin && (
+                            {me.scoreadmin && (
                                 <>
                                     <Dropdown.Menu.List.Item
                                         onClick={() => {
@@ -95,14 +95,16 @@ function UserFetchInnlogging(props: { children: React.ReactNode }) {
                                     >
                                         Rediger resultater
                                     </Dropdown.Menu.List.Item>
-                                    <Dropdown.Menu.List.Item
-                                        onClick={() => {
-                                            router.push('/brukere')
-                                        }}
-                                    >
-                                        Brukere
-                                    </Dropdown.Menu.List.Item>
                                 </>
+                            )}
+                            {(me.superadmin || me.paymentadmin) && (
+                                <Dropdown.Menu.List.Item
+                                    onClick={() => {
+                                        router.push('/brukere')
+                                    }}
+                                >
+                                    Brukere
+                                </Dropdown.Menu.List.Item>
                             )}
 
                             <Dropdown.Menu.List.Item

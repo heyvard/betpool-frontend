@@ -9,7 +9,7 @@ const handler = async function handler(opts: ApiHandlerOpts): Promise<void> {
         return
     }
 
-    if (!user.admin) {
+    if (!(user.superadmin || user.scoreadmin)) {
         res.status(403)
         return
     }
@@ -28,27 +28,39 @@ const handler = async function handler(opts: ApiHandlerOpts): Promise<void> {
             [reqBody.paid, id],
         )
     }
-
-    if (typeof reqBody.admin !== 'undefined') {
-        await client.query(
-            `
+    if (user.superadmin) {
+        if (typeof reqBody.scoreadmin !== 'undefined') {
+            await client.query(
+                `
                 UPDATE users
-                SET admin = $1
+                SET scoreadmin = $1
                 WHERE id = $2;
             `,
-            [reqBody.admin, id],
-        )
-    }
+                [reqBody.scoreadmin, id],
+            )
+        }
 
-    if (typeof reqBody.active !== 'undefined') {
-        await client.query(
-            `
+        if (typeof reqBody.paymentadmin !== 'undefined') {
+            await client.query(
+                `
+                UPDATE users
+                SET paymentadmin = $1
+                WHERE id = $2;
+            `,
+                [reqBody.paymentadmin, id],
+            )
+        }
+
+        if (typeof reqBody.active !== 'undefined') {
+            await client.query(
+                `
                 UPDATE users
                 SET active = $1
                 WHERE id = $2;
             `,
-            [reqBody.active, id],
-        )
+                [reqBody.active, id],
+            )
+        }
     }
 
     res.status(200).json(reqBody)
