@@ -15,12 +15,17 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 
 function UserFetchInnlogging(props: { children: React.ReactNode }) {
     const { data: me, isLoading } = UseUser()
-    const [user] = useAuthState(getFirebaseAuth())
+    const [user, load, err] = useAuthState(getFirebaseAuth())
 
     const router = useRouter()
 
     if (isLoading || !user || !me) {
-        return <Spinner />
+        return (
+            <>
+                <pre>{JSON.stringify({ load, err })}</pre>
+                <Spinner />
+            </>
+        )
     }
 
     const FooterKnapp: FC<{
