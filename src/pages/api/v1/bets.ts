@@ -1,5 +1,5 @@
 import { ApiHandlerOpts } from '../../../types/apiHandlerOpts'
-import { isInFirstRound } from '../../../utils/isInFirstRound'
+import { erIFørsteRunde } from '../../../utils/isInFirstRound'
 import { auth } from '../../../auth/authHandler'
 
 const handler = async function handler(opts: ApiHandlerOpts): Promise<void> {
@@ -58,7 +58,7 @@ const handler = async function handler(opts: ApiHandlerOpts): Promise<void> {
 
     const alt = await Promise.all([getBets(), getUsers()])
 
-    if (isInFirstRound()) {
+    if (erIFørsteRunde()) {
         alt[1].forEach((a) => {
             delete a.winner
             delete a.topscorer

@@ -16,6 +16,7 @@ import { Alert, Button, LinkPanel, TextField, Select } from '@navikt/ds-react'
 import { FloppydiskIcon } from '@navikt/aksel-icons'
 import { useQueryClient } from '@tanstack/react-query'
 import nb from 'dayjs/locale/nb'
+import { erEtterFørsteRunde, førsteRunde } from '../utils/isInFirstRound'
 
 dayjs.locale(nb)
 
@@ -34,15 +35,6 @@ const Home: NextPage = () => {
     if (!megselv || !stats) {
         return <Spinner></Spinner>
     }
-    const kanEndres = dayjs(
-        matches
-            .sort((a, b) => {
-                return dayjs(a.game_start).diff(dayjs(b.game_start))
-            })
-            .find((a) => {
-                return a.round == '2'
-            })!.game_start,
-    )
 
     const kamper = matches.filter((a) => {
         return dayjs(a.game_start).isAfter(dayjs().subtract(2, 'hours')) && dayjs(a.game_start).isBefore(dayjs())
@@ -75,11 +67,7 @@ const Home: NextPage = () => {
                     </div>
                 )
             })}
-            {kanEndres.isAfter(dayjs()) && (
-                <Alert variant={'info'} className={'rounded-xl'}>
-                    Vinner og toppscorer kan endres frem til {kanEndres.format('dddd D MMM  kl HH:mm')}
-                </Alert>
-            )}
+
             {!megselv.paid && (
                 <Alert variant={'warning'} className={'rounded-xl'}>
                     Din innbetaling er ikke registrert ennå. 300kr må være vippset innen start på første kamp til 48 18
@@ -90,8 +78,8 @@ const Home: NextPage = () => {
             <div className={'my-4 p-4 border border-border-alt-3 bg-bg-subtle rounded-xl'}>
                 <Select
                     label={'Hvem vinner VM?'}
-                    description={'Kan endres frem til ' + kanEndres.format('dddd D MMM  kl HH:mm')}
-                    disabled={lagrer || kanEndres.isBefore(dayjs())}
+                    description={'Kan endres frem til ' + førsteRunde.format('dddd D MMM  kl HH:mm')}
+                    disabled={lagrer || erEtterFørsteRunde()}
                     value={megselv.winner}
                     onChange={async (e) => {
                         try {
@@ -159,9 +147,9 @@ const Home: NextPage = () => {
                     <div>
                         <TextField
                             label="Hvilken spiller scorer flest mål?"
-                            disabled={kanEndres.isBefore(dayjs())}
+                            disabled={erEtterFørsteRunde()}
                             value={topscorer}
-                            description={'Kan endres frem til ' + kanEndres.format('dddd D MMM  kl HH:mm')}
+                            description={'Kan endres frem til ' + førsteRunde.format('dddd D MMM  kl HH:mm')}
                             onChange={(e) => {
                                 setTopscorer(e.target.value)
                             }}

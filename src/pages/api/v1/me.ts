@@ -1,5 +1,5 @@
 import { ApiHandlerOpts } from '../../../types/apiHandlerOpts'
-import { isInFirstRound } from '../../../utils/isInFirstRound'
+import { erIFørsteRunde } from '../../../utils/isInFirstRound'
 import { auth } from '../../../auth/authHandler'
 
 const handler = async function handler(opts: ApiHandlerOpts): Promise<void> {
@@ -8,7 +8,7 @@ const handler = async function handler(opts: ApiHandlerOpts): Promise<void> {
         if (req.method == 'PUT') {
             const reqBody = JSON.parse(req.body)
 
-            const kanBette = isInFirstRound()
+            const kanBette = erIFørsteRunde()
             if (reqBody.winner && kanBette) {
                 await client.query(
                     `
