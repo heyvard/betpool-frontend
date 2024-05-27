@@ -1,0 +1,22 @@
+{
+  "short_name": "EM Betpool",
+  "name": "EM Betpool",
+  "icons": [
+    {
+      "src": "favicon-180x180.png",
+      "sizes": "180x180",
+      "type": "image/png"
+    },
+    {
+      "src": "favicon-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "favicon-310x310.png",
+      "sizes": "310x310",
+      "type": "image/png"
+    }
+  ],
+  "display": "minimal-ui"
+}
