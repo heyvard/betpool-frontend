@@ -12,13 +12,12 @@ const Regler: NextPage = () => {
     }
     return (
         <>
-            <Heading size="small" level={'1'} spacing>
+            <Heading size="small" level={'1'}>
                 Innskudd
             </Heading>
             <BodyShort>Det koster 300 kr å delta.</BodyShort>
-            <BodyShort spacing>Pengene må være vippeset innen start på første kamp til 467 90 000.</BodyShort>
-
-            <Heading size="small" level={'1'} spacing>
+            <BodyShort spacing>Pengene må være vippeset innen start på første kamp til 48 18 49 49.</BodyShort>
+            <Heading size="small" level={'1'}>
                 Premier
             </Heading>
             <BodyShort spacing>Potten er på: {stats.pot} kr.</BodyShort>
@@ -82,7 +81,7 @@ const Regler: NextPage = () => {
                 <List.Item>Finale: 5</List.Item>
             </List>
 
-            <Heading size="small" level={'1'} spacing>
+            <Heading size="small" level={'1'}>
                 Vinner
             </Heading>
             <BodyLong spacing>
@@ -90,7 +89,7 @@ const Regler: NextPage = () => {
                 {stats.deltakere * 3} poeng. Disse splittes på alle som har riktig svar. Summen er antall deltagere
                 ganger 3.
             </BodyLong>
-            <Heading size="small" level={'1'} spacing>
+            <Heading size="small" level={'1'}>
                 Toppscorer
             </Heading>
             <BodyLong spacing>
