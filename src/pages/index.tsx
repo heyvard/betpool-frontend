@@ -79,8 +79,8 @@ const Home: NextPage = () => {
             )}
             {!megselv.paid && (
                 <Alert variant={'warning'} className={'rounded-xl'}>
-                    Din innbetaling er ikke registrert ennå. 300kr må være vippeset innen start på første kamp til 467
-                    90 000.
+                    Din innbetaling er ikke registrert ennå. 300kr må være vippset innen start på første kamp til 48 18
+                    49 49.
                 </Alert>
             )}
 
