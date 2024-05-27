@@ -16,9 +16,7 @@ const Regler: NextPage = () => {
                 Innskudd
             </Heading>
             <BodyShort>Det koster 300 kr å delta.</BodyShort>
-            <BodyShort spacing>
-                Pengene må være overført innen slutten av første runde i gruppespillet på vipps til 467 90 000 .
-            </BodyShort>
+            <BodyShort spacing>Pengene må være vippeset innen start på første kamp til 467 90 000.</BodyShort>
 
             <Heading size="small" level={'1'} spacing>
                 Premier
