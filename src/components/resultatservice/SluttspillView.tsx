@@ -30,14 +30,11 @@ export const SluttspillView = ({ match }: { match: Match }) => {
                             const idtoken = await user?.getIdToken()
                             const value = {} as Record<string, string>
                             value[lag] = e.target.value
-                            const responsePromise = await fetch(
-                                `https://betpool-2022-backend.vercel.app/api/v1/matches/${match.id}`,
-                                {
-                                    method: 'PUT',
-                                    body: JSON.stringify(value),
-                                    headers: { Authorization: `Bearer ${idtoken}` },
-                                },
-                            )
+                            const responsePromise = await fetch(`/api/v1/matches/${match.id}`, {
+                                method: 'PUT',
+                                body: JSON.stringify(value),
+                                headers: { Authorization: `Bearer ${idtoken}` },
+                            })
                             if (!responsePromise.ok) {
                                 window.alert('oops, feil ved lagring')
                             }
@@ -47,7 +44,6 @@ export const SluttspillView = ({ match }: { match: Match }) => {
                         }
                     }}
                 >
-                    <MenuItem value={'TBA'}>{'🤔 TBA'}</MenuItem>
                     {alleLagSortert.map((l) => {
                         return (
                             <MenuItem key={l.engelsk} value={l.engelsk}>

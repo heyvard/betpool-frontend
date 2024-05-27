@@ -5,6 +5,7 @@ interface Lag {
 }
 
 export const alleLag: Lag[] = [
+    { engelsk: 'Austria', norsk: 'Østerrike', flagg: '🇦🇹' },
     { engelsk: 'Belgium', norsk: 'Belgia', flagg: '🇧🇪' },
 
     {

@@ -14,7 +14,7 @@ export function UseMutateMatch(
     return useMutation({
         mutationFn: async () => {
             const idtoken = await user?.getIdToken()
-            const responsePromise = await fetch(`https://betpool-2022-backend.vercel.app/api/v1/matches/${id}`, {
+            const responsePromise = await fetch(`/api/v1/matches/${id}`, {
                 method: 'PUT',
                 body: JSON.stringify({ home_score: homeScore, away_score: awayScore }),
                 headers: { Authorization: `Bearer ${idtoken}` },

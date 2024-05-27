@@ -67,7 +67,7 @@ export function UseAllBets() {
 
         queryFn: async () => {
             const idtoken = await user?.getIdToken()
-            const responsePromise = await fetch('https://betpool-2022-backend.vercel.app/api/v1/bets', {
+            const responsePromise = await fetch('/api/v1/bets', {
                 method: 'GET',
                 headers: { Authorization: `Bearer ${idtoken}` },
             })
