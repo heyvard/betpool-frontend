@@ -19,7 +19,7 @@
         "@navikt/ds-tailwind": "^6.3.6",
         "@navikt/ds-tokens": "^6.3.2",
         "@next/env": "^12.3.1",
-        "@tanstack/react-query": "^5.37.1",
+        "@tanstack/react-query": "^5.39.0",
         "array-shuffle": "^3.0.0",
         "dayjs": "^1.11.6",
         "firebase": "^10.6.0",
