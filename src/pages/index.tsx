@@ -2,7 +2,7 @@ import type { NextPage } from 'next'
 
 import { UseUser } from '../queries/useUser'
 import { Spinner } from '../components/loading/Spinner'
-import { Card, CardContent, FormControl, InputLabel, MenuItem, Select, TextField } from '@mui/material'
+
 import React, { useState } from 'react'
 import { useAuthState } from 'react-firebase-hooks/auth'
 import { UseStats } from '../queries/useStats'
@@ -12,10 +12,11 @@ import dayjs from 'dayjs'
 import NextLink from 'next/link'
 import { fixLand } from '../components/bet/BetView'
 import { getFirebaseAuth } from '../auth/clientApp'
-import { Alert, Button, LinkPanel } from '@navikt/ds-react'
+import { Alert, Button, LinkPanel, TextField, Select } from '@navikt/ds-react'
 import { FloppydiskIcon } from '@navikt/aksel-icons'
 import { useQueryClient } from '@tanstack/react-query'
 import nb from 'dayjs/locale/nb'
+
 dayjs.locale(nb)
 
 const Home: NextPage = () => {
@@ -86,99 +87,101 @@ const Home: NextPage = () => {
                 </Alert>
             )}
 
-            <Card sx={{ mt: 1 }}>
-                <CardContent>
-                    <FormControl fullWidth>
-                        <InputLabel id="demo-simple-select-label">Hvem vinner VM?</InputLabel>
-                        <Select
-                            labelId="demo-simple-select-label"
-                            disabled={lagrer || kanEndres.isBefore(dayjs())}
-                            id="demo-simple-select"
-                            value={megselv.winner}
-                            label="Hvem winner VM?"
-                            onChange={async (e) => {
-                                try {
-                                    setLagrer(true)
-                                    const idtoken = await user?.getIdToken()
-                                    const responsePromise = await fetch(`/api/v1/me/`, {
-                                        method: 'PUT',
-                                        body: JSON.stringify({ winner: e.target.value }),
-                                        headers: { Authorization: `Bearer ${idtoken}` },
-                                    })
-                                    if (!responsePromise.ok) {
-                                        window.alert('oops, feil ved lagring')
-                                    }
-                                    queryClient
-                                        .invalidateQueries({
-                                            queryKey: ['user-me'],
-                                        })
-                                        .then()
-                                    queryClient
-                                        .invalidateQueries({
-                                            queryKey: ['stats'],
-                                        })
-                                        .then()
-                                } finally {
-                                    setLagrer(false)
-                                }
-                            }}
-                        >
-                            {alleLagSortert.map((l) => {
-                                return (
-                                    <MenuItem key={l.engelsk} value={l.engelsk}>
-                                        {l.flagg + ' ' + l.norsk}
-                                    </MenuItem>
-                                )
-                            })}
-                        </Select>
-                    </FormControl>
-                </CardContent>
-            </Card>
-            <Card sx={{ mt: 1 }}>
-                <CardContent>
-                    <FormControl fullWidth>
+            <div className={'my-4 p-4 border border-border-alt-3 bg-bg-subtle rounded-xl'}>
+                <Select
+                    label={'Hvem vinner VM?'}
+                    description={'Kan endres frem til ' + kanEndres.format('dddd D MMM  kl HH:mm')}
+                    disabled={lagrer || kanEndres.isBefore(dayjs())}
+                    value={megselv.winner}
+                    onChange={async (e) => {
+                        try {
+                            let winner = e.target.value.toString()
+                            setLagrer(true)
+                            const idtoken = await user?.getIdToken()
+                            const responsePromise = await fetch(`/api/v1/me/`, {
+                                method: 'PUT',
+                                body: JSON.stringify({ winner: winner }),
+                                headers: { Authorization: `Bearer ${idtoken}` },
+                            })
+                            if (!responsePromise.ok) {
+                                window.alert('oops, feil ved lagring')
+                            }
+                            queryClient
+                                .invalidateQueries({
+                                    queryKey: ['user-me'],
+                                })
+                                .then()
+                            queryClient
+                                .invalidateQueries({
+                                    queryKey: ['stats'],
+                                })
+                                .then()
+                        } finally {
+                            setLagrer(false)
+                        }
+                    }}
+                >
+                    {alleLagSortert.map((l) => {
+                        return (
+                            <option key={l.engelsk} value={l.engelsk}>
+                                {l.flagg + ' ' + l.norsk}
+                            </option>
+                        )
+                    })}
+                </Select>
+            </div>
+
+            <div className={'my-4 p-4 border border-border-alt-3 bg-bg-subtle rounded-xl'}>
+                <form
+                    onSubmit={async (e) => {
+                        e.preventDefault()
+                        try {
+                            setLagrer(true)
+                            const idtoken = await user?.getIdToken()
+                            const responsePromise = await fetch(`/api/v1/me/`, {
+                                method: 'PUT',
+                                body: JSON.stringify({ topscorer: topscorer }),
+                                headers: { Authorization: `Bearer ${idtoken}` },
+                            })
+                            if (!responsePromise.ok) {
+                                window.alert('oops, feil ved lagring')
+                            }
+                            queryClient
+                                .invalidateQueries({
+                                    queryKey: ['user-me'],
+                                })
+                                .then()
+                        } finally {
+                            setLagrer(false)
+                        }
+                    }}
+                >
+                    <div>
                         <TextField
-                            id="outlined-required"
                             label="Hvilken spiller scorer flest mål?"
                             disabled={kanEndres.isBefore(dayjs())}
                             value={topscorer}
+                            description={'Kan endres frem til ' + kanEndres.format('dddd D MMM  kl HH:mm')}
                             onChange={(e) => {
                                 setTopscorer(e.target.value)
                             }}
                         />
-                        {topscorer != megselv.topscorer && (
-                            <Button
-                                className={'mt-4'}
-                                onClick={async () => {
-                                    try {
-                                        setLagrer(true)
-                                        const idtoken = await user?.getIdToken()
-                                        const responsePromise = await fetch(`/api/v1/me/`, {
-                                            method: 'PUT',
-                                            body: JSON.stringify({ topscorer: topscorer }),
-                                            headers: { Authorization: `Bearer ${idtoken}` },
-                                        })
-                                        if (!responsePromise.ok) {
-                                            window.alert('oops, feil ved lagring')
-                                        }
-                                        queryClient
-                                            .invalidateQueries({
-                                                queryKey: ['user-me'],
-                                            })
-                                            .then()
-                                    } finally {
-                                        setLagrer(false)
-                                    }
-                                }}
-                                loading={lagrer}
-                                icon={<FloppydiskIcon />}
-                            >
-                                Lagre
-                            </Button>
-                        )}
-                    </FormControl>
-                </CardContent>
-            </Card>
+
+                        <div>
+                            {topscorer != megselv.topscorer && (
+                                <Button
+                                    className={'mt-4'}
+                                    onClick={async () => {}}
+                                    loading={lagrer}
+                                    icon={<FloppydiskIcon />}
+                                >
+                                    Lagre
+                                </Button>
+                            )}
+                        </div>
+                    </div>
+                </form>
+            </div>
         </div>
     )
 }
