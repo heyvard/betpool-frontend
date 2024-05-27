@@ -54,7 +54,7 @@ export function auth(fn: { (_opts: ApiHandlerOpts): Promise<void> }) {
                 return
             }
 
-            const verifisert = await verifiserIdToken(authheader.split(' ')[ 1 ])
+            const verifisert = await verifiserIdToken(authheader.split(' ')[1])
             if (!verifisert) {
                 res.status(401)
                 return
@@ -72,7 +72,7 @@ export function auth(fn: { (_opts: ApiHandlerOpts): Promise<void> }) {
                     if (userList.rows.length == null) {
                         return undefined
                     }
-                    return userList.rows[ 0 ]
+                    return userList.rows[0]
                 }
 
                 await fn({ req, res, jwtPayload: verifisert.payload, client, user: hentBrukeren() })
