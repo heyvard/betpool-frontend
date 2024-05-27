@@ -15,6 +15,8 @@ import { getFirebaseAuth } from '../auth/clientApp'
 import { Alert, Button, LinkPanel } from '@navikt/ds-react'
 import { FloppydiskIcon } from '@navikt/aksel-icons'
 import { useQueryClient } from '@tanstack/react-query'
+import nb from 'dayjs/locale/nb'
+dayjs.locale(nb)
 
 const Home: NextPage = () => {
     const { data: megselv } = UseUser()
@@ -74,7 +76,7 @@ const Home: NextPage = () => {
             })}
             {kanEndres.isAfter(dayjs()) && (
                 <Alert variant={'info'} className={'rounded-xl'}>
-                    Vinner og toppscorer kan endres frem til {kanEndres.format('ddd, D MMM  kl HH:mm')}
+                    Vinner og toppscorer kan endres frem til {kanEndres.format('dddd D MMM  kl HH:mm')}
                 </Alert>
             )}
             {!megselv.paid && (
