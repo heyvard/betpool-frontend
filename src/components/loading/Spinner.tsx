@@ -1,9 +1,5 @@
-import { Box, CircularProgress } from '@mui/material'
+import { Skeleton } from '@navikt/ds-react'
 
 export const Spinner = () => {
-    return (
-        <Box display="flex" justifyContent="center" alignItems="center" minHeight="100vh">
-            <CircularProgress />
-        </Box>
-    )
+    return <Skeleton />
 }

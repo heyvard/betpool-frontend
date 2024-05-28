@@ -170,6 +170,14 @@ const Home: NextPage = () => {
                     </div>
                 </form>
             </div>
+
+            <div>
+                <NextLink passHref legacyBehavior href={'/my-bets'}>
+                    <LinkPanel className={'rounded-xl'} href={'/my-bets'}>
+                        Kamper
+                    </LinkPanel>
+                </NextLink>
+            </div>
         </div>
     )
 }
