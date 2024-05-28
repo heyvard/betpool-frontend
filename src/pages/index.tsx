@@ -39,7 +39,7 @@ const Home: NextPage = () => {
     const kamper = matches.filter((a) => {
         return dayjs(a.game_start).isAfter(dayjs().subtract(2, 'hours')) && dayjs(a.game_start).isBefore(dayjs())
     })
-    const snartKamper = matches.filter((a) => {
+    const snartKamper = matches.filter((a, i) => {
         return dayjs(a.game_start).isAfter(dayjs()) && dayjs(a.game_start).isBefore(dayjs().add(2, 'hours'))
     })
     return (
@@ -69,13 +69,13 @@ const Home: NextPage = () => {
             })}
 
             {!megselv.paid && (
-                <Alert variant={'warning'} className={'rounded-xl'}>
+                <Alert variant={'warning'} className={'rounded-xl border-0 shadow shadow-border-warning'}>
                     Din innbetaling er ikke registrert ennå. 300kr må være vippset innen start på første kamp til 918 65
                     052.
                 </Alert>
             )}
 
-            <div className={'my-4 p-4 border border-border-alt-3 bg-bg-subtle rounded-xl'}>
+            <div className={'my-4 p-4 shadow bg-bg-subtle rounded-xl'}>
                 <Select
                     label={'Hvem vinner VM?'}
                     description={'Kan endres frem til ' + førsteRunde.format('dddd D MMM  kl HH:mm')}
@@ -119,7 +119,7 @@ const Home: NextPage = () => {
                 </Select>
             </div>
 
-            <div className={'my-4 p-4 border border-border-alt-3 bg-bg-subtle rounded-xl'}>
+            <div className={'my-4 p-4 shadow bg-bg-subtle rounded-xl'}>
                 <form
                     onSubmit={async (e) => {
                         e.preventDefault()
@@ -173,7 +173,7 @@ const Home: NextPage = () => {
 
             <div>
                 <NextLink passHref legacyBehavior href={'/my-bets'}>
-                    <LinkPanel className={'rounded-xl'} href={'/my-bets'}>
+                    <LinkPanel className={'rounded-xl shadow border-0 text-xl'} href={'/my-bets'}>
                         Kamper
                     </LinkPanel>
                 </NextLink>

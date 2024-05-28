@@ -17,7 +17,7 @@ export function UseMatches() {
                 headers: { Authorization: `Bearer ${idtoken}` },
             })
             let matchene: Match[] = await responsePromise.json()
-            matchene.sort((a, b) => dayjs(b.game_start).unix() - dayjs(a.game_start).unix())
+            matchene.sort((a, b) => dayjs(a.game_start).unix() - dayjs(b.game_start).unix())
             return matchene
         },
     })
