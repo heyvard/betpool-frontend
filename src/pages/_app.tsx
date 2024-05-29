@@ -22,9 +22,7 @@ function Layout({ children }: { children: React.ReactNode }) {
         <>
             <div className="px-2 pt-4 pb-16 mx-auto max-w-full sm:max-w-lg md:max-w-2xl">
                 {error && <ErrorMessage>Error useAuthState: {JSON.stringify(error)}</ErrorMessage>}
-                {loading && (
-                    <Spinner />
-                )}
+                {loading && <Spinner />}
                 {!loading && !user && <SignInScreen />}
                 {user && <>{children}</>}
             </div>
