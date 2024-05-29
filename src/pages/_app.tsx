@@ -8,23 +8,22 @@ import Head from 'next/head'
 
 import '../styles/global.css'
 import { getFirebaseAuth } from '../auth/clientApp'
-import { BodyShort, Dropdown, InternalHeader, Loader } from '@navikt/ds-react'
+import { Dropdown, ErrorMessage, InternalHeader } from '@navikt/ds-react'
 import { BankNoteIcon, HouseIcon, MenuHamburgerIcon, NumberListIcon, ParagraphIcon } from '@navikt/aksel-icons'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
+import { Spinner } from '../components/loading/Spinner'
 
 function Layout({ children }: { children: React.ReactNode }) {
-    const [user, loading] = useAuthState(getFirebaseAuth())
+    const [user, loading, error] = useAuthState(getFirebaseAuth())
     const router = useRouter()
     const { data: me } = UseUser()
 
     return (
         <>
             <div className="px-2 pt-4 pb-16 mx-auto max-w-full sm:max-w-lg md:max-w-2xl">
+                {error && <ErrorMessage>Error useAuthState: {JSON.stringify(error)}</ErrorMessage>}
                 {loading && (
-                    <div className="flex justify-center items-center min-h-screen">
-                        <BodyShort>loading</BodyShort>
-                        <Loader size="3xlarge" title="Venter..." />
-                    </div>
+                    <Spinner />
                 )}
                 {!loading && !user && <SignInScreen />}
                 {user && <>{children}</>}
