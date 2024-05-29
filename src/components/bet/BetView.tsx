@@ -1,4 +1,3 @@
-import { Box, Card, CardContent, TextField, Typography } from '@mui/material'
 import { Bet } from '../../types/types'
 import dayjs from 'dayjs'
 import React, { useState } from 'react'
@@ -6,7 +5,7 @@ import { UseMutateBet } from '../../queries/mutateBet'
 import { hentFlag, hentNorsk } from '../../utils/lag'
 import NextLink from 'next/link'
 import { rundeTilTekst } from '../../utils/rundeTilTekst'
-import { Button, Link } from '@navikt/ds-react'
+import { BodyShort, Button, Link, TextField } from '@navikt/ds-react'
 import { FloppydiskIcon } from '@navikt/aksel-icons'
 
 export const BetView = ({ bet, matchside }: { bet: Bet; matchside: boolean }) => {
@@ -51,98 +50,79 @@ export const BetView = ({ bet, matchside }: { bet: Bet; matchside: boolean }) =>
         e.target.select()
     }
     return (
-        <Card sx={{ mt: 1 }}>
-            <CardContent>
-                {kampstart.format('ddd, D MMM  HH:mm')}
-                <br />
-                {rundeTilTekst(bet.round)}
-                <Box sx={{ display: 'flex', alignItems: 'flex-end' }}>
-                    <Typography width={140}> {fixLand(bet.home_team)}</Typography>
-                    <TextField
-                        type="text"
-                        disabled={disabled}
-                        error={lagreknappSynlig}
-                        variant="standard"
-                        inputProps={{
-                            inputmode: 'numeric',
-                            pattern: '[0-9]*',
-                        }}
-                        InputProps={{
-                            sx: {
-                                '& input': {
-                                    textAlign: 'center',
-                                },
-                            },
-                        }}
-                        sx={{ width: 40 }}
-                        value={hjemmescore}
-                        onFocus={selectAllFocus}
-                        onChange={(e) => {
-                            if (!e.currentTarget.value) {
-                                setHjemmescore('')
-                                return
-                            }
-                            const number = Number(e.currentTarget.value)
-                            if (number >= 0 && number <= 99) {
-                                setHjemmescore(String(number))
-                            }
-                        }}
-                    />
-                </Box>
-                <Box sx={{ display: 'flex', alignItems: 'flex-end' }}>
-                    <Typography width={140}> {fixLand(bet.away_team)}</Typography>
+        <div className={'my-4 p-4 shadow bg-bg-subtle rounded-xl'}>
+            <BodyShort>{kampstart.format('ddd, D MMM  HH:mm')}</BodyShort>
+            {rundeTilTekst(bet.round)}
+            <div className={'flex items-end'}>
+                <BodyShort className={'w-28'}>{fixLand(bet.home_team)}</BodyShort>
+                <TextField
+                    className={'w-12'}
+                    type="text"
+                    disabled={disabled}
+                    error={lagreknappSynlig}
+                    label={bet.home_team}
+                    hideLabel={true}
+                    inputMode={'numeric'}
+                    size={'small'}
+                    value={hjemmescore}
+                    onFocus={selectAllFocus}
+                    onChange={(e) => {
+                        if (!e.currentTarget.value) {
+                            setHjemmescore('')
+                            return
+                        }
+                        const number = Number(e.currentTarget.value)
+                        if (number >= 0 && number <= 99) {
+                            setHjemmescore(String(number))
+                        }
+                    }}
+                />
+            </div>
+            <div className={'flex items-end'}>
+                <BodyShort className={'w-28'}> {fixLand(bet.away_team)}</BodyShort>
 
-                    <TextField
-                        type={'text'}
-                        disabled={disabled}
-                        variant="standard"
-                        inputProps={{
-                            inputmode: 'numeric',
-                            pattern: '[0-9]*',
-                        }}
-                        InputProps={{
-                            sx: {
-                                '& input': {
-                                    textAlign: 'center',
-                                },
-                            },
-                        }}
-                        error={lagreknappSynlig}
-                        sx={{ width: 40 }}
-                        value={bortescore}
-                        onFocus={selectAllFocus}
-                        onChange={(e) => {
-                            if (!e.currentTarget.value) {
-                                setBortescore('')
-                                return
-                            }
-                            const number = Number(e.currentTarget.value)
-                            if (number >= 0 && number <= 99) {
-                                setBortescore(String(number))
-                            }
-                        }}
-                    />
-                </Box>
-                {lagreknappSynlig && (
-                    <Button
-                        size={'small'}
-                        className={'mt-2'}
-                        onClick={() => {
-                            mutate()
-                        }}
-                        loading={isPending}
-                        icon={<FloppydiskIcon />}
-                    >
-                        Lagre
-                    </Button>
-                )}
-                {disabled && !matchside && (
-                    <NextLink href={'/match/' + bet.match_id}>
-                        <Link>Se alles bets på denne kampen</Link>
-                    </NextLink>
-                )}
-            </CardContent>
-        </Card>
+                <TextField
+                    className={'w-12'}
+                    type={'number'}
+                    disabled={disabled}
+                    error={lagreknappSynlig}
+                    value={bortescore}
+                    size={'small'}
+                    inputMode={'numeric'}
+                    label={bet.away_team}
+                    hideLabel={true}
+                    onFocus={selectAllFocus}
+                    onChange={(e) => {
+                        if (!e.currentTarget.value) {
+                            setBortescore('')
+                            return
+                        }
+                        const number = Number(e.currentTarget.value)
+                        if (number >= 0 && number <= 99) {
+                            setBortescore(String(number))
+                        }
+                    }}
+                />
+            </div>
+            {lagreknappSynlig && (
+                <Button
+                    size={'small'}
+                    className={'mt-2'}
+                    onClick={() => {
+                        mutate()
+                    }}
+                    loading={isPending}
+                    icon={<FloppydiskIcon />}
+                >
+                    Lagre
+                </Button>
+            )}
+            {disabled && !matchside && (
+                <NextLink href={'/match/' + bet.match_id}>
+                    <Link>Se alles bets på denne kampen</Link>
+                </NextLink>
+            )}
+        </div>
     )
 }
 

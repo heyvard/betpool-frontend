@@ -39,7 +39,7 @@ const Home: NextPage = () => {
     const kamper = matches.filter((a) => {
         return dayjs(a.game_start).isAfter(dayjs().subtract(2, 'hours')) && dayjs(a.game_start).isBefore(dayjs())
     })
-    const snartKamper = matches.filter((a, i) => {
+    const snartKamper = matches.filter((a) => {
         return dayjs(a.game_start).isAfter(dayjs()) && dayjs(a.game_start).isBefore(dayjs().add(2, 'hours'))
     })
     return (
