@@ -148,7 +148,7 @@ const FooterKnapp: FC<{
             } ${isActive && me ? 'bg-gray-600 text-white' : ''}`}
             type="button"
             onClick={() => {
-                if (me) return router.push(url)
+                router.push(url)
             }}
         >
             <Icon className="w-8 h-8" />
