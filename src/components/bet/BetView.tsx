@@ -52,9 +52,7 @@ export const BetView = ({ bet, matchside }: { bet: Bet; matchside: boolean }) =>
     }
     return (
         <div className={'my-2 p-4 shadow rounded-xl bg-white'}>
-            <BodyShort className={'italic'}>
-                {rundeTilTekst(bet.round) + ' ' + kampstart.locale(nb).format('dddd D MMM  HH:mm')}
-            </BodyShort>
+            <BodyShort spacing>{rundeTilTekst(bet.round)}</BodyShort>
             <div className={'flex items-end mb-1'}>
                 <BodyShort className={'w-36 font-bold text-xl'}>{fixLand(bet.home_team)}</BodyShort>
                 <TextField
@@ -124,6 +122,7 @@ export const BetView = ({ bet, matchside }: { bet: Bet; matchside: boolean }) =>
                     <Link>Se alles bets på denne kampen</Link>
                 </NextLink>
             )}
+            <BodyShort className={'italic text-sm mt-4'}>{kampstart.locale(nb).format('dddd D MMM  HH:mm')}</BodyShort>
         </div>
     )
 }
