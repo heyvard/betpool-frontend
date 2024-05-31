@@ -3,7 +3,7 @@ import type { NextPage } from 'next'
 import { UseUser } from '../queries/useUser'
 import { Spinner } from '../components/loading/Spinner'
 
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useAuthState } from 'react-firebase-hooks/auth'
 import { UseStats } from '../queries/useStats'
 import { alleLagSortert } from '../utils/lag'
@@ -28,7 +28,11 @@ const Home: NextPage = () => {
     const { data: stats } = UseStats()
     const [topscorer, setTopscorer] = useState(megselv?.topscorer)
     const { data: matches, isLoading: isLoading2 } = UseMatches()
-
+    useEffect(() => {
+        if (megselv) {
+            setTopscorer(megselv.topscorer)
+        }
+    }, [megselv, setTopscorer])
     if (!matches || isLoading2) {
         return <Spinner />
     }
