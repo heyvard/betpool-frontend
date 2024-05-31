@@ -11,7 +11,7 @@ const Regler: NextPage = () => {
         return <Spinner></Spinner>
     }
     return (
-        <>
+        <div className={'bg-white p-4 rounded-xl mb-8'}>
             <Heading size="small" level={'1'}>
                 Innskudd
             </Heading>
@@ -97,7 +97,7 @@ const Regler: NextPage = () => {
                 {stats.deltakere * 3} poeng. Disse splittes på alle som har riktig svar. Summen er antall deltagere
                 ganger 3.
             </BodyLong>
-        </>
+        </div>
     )
 }
 

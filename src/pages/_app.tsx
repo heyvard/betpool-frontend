@@ -28,7 +28,7 @@ function Layout({ children }: { children: React.ReactNode }) {
             </div>
             <InternalHeader className="fixed bottom-0 left-0 z-50 w-full h-16 flex ">
                 <FooterKnapp url={'/'} text={''} icon={HouseIcon} />
-                <FooterKnapp text={'Bets'} url={'/my-bets'} icon={BankNoteIcon} />
+                <FooterKnapp text={'Kamper'} url={'/my-bets'} icon={BankNoteIcon} />
                 <FooterKnapp text={'Resultater'} url={'/leaderboard'} icon={NumberListIcon} />
                 <FooterKnapp text={'Regler'} url={'/rules'} icon={ParagraphIcon} />
                 <Dropdown>

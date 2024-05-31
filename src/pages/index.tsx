@@ -79,7 +79,7 @@ const Home: NextPage = () => {
                 </Alert>
             )}
 
-            <div className={'my-4 p-4 shadow bg-bg-subtle rounded-xl'}>
+            <div className={'my-4 p-4 shadow bg-white rounded-xl'}>
                 <Select
                     label={'Hvem vinner VM?'}
                     description={'Kan endres frem til ' + førsteRunde.format('dddd D MMM  kl HH:mm')}
@@ -123,7 +123,7 @@ const Home: NextPage = () => {
                 </Select>
             </div>
 
-            <div className={'my-4 p-4 shadow bg-bg-subtle rounded-xl'}>
+            <div className={'my-4 p-4 shadow bg-white rounded-xl'}>
                 <form
                     onSubmit={async (e) => {
                         e.preventDefault()

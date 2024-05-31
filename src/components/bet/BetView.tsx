@@ -50,11 +50,12 @@ export const BetView = ({ bet, matchside }: { bet: Bet; matchside: boolean }) =>
         e.target.select()
     }
     return (
-        <div className={'my-4 p-4 shadow bg-bg-subtle rounded-xl'}>
-            <BodyShort>{kampstart.format('ddd, D MMM  HH:mm')}</BodyShort>
-            {rundeTilTekst(bet.round)}
-            <div className={'flex items-end'}>
-                <BodyShort className={'w-28'}>{fixLand(bet.home_team)}</BodyShort>
+        <div className={'my-2 p-4 shadow rounded-xl bg-white'}>
+            <BodyShort className={'italic'}>
+                {rundeTilTekst(bet.round) + ' ' + kampstart.format('dddd D MMM  HH:mm')}
+            </BodyShort>
+            <div className={'flex items-end mb-1'}>
+                <BodyShort className={'w-36 font-bold text-xl'}>{fixLand(bet.home_team)}</BodyShort>
                 <TextField
                     className={'w-12'}
                     type="text"
@@ -79,7 +80,7 @@ export const BetView = ({ bet, matchside }: { bet: Bet; matchside: boolean }) =>
                 />
             </div>
             <div className={'flex items-end'}>
-                <BodyShort className={'w-28'}> {fixLand(bet.away_team)}</BodyShort>
+                <BodyShort className={'w-36 font-bold text-xl'}> {fixLand(bet.away_team)}</BodyShort>
 
                 <TextField
                     className={'w-12'}

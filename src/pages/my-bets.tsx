@@ -7,7 +7,7 @@ import dayjs from 'dayjs'
 import NextLink from 'next/link'
 import React from 'react'
 import { UseUser } from '../queries/useUser'
-import { Link } from '@navikt/ds-react'
+import { LinkPanel } from '@navikt/ds-react'
 
 const Home: NextPage = () => {
     const { data: myBets } = UseMyBets()
@@ -19,9 +19,13 @@ const Home: NextPage = () => {
 
     return (
         <>
-            <NextLink href={'/user/' + megselv.id}>
-                <Link>Mine tidligere bets</Link>
-            </NextLink>
+            <div>
+                <NextLink passHref legacyBehavior href={'/user/' + megselv.id}>
+                    <LinkPanel className={'rounded-xl shadow border-0 text-xl'} href={'/my-bets'}>
+                        Tidligere kamper
+                    </LinkPanel>
+                </NextLink>
+            </div>
 
             {myBets
                 .filter((b) => dayjs(b.game_start).isAfter(dayjs()))

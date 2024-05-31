@@ -5,7 +5,7 @@ const Home: NextPage = () => {
     return (
         <Html lang={'no'}>
             <Head></Head>
-            <body className={'bg-green-50'}>
+            <body className={'bg-gray-100'}>
                 <Main />
                 <NextScript />
             </body>
