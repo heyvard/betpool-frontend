@@ -70,7 +70,7 @@ alleLag.forEach((l) => {
 })
 
 export function hentFlag(engelskLag: string) {
-    return engelskMap.get(engelskLag)?.flagg || '🤔'
+    return engelskMap.get(engelskLag)?.flagg || ''
 }
 
 export function hentNorsk(engelskLag: string) {

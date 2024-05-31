@@ -128,5 +128,8 @@ export const BetView = ({ bet, matchside }: { bet: Bet; matchside: boolean }) =>
 }
 
 export function fixLand(s: string): string {
+    if (s === 'To be announced') {
+        return 'TBA'
+    }
     return hentFlag(s) + ' ' + hentNorsk(s)
 }
