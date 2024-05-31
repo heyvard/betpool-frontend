@@ -8,11 +8,11 @@ export function UseUser() {
 
     return useQuery<User>({
         queryKey: ['user-me'],
-
+        enabled: !!user,
         queryFn: async () => {
             const idtoken = await user?.getIdToken()
             if (!idtoken) {
-                return undefined
+                throw new Error('No idtoken')
             }
             let responsePromise = await fetch('/api/v1/me', {
                 method: 'GET',

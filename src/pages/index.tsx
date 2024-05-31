@@ -82,7 +82,7 @@ const Home: NextPage = () => {
             <div className={'my-4 p-4 shadow bg-white rounded-xl'}>
                 <Select
                     label={'Hvem vinner VM?'}
-                    description={'Kan endres frem til ' + førsteRunde.format('dddd D MMM  kl HH:mm')}
+                    description={'Kan endres frem til ' + førsteRunde.locale(nb).format('dddd D MMM  kl HH:mm')}
                     disabled={lagrer || erEtterFørsteRunde()}
                     value={megselv.winner}
                     onChange={async (e) => {
@@ -153,7 +153,9 @@ const Home: NextPage = () => {
                             label="Hvilken spiller scorer flest mål?"
                             disabled={erEtterFørsteRunde()}
                             value={topscorer}
-                            description={'Kan endres frem til ' + førsteRunde.format('dddd D MMM  kl HH:mm')}
+                            description={
+                                'Kan endres frem til ' + førsteRunde.locale('nb').format('dddd D MMM  kl HH:mm')
+                            }
                             onChange={(e) => {
                                 setTopscorer(e.target.value)
                             }}
