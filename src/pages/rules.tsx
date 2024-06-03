@@ -22,11 +22,11 @@ const Regler: NextPage = () => {
             </Heading>
             <BodyShort spacing>Potten er på: {stats.pot} kr.</BodyShort>
             <BodyShort spacing>
-                1. plass får 50% av potten: {stats.premier[0]} kr
+                1. plass får 50% av potten: {stats.premier[ 0 ]} kr
                 <br />
-                2. plass får 30% av potten: {stats.premier[1]} kr
+                2. plass får 30% av potten: {stats.premier[ 1 ]} kr
                 <br />
-                3. plass får 20% av potten: {stats.premier[2]} kr
+                3. plass får 20% av potten: {stats.premier[ 2 ]} kr
             </BodyShort>
             <BodyShort spacing>
                 Hvis flere personer får like mange poeng så deles premiepottene for de aktuelle plassene.
@@ -85,7 +85,8 @@ const Regler: NextPage = () => {
             </Heading>
             <BodyLong spacing>
                 Du kan endre bet hele første runde av gruppespillet, deretter er det låst. Det deles ut totalt{' '}
-                {stats.deltakere * 3} poeng. Disse splittes på alle som har riktig svar. Summen er antall deltagere
+                {stats.deltakere * 3} poeng. Disse splittes på alle som har riktig svar, men begrenset til maks 15 poeng
+                per spiller. Summen er antall deltagere
                 ganger 3.
             </BodyLong>
             <Heading size="small" level={'1'}>
@@ -93,7 +94,8 @@ const Regler: NextPage = () => {
             </Heading>
             <BodyLong spacing>
                 Du kan endre bet hele første runde av gruppespillet, deretter er det låst. Det deles ut totalt{' '}
-                {stats.deltakere * 3} poeng. Disse splittes på alle som har riktig svar. Summen er antall deltagere
+                {stats.deltakere * 3} poeng. Disse splittes på alle som har riktig svar, men begrenset til maks 15 poeng
+                per spiller. Summen er antall deltagere
                 ganger 3.
             </BodyLong>
         </div>

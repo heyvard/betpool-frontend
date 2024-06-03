@@ -111,7 +111,7 @@ export function UseAllBets() {
                 if (antallOk == 0) {
                     return 0
                 }
-                return (allBets.users.length * 3) / antallOk
+                return Math.min(Math.ceil((allBets.users.length * 3) / antallOk), 15)
             }
             const poengPerVinner = winnerPointsFun()
             const topscorerPointsFun = () => {
@@ -119,7 +119,7 @@ export function UseAllBets() {
                 if (antallOk == 0) {
                     return 0
                 }
-                return (allBets.users.length * 3) / antallOk
+                return Math.min(Math.ceil((allBets.users.length * 3) / antallOk), 15)
             }
             const poengPerTopscorer = topscorerPointsFun()
             return {
