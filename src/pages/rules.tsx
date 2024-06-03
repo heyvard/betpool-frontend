@@ -64,7 +64,7 @@ const Regler: NextPage = () => {
             <Heading size="small" level={'2'}>
                 Poeng i gruppespillet
             </Heading>
-            <BodyShort spacing>Kampverdien er 1 i runde 1 og 2. I runde 3 er kampverdien 1,5.</BodyShort>
+            <BodyShort spacing>Kampverdien er 1 i gruppespillet.</BodyShort>
 
             <Heading size="small" level={'2'}>
                 Poeng i sluttspillet
@@ -75,10 +75,9 @@ const Regler: NextPage = () => {
 
             <List className={'mb-4'} as="ul" size="small" title={'Kampverdier'}>
                 <List.Item>Åttendedelsfinaler: 2</List.Item>
-                <List.Item>Kvartfinaler: 2,5</List.Item>
+                <List.Item>Kvartfinaler: 2</List.Item>
                 <List.Item>Semifinaler: 3</List.Item>
-                <List.Item>Bronsefinale: 3</List.Item>
-                <List.Item>Finale: 5</List.Item>
+                <List.Item>Finale: 4</List.Item>
             </List>
 
             <Heading size="small" level={'1'}>
