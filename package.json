@@ -16,7 +16,7 @@
         "test:ci": "jest --ci"
     },
     "dependencies": {
-        "@mui/material": "^5.15.18",
+        "@mui/material": "^5.15.19",
         "@navikt/ds-css": "^6.8.0",
         "@navikt/ds-react": "^6.8.0",
         "@navikt/ds-tailwind": "^6.8.0",
