@@ -52,7 +52,7 @@ const Home: NextPage = () => {
                     user: data.users.find((u) => u.id == a.user_id)!,
                 }))
                 .map((a) => (
-                    <PastBetView key={a.bet_id} bet={a} matchside={false} />
+                    <PastBetView key={a.bet_id} bet={a} matchside={false} navn={user.name} />
                 ))}
         </>
     )
