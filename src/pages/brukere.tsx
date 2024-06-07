@@ -14,7 +14,7 @@ function BrukerView({ me, user }: { user: UserForAdmin; me: User }) {
     return (
         <div key={user.id} className={' py-4'}>
             <BodyShort spacing>{user.name}</BodyShort>
-            <div className={'flex justify-between'}>
+            <div>
                 <Switch
                     checked={user.paid}
                     size={'small'}
