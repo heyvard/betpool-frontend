@@ -59,7 +59,9 @@ const Leaderboard: NextPage = () => {
                                         <Link>{user?.name}</Link>
                                     </NextLink>
                                 </Table.DataCell>
-                                <Table.DataCell align="right">{row.poeng.toFixed(0)}</Table.DataCell>
+                                <Table.DataCell align="right" className={'pr-4 font-bold'}>
+                                    {row.poeng.toFixed(0)}
+                                </Table.DataCell>
                             </Table.Row>
                         )
                     })}
