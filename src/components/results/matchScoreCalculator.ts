@@ -81,6 +81,8 @@ export function regnUtScoreForKamp(bets: MatchBet[]): Map<string, MatchPoeng> {
                 }
             })
 
+            //   const andelRiktigeResultat = (riktigeSvar / faktiskeBets) * 100
+            const andelRiktigeUTfall = riktigeUtfall / faktiskeBets
             const riktigResultat = () => {
                 if (riktigeSvar <= 1) {
                     return 5
@@ -97,7 +99,7 @@ export function regnUtScoreForKamp(bets: MatchBet[]): Map<string, MatchPoeng> {
                 return 1
             }
 
-            const _skalDobles = riktigeUtfall < faktiskeBets * 0.2 && round > 2
+            const _skalDobles = andelRiktigeUTfall < 0.2
 
             res.push({
                 matchid: match,

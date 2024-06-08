@@ -23,7 +23,7 @@ describe('Tester match score calculator', () => {
             antallRiktigeUtfall: 1,
             matchid: 'match_id_1',
             riktigResultat: 5,
-            riktigUtfall: 1,
+            riktigUtfall: 2,
             utfall: 'B',
         })
     })
