@@ -8,6 +8,8 @@ export interface MatchPoeng {
     riktigResultat: number
     antallRiktigeSvar: number
     antallRiktigeUtfall: number
+    andelRiktigeUtfall: number
+    andelRiktigeResultat: number
     utfall: Utfall | null
 }
 
@@ -41,6 +43,8 @@ export function regnUtScoreForKamp(bets: MatchBet[]): Map<string, MatchPoeng> {
                 riktigResultat: 0,
                 antallRiktigeSvar: 0,
                 antallRiktigeUtfall: 0,
+                andelRiktigeUtfall: 0,
+                andelRiktigeResultat: 0,
                 utfall: null,
             })
         } else {
@@ -81,32 +85,33 @@ export function regnUtScoreForKamp(bets: MatchBet[]): Map<string, MatchPoeng> {
                 }
             })
 
-            //   const andelRiktigeResultat = (riktigeSvar / faktiskeBets) * 100
-            const andelRiktigeUTfall = riktigeUtfall / faktiskeBets
+            const andelRiktigeResultat = riktigeSvar / faktiskeBets
+            const andelRiktigeUtfall = riktigeUtfall / faktiskeBets
             const riktigResultat = () => {
-                if (riktigeSvar <= 1) {
-                    return 5
+                if (andelRiktigeResultat < 0.15) {
+                    return vekting * 3
                 }
-                if (riktigeSvar <= 2) {
-                    return 4
+                if (andelRiktigeResultat < 0.3) {
+                    return vekting * 2
                 }
-                if (riktigeSvar <= 3) {
-                    return 3
-                }
-                if (riktigeSvar <= 5) {
-                    return 2
-                }
-                return 1
+                return vekting
             }
 
-            const _skalDobles = andelRiktigeUTfall < 0.2
+            const riktigUtfall = () => {
+                if (andelRiktigeUtfall < 0.2) {
+                    return vekting * 2
+                }
+                return vekting
+            }
 
             res.push({
                 matchid: match,
-                riktigUtfall: vekting * (_skalDobles ? 2 : 1),
-                riktigResultat: riktigResultat() * vekting,
+                riktigUtfall: riktigUtfall(),
+                riktigResultat: riktigResultat(),
                 antallRiktigeSvar: riktigeSvar,
                 antallRiktigeUtfall: riktigeUtfall,
+                andelRiktigeUtfall: andelRiktigeUtfall,
+                andelRiktigeResultat: andelRiktigeResultat,
                 utfall: utfall,
             })
         }

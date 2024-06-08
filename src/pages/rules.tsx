@@ -47,11 +47,12 @@ const Regler: NextPage = () => {
             </Heading>
             <BodyShort spacing>
                 Man får 1 poeng ganget med kampverdien for å gjette riktig utfall av kampen (hvem som vinner eller
-                uavgjort). Dette ganges med kampverdien. Fra og med runde 3 dobles også denne verdien dersom antallet
-                spillere som har riktig utfall er under 20%.
+                uavgjort). Dette ganges med kampverdien. Denne verdien dobles dersom antallet spillere som har riktig
+                utfall er under 20%.
             </BodyShort>
             <BodyShort spacing>
-                Treffer man riktig resultat får man 2-5 poeng avhengig av hvor mange andre som hadde riktig resultat.
+                Treffer man riktig resultat får man 1-3 poeng avhengig av hvor mange andre som hadde riktig resultat.
+                Hvis under 15% har riktig resultat får man 3 poeng. Under 30% så får man to poeng, ellers 1 poseng.
                 Dette ganges med kampverdien.
             </BodyShort>
             <Heading size="small" level={'1'}>
