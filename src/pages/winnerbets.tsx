@@ -1,13 +1,9 @@
 import type { NextPage } from 'next'
-import Head from 'next/head'
 
-import { Box, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from '@mui/material'
-import { Container } from '@mui/system'
 import { Spinner } from '../components/loading/Spinner'
 import { UseAllBets } from '../queries/useAllBetsExtended'
 import NextLink from 'next/link'
-import { fixLand } from '../components/bet/BetView'
-import { Link } from '@navikt/ds-react'
+import { Link, Table } from '@navikt/ds-react'
 
 const Leaderboard: NextPage = () => {
     const { data, isLoading } = UseAllBets()
@@ -17,46 +13,30 @@ const Leaderboard: NextPage = () => {
     data.users.sort((a, b) => a.winner?.localeCompare(b.winner || '') || 0)
 
     return (
-        <>
-            <Head>
-                <title>Leaderboard</title>
-            </Head>
-            <Box display="flex" justifyContent="center" alignItems="center" minHeight="80vh">
-                <Container maxWidth="md" sx={{ p: 0 }}>
-                    <TableContainer component={Paper}>
-                        <Table>
-                            <TableHead>
-                                <TableRow>
-                                    <TableCell>Navn</TableCell>
-                                    <TableCell>Vinner</TableCell>
-                                    <TableCell>Poeng</TableCell>
-                                </TableRow>
-                            </TableHead>
-                            <TableBody>
-                                {data.users.map((user, i) => {
-                                    return (
-                                        <TableRow
-                                            key={i}
-                                            sx={{
-                                                '&:last-child td, &:last-child th': { border: 0 },
-                                            }}
-                                        >
-                                            <TableCell component="th" scope="row" sx={{ p: 0, pl: 1 }}>
-                                                <NextLink href={'/user/' + user?.id}>
-                                                    <Link>{user?.name}</Link>
-                                                </NextLink>
-                                            </TableCell>
-                                            <TableCell sx={{ p: 0, pr: 3 }}>{fixLand(user.winner || '')}</TableCell>
-                                            <TableCell sx={{ p: 0, pr: 3 }}>{user.winnerPoints}</TableCell>
-                                        </TableRow>
-                                    )
-                                })}
-                            </TableBody>
-                        </Table>
-                    </TableContainer>
-                </Container>
-            </Box>
-        </>
+        <Table size={'small'}>
+            <Table.Header>
+                <Table.Row>
+                    <Table.HeaderCell>Navn</Table.HeaderCell>
+                    <Table.HeaderCell>Vinner</Table.HeaderCell>
+                    <Table.HeaderCell align="right">Poeng</Table.HeaderCell>
+                </Table.Row>
+            </Table.Header>
+            <Table.Body>
+                {data.users.map((user, i) => {
+                    return (
+                        <Table.Row key={i}>
+                            <Table.DataCell>
+                                <NextLink href={'/user/' + user?.id}>
+                                    <Link>{user?.name}</Link>
+                                </NextLink>
+                            </Table.DataCell>
+                            <Table.DataCell>{user.winner}</Table.DataCell>
+                            <Table.DataCell align="right">{user.winnerPoints}</Table.DataCell>
+                        </Table.Row>
+                    )
+                })}
+            </Table.Body>
+        </Table>
     )
 }
 
