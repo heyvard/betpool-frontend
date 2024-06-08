@@ -8,6 +8,7 @@ import { rundeTilTekst } from '../../utils/rundeTilTekst'
 import { BodyShort, Button, Link, TextField } from '@navikt/ds-react'
 import { FloppydiskIcon } from '@navikt/aksel-icons'
 import nb from 'dayjs/locale/nb'
+import { BpCard } from '../Card'
 
 export const BetView = ({ bet, matchside }: { bet: Bet; matchside: boolean }) => {
     const numberPropTilString = (prop: number | null) => {
@@ -51,7 +52,7 @@ export const BetView = ({ bet, matchside }: { bet: Bet; matchside: boolean }) =>
         e.target.select()
     }
     return (
-        <div className={'my-2 p-4 shadow rounded-xl bg-white'}>
+        <BpCard>
             <BodyShort spacing>{rundeTilTekst(bet.round)}</BodyShort>
             <div className={'flex items-end mb-1'}>
                 <BodyShort className={'w-36 font-bold text-xl'}>{fixLand(bet.home_team)}</BodyShort>
@@ -123,7 +124,7 @@ export const BetView = ({ bet, matchside }: { bet: Bet; matchside: boolean }) =>
                 </NextLink>
             )}
             <BodyShort className={'italic text-sm mt-4'}>{kampstart.locale(nb).format('dddd D MMM  HH:mm')}</BodyShort>
-        </div>
+        </BpCard>
     )
 }
 
