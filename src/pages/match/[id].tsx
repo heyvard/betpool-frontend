@@ -31,9 +31,14 @@ const Home: NextPage = () => {
             </BodyShort>
             <div className={'mb-4'}>
                 <BodyShort>{match.matchpoeng.antallRiktigeSvar + ' hadde helt rett'} </BodyShort>
-                <BodyShort>{match.matchpoeng.antallRiktigeUtfall + ' hadde riktig utfall'} </BodyShort>
+                <BodyShort spacing>{match.matchpoeng.antallRiktigeUtfall + ' hadde riktig utfall'} </BodyShort>
                 <BodyShort>{match.matchpoeng.riktigResultat + ' poeng for riktig resultat'} </BodyShort>
+                <BodyShort spacing>
+                    {Math.floor(match.matchpoeng.andelRiktigeResultat * 100) + ' % har riktig resultat'}{' '}
+                </BodyShort>
                 <BodyShort>{match.matchpoeng.riktigUtfall + ' poeng for riktig utfall'} </BodyShort>
+
+                <BodyShort>{Math.floor(match.matchpoeng.andelRiktigeUtfall * 100) + ' % har riktig utfall'} </BodyShort>
             </div>
             {data.bets
                 .filter((a) => a.match_id == id)
