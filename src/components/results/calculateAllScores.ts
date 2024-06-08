@@ -1,8 +1,9 @@
-import { MatchBetMedScore, OtherUser } from '../../queries/useAllBetsExtended'
+import { MatchBetMedScore, OtherUser } from '../../queries/useAllBets'
 
 interface LeaderBoard {
     userid: string
     poeng: number
+    userName: string
 }
 
 export function calculateLeaderboard(bets: MatchBetMedScore[], users: OtherUser[]): LeaderBoard[] {
@@ -12,12 +13,16 @@ export function calculateLeaderboard(bets: MatchBetMedScore[], users: OtherUser[
             return {
                 userid: u.id,
                 poeng: 0,
+                userName: u.name,
             }
         })
     }
     bets.forEach((bet) => userMap.set(bet.user_id, []))
     bets.forEach((bet) => userMap.get(bet.user_id)?.push(bet))
-
+    const userNameMap = new Map<string, string>()
+    users.forEach((u) => {
+        userNameMap.set(u.id, u.name)
+    })
     const res = [] as LeaderBoard[]
     userMap.forEach((bets, user) => {
         let poeng = 0
@@ -33,7 +38,8 @@ export function calculateLeaderboard(bets: MatchBetMedScore[], users: OtherUser[
         res.push({
             userid: user,
             poeng,
+            userName: userNameMap.get(user) || 'unknown',
         })
     })
-    return res
+    return res.sort((a, b) => b.poeng - a.poeng)
 }

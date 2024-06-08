@@ -1,6 +1,6 @@
 import dayjs from 'dayjs'
 import NextLink from 'next/link'
-import { MatchBetMedScore } from '../../queries/useAllBetsExtended'
+import { MatchBetMedScore } from '../../queries/useAllBets'
 import { fixLand } from './BetView'
 import { rundeTilTekst } from '../../utils/rundeTilTekst'
 import React from 'react'

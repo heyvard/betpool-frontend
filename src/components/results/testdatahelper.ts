@@ -1,4 +1,4 @@
-import { MatchBet } from '../../queries/useAllBetsExtended'
+import { MatchBet } from '../../queries/useAllBets'
 
 export function skapMatchBetArray(opts: {
     runde: string

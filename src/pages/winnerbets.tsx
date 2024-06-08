@@ -1,7 +1,7 @@
 import type { NextPage } from 'next'
 
 import { Spinner } from '../components/loading/Spinner'
-import { UseAllBets } from '../queries/useAllBetsExtended'
+import { UseAllBets } from '../queries/useAllBets'
 import NextLink from 'next/link'
 import { Link, Table } from '@navikt/ds-react'
 

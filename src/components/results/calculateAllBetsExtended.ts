@@ -1,6 +1,6 @@
 import { finnUtfall, regnUtScoreForKamp } from './matchScoreCalculator'
 import { stringTilNumber } from '../../utils/stringnumber'
-import { AllBets, MatchBetMedScore, OtherUser } from '../../queries/useAllBetsExtended'
+import { AllBets, MatchBetMedScore, OtherUser } from '../../queries/useAllBets'
 const winner = 'TODO'
 
 export interface AllBetsExtended {
