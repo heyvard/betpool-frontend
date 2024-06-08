@@ -81,7 +81,7 @@ const Home: NextPage = () => {
 
             <div className={'my-4 p-4 shadow bg-white rounded-xl'}>
                 <Select
-                    label={'Hvem vinner VM?'}
+                    label={'Hvem vinner EM?'}
                     description={'Kan endres frem til ' + førsteRunde.locale(nb).format('dddd D MMM  kl HH:mm')}
                     disabled={lagrer || erEtterFørsteRunde()}
                     value={megselv.winner}

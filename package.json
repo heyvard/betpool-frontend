@@ -4,6 +4,7 @@
     "private": true,
     "scripts": {
         "dev": "next dev",
+        "dev-vm": "VM=true next dev",
         "build": "next build",
         "start": "next start",
         "prettier:write": "prettier --write .",
