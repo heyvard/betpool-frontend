@@ -16,7 +16,7 @@ const Regler: NextPage = () => {
                 Innskudd
             </Heading>
             <BodyShort>Det koster 300 kr å delta.</BodyShort>
-            <BodyShort spacing>Pengene må være vippeset innen start på første kamp til 918 65 052.</BodyShort>
+            <BodyShort spacing>Pengene må være vippset innen start på første kamp til 918 65 052.</BodyShort>
             <Heading size="small" level={'1'}>
                 Premier
             </Heading>
