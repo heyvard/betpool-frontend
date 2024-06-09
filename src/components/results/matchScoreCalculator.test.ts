@@ -22,9 +22,11 @@ describe('Tester match score calculator', () => {
             antallRiktigeSvar: 1,
             antallRiktigeUtfall: 1,
             matchid: 'match_id_1',
-            riktigResultat: 5,
+            riktigResultat: 3,
             riktigUtfall: 2,
             utfall: 'B',
+            andelRiktigeResultat: 0.1111111111111111,
+            andelRiktigeUtfall: 0.1111111111111111,
         })
     })
 
@@ -42,9 +44,11 @@ describe('Tester match score calculator', () => {
             antallRiktigeSvar: 1,
             antallRiktigeUtfall: 1,
             matchid: 'match_id_1',
-            riktigResultat: 15,
+            riktigResultat: 9,
             riktigUtfall: 6,
             utfall: 'B',
+            andelRiktigeResultat: 0.1111111111111111,
+            andelRiktigeUtfall: 0.1111111111111111,
         })
     })
 })
