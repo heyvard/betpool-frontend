@@ -56,7 +56,7 @@ const Leaderboard: NextPage = () => {
                                 </Table.DataCell>
                                 <Table.DataCell>
                                     <NextLink href={'/user/' + user?.id}>
-                                        <Link>{user?.name}</Link>
+                                        <Link>{user.name.split('@')[0]}</Link>
                                     </NextLink>
                                 </Table.DataCell>
                                 <Table.DataCell align="right" className={'pr-4 font-bold'}>
