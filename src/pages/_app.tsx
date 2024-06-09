@@ -1,6 +1,5 @@
 import type { AppProps } from 'next/app'
 import { useAuthState } from 'react-firebase-hooks/auth'
-import { SignInScreen } from '../components/SignIn'
 import React, { FC, useState } from 'react'
 import { UseUser } from '../queries/useUser'
 import { useRouter } from 'next/router'
@@ -11,7 +10,8 @@ import { getFirebaseAuth } from '../auth/clientApp'
 import { Dropdown, ErrorMessage, InternalHeader } from '@navikt/ds-react'
 import { BankNoteIcon, HouseIcon, MenuHamburgerIcon, NumberListIcon, ParagraphIcon } from '@navikt/aksel-icons'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
-import { Spinner } from '../components/loading/Spinner'
+import { SignInScreen } from '../components/SignIn'
+import { LoadingScreen } from '../components/loading/LoadingScreen'
 
 function Layout({ children }: { children: React.ReactNode }) {
     const [user, loading, error] = useAuthState(getFirebaseAuth())
@@ -22,7 +22,7 @@ function Layout({ children }: { children: React.ReactNode }) {
         <>
             <div className="px-2 pt-4 pb-16 mx-auto max-w-full sm:max-w-lg md:max-w-2xl">
                 {error && <ErrorMessage>Error useAuthState: {JSON.stringify(error)}</ErrorMessage>}
-                {loading && <Spinner />}
+                {loading && <LoadingScreen />}
                 {!loading && !user && <SignInScreen />}
                 {user && <>{children}</>}
             </div>

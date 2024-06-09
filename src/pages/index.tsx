@@ -1,7 +1,6 @@
 import type { NextPage } from 'next'
 
 import { UseUser } from '../queries/useUser'
-import { Spinner } from '../components/loading/Spinner'
 
 import React, { useEffect, useState } from 'react'
 import { useAuthState } from 'react-firebase-hooks/auth'
@@ -17,6 +16,7 @@ import { FloppydiskIcon } from '@navikt/aksel-icons'
 import { useQueryClient } from '@tanstack/react-query'
 import nb from 'dayjs/locale/nb'
 import { erEtterFørsteRunde, førsteRunde } from '../utils/isInFirstRound'
+import { LoadingScreen } from '../components/loading/LoadingScreen'
 
 dayjs.locale(nb)
 
@@ -34,10 +34,10 @@ const Home: NextPage = () => {
         }
     }, [megselv, setTopscorer])
     if (!matches || isLoading2) {
-        return <Spinner />
+        return <LoadingScreen />
     }
     if (!megselv || !stats) {
-        return <Spinner></Spinner>
+        return <LoadingScreen></LoadingScreen>
     }
 
     const kamper = matches.filter((a) => {
