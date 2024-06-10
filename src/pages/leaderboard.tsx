@@ -6,7 +6,6 @@ import NextLink from 'next/link'
 import { calculateLeaderboard } from '../components/results/calculateAllScores'
 import { BodyShort, Link, Table } from '@navikt/ds-react'
 import classNames from 'classnames'
-import { Verified } from '../components/verified'
 
 function plassVisning(plass: number) {
     switch (plass) {
@@ -54,7 +53,7 @@ const Leaderboard: NextPage = () => {
                                 <Table.DataCell>
                                     <NextLink href={'/user/' + row.userid}>
                                         <Link>
-                                            {row.userName.split('@')[0]} {row.paid && <Verified />}
+                                            {row.userName.split('@')[0]} {row.paid && '💰'}
                                         </Link>
                                     </NextLink>
                                 </Table.DataCell>
