@@ -6,6 +6,7 @@ import NextLink from 'next/link'
 import { calculateLeaderboard } from '../components/results/calculateAllScores'
 import { BodyShort, Link, Table } from '@navikt/ds-react'
 import classNames from 'classnames'
+import { Verified } from '../components/verified'
 
 function plassVisning(plass: number) {
     switch (plass) {
@@ -40,23 +41,21 @@ const Leaderboard: NextPage = () => {
                 </Table.Header>
                 <Table.Body>
                     {lista.map((row, i) => {
-                        const user = data.users.find((a) => a.id == row.userid)
-                        if (!user) {
-                            return null
-                        }
                         return (
                             <Table.Row key={row.userid}>
                                 <Table.DataCell align="center">
                                     <BodyShort className={'text-5xl'}>{plassVisning(i + 1)}</BodyShort>
                                 </Table.DataCell>
                                 <Table.DataCell align="left">
-                                    <NextLink href={'/user/' + user?.id}>
-                                        <Avatar src={user?.picture} name={user?.name} />
+                                    <NextLink href={'/user/' + row.userid}>
+                                        <Avatar src={row?.picture} name={row.userName} />
                                     </NextLink>
                                 </Table.DataCell>
                                 <Table.DataCell>
-                                    <NextLink href={'/user/' + user?.id}>
-                                        <Link>{user.name.split('@')[0]}</Link>
+                                    <NextLink href={'/user/' + row.userid}>
+                                        <Link>
+                                            {row.userName.split('@')[0]} {row.paid && <Verified />}
+                                        </Link>
                                     </NextLink>
                                 </Table.DataCell>
                                 <Table.DataCell align="right" className={'pr-4 font-bold'}>

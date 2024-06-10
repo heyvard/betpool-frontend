@@ -4,6 +4,8 @@ interface LeaderBoard {
     userid: string
     poeng: number
     userName: string
+    paid: boolean
+    picture: string | null
 }
 
 export function calculateLeaderboard(bets: MatchBetMedScore[], users: OtherUser[]): LeaderBoard[] {
@@ -14,14 +16,16 @@ export function calculateLeaderboard(bets: MatchBetMedScore[], users: OtherUser[
                 userid: u.id,
                 poeng: 0,
                 userName: u.name,
+                paid: u.paid,
+                picture: u.picture,
             }
         })
     }
     bets.forEach((bet) => userMap.set(bet.user_id, []))
     bets.forEach((bet) => userMap.get(bet.user_id)?.push(bet))
-    const userNameMap = new Map<string, string>()
-    users.forEach((u) => {
-        userNameMap.set(u.id, u.name)
+    const otherUserMap = new Map<string, OtherUser>()
+    otherUserMap.forEach((u) => {
+        otherUserMap.set(u.id, u)
     })
     const res = [] as LeaderBoard[]
     userMap.forEach((bets, user) => {
@@ -38,7 +42,9 @@ export function calculateLeaderboard(bets: MatchBetMedScore[], users: OtherUser[
         res.push({
             userid: user,
             poeng,
-            userName: userNameMap.get(user) || 'unknown',
+            userName: otherUserMap.get(user)?.name || 'unknown',
+            paid: otherUserMap.get(user)?.paid || false,
+            picture: otherUserMap.get(user)?.picture || null,
         })
     })
     return res.sort((a, b) => b.poeng - a.poeng)
