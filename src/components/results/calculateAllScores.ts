@@ -24,7 +24,7 @@ export function calculateLeaderboard(bets: MatchBetMedScore[], users: OtherUser[
     bets.forEach((bet) => userMap.set(bet.user_id, []))
     bets.forEach((bet) => userMap.get(bet.user_id)?.push(bet))
     const otherUserMap = new Map<string, OtherUser>()
-    otherUserMap.forEach((u) => {
+    users.forEach((u) => {
         otherUserMap.set(u.id, u)
     })
     const res = [] as LeaderBoard[]
