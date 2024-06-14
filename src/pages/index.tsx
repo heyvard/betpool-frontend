@@ -4,7 +4,6 @@ import { UseUser } from '../queries/useUser'
 
 import React, { useEffect, useState } from 'react'
 import { useAuthState } from 'react-firebase-hooks/auth'
-import { UseStats } from '../queries/useStats'
 import { alleLagSortert } from '../utils/lag'
 import { UseMatches } from '../queries/useMatches'
 import dayjs from 'dayjs'
@@ -25,7 +24,6 @@ const Home: NextPage = () => {
     const [user] = useAuthState(getFirebaseAuth())
     const [lagrer, setLagrer] = useState(false)
     const queryClient = useQueryClient()
-    const { data: stats } = UseStats()
     const [topscorer, setTopscorer] = useState(megselv?.topscorer)
     const { data: matches, isLoading: isLoading2 } = UseMatches()
     useEffect(() => {
@@ -36,7 +34,7 @@ const Home: NextPage = () => {
     if (!matches || isLoading2) {
         return <LoadingScreen />
     }
-    if (!megselv || !stats) {
+    if (!megselv) {
         return <LoadingScreen></LoadingScreen>
     }
 

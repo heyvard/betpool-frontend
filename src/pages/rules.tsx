@@ -1,14 +1,24 @@
 import type { NextPage } from 'next'
 
-import { UseStats } from '../queries/useStats'
 import { Spinner } from '../components/loading/Spinner'
 import React from 'react'
 import { BodyLong, List, BodyShort, Heading } from '@navikt/ds-react'
+import { UseAllBets } from '../queries/useAllBets'
 
 const Regler: NextPage = () => {
-    const { data: stats } = UseStats()
-    if (!stats) {
+    const { data } = UseAllBets()
+
+    if (!data) {
         return <Spinner></Spinner>
+    }
+
+    const deltakere = data.users.length
+    const pot = data.users.length * 300
+
+    const stats = {
+        pot,
+        deltakere,
+        premier: [Math.round(pot * 0.5), Math.round(pot * 0.3), Math.round(pot * 0.2)],
     }
     return (
         <div className={'bg-white p-4 rounded-xl mb-8'}>
