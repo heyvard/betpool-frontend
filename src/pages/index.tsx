@@ -50,7 +50,7 @@ const Home: NextPage = () => {
                 return (
                     <div key={k.id}>
                         <NextLink href={'/match/' + k.id}>
-                            <LinkPanel className={'rounded-xl shadow border-0 text-xl'}>
+                            <LinkPanel className={'rounded-xl shadow border-0'}>
                                 Nå pågår {fixLand(k.home_team)} vs {fixLand(k.away_team)}
                             </LinkPanel>
                         </NextLink>
@@ -61,7 +61,7 @@ const Home: NextPage = () => {
                 return (
                     <div key={k.id}>
                         <NextLink href={'/my-bets/'}>
-                            <LinkPanel className={'rounded-xl shadow border-0 text-xl'}>
+                            <LinkPanel className={'rounded-xl shadow border-0'}>
                                 {fixLand(k.home_team)} vs {fixLand(k.away_team)} starter kl{' '}
                                 {dayjs(k.game_start).format('HH:mm')}
                             </LinkPanel>
