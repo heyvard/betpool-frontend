@@ -50,7 +50,7 @@ const Home: NextPage = () => {
                 return (
                     <div key={k.id}>
                         <NextLink href={'/match/' + k.id}>
-                            <LinkPanel className={'rounded-xl'}>
+                            <LinkPanel className={'rounded-xl shadow border-0 text-xl'}>
                                 Nå pågår {fixLand(k.home_team)} vs {fixLand(k.away_team)}
                             </LinkPanel>
                         </NextLink>
