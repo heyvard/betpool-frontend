@@ -45,7 +45,7 @@ const Home: NextPage = () => {
         return dayjs(a.game_start).isAfter(dayjs()) && dayjs(a.game_start).isBefore(dayjs().add(2, 'hours'))
     })
     return (
-        <div className={'space-y-2'}>
+        <div className={'space-y-4'}>
             {kamper.map((k) => {
                 return (
                     <div key={k.id}>
