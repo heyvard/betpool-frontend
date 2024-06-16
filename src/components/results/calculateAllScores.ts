@@ -1,6 +1,6 @@
 import { MatchBetMedScore, OtherUser } from '../../queries/useAllBets'
 
-interface LeaderBoard {
+export interface LeaderBoard {
     userid: string
     poeng: number
     userName: string

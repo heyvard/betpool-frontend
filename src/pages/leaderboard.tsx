@@ -3,7 +3,7 @@ import type { NextPage } from 'next'
 import { Spinner } from '../components/loading/Spinner'
 import { UseAllBets } from '../queries/useAllBets'
 import NextLink from 'next/link'
-import { calculateLeaderboard } from '../components/results/calculateAllScores'
+import { calculateLeaderboard, LeaderBoard } from '../components/results/calculateAllScores'
 import { BodyShort, Link, Table } from '@navikt/ds-react'
 import classNames from 'classnames'
 
@@ -25,8 +25,23 @@ const Leaderboard: NextPage = () => {
         return <Spinner />
     }
     const lista = calculateLeaderboard(data.bets, data.users)
-    lista.sort((a, b) => b.poeng - a.poeng)
+    lista.sort((a, b) => {
+        if (b.poeng === a.poeng) {
+            return a.userid.localeCompare(b.userid) // Sorter etter userId hvis poengene er like
+        } else {
+            return b.poeng - a.poeng // Sorter etter poeng i synkende rekkefølge
+        }
+    })
 
+    const finnFaktiskPlass = (index: number, lista: LeaderBoard[]): number => {
+        if (index === 0) return 1 // Første plass
+        if (lista[index].poeng === lista[index - 1].poeng) {
+            // Hvis poengene er like som forrige, gi samme plassering
+            return finnFaktiskPlass(index - 1, lista)
+        }
+        // Hvis poengene er forskjellige, gi neste plassering
+        return index + 1
+    }
     return (
         <>
             <Table>
@@ -43,7 +58,9 @@ const Leaderboard: NextPage = () => {
                         return (
                             <Table.Row key={row.userid}>
                                 <Table.DataCell align="center">
-                                    <BodyShort className={'text-5xl'}>{plassVisning(i + 1)}</BodyShort>
+                                    <BodyShort className={'text-5xl'}>
+                                        {plassVisning(finnFaktiskPlass(i, lista))}
+                                    </BodyShort>
                                 </Table.DataCell>
                                 <Table.DataCell align="left">
                                     <NextLink href={'/user/' + row.userid}>
