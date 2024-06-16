@@ -1,6 +1,6 @@
 import { finnUtfall, regnUtScoreForKamp } from './matchScoreCalculator'
 import { stringTilNumber } from '../../utils/stringnumber'
-import { AllBets, MatchBetMedScore, OtherUser } from '../../queries/useAllBets'
+import { AllBets, MatchBet, MatchBetMedScore, OtherUser } from '../../queries/useAllBets'
 const winner = 'TODO'
 
 export interface AllBetsExtended {
@@ -11,39 +11,47 @@ export interface AllBetsExtended {
 const topscorer = ['TODO']
 export function calculateAllBetsExtended(allBets: AllBets): AllBetsExtended {
     let scoreForKamp = regnUtScoreForKamp(allBets.bets)
-    const betsMedScore = allBets.bets.map((b): MatchBetMedScore => {
-        if (b.home_score == null || b.away_score == null) {
+    const betsMedScore = allBets.bets
+        .map((b) => {
             return {
                 ...b,
-                away_score: stringTilNumber(b.away_score),
-                home_score: stringTilNumber(b.home_score),
-                poeng: 0,
-                riktigResultat: false,
-                riktigUtfall: false,
-                matchpoeng: scoreForKamp.get(b.match_id)!,
+                away_score: b.away_score || '0',
+                home_score: b.home_score || '0',
+            } as MatchBet
+        })
+        .map((b): MatchBetMedScore => {
+            if (b.home_score == null || b.away_score == null) {
+                return {
+                    ...b,
+                    away_score: stringTilNumber(b.away_score),
+                    home_score: stringTilNumber(b.home_score),
+                    poeng: 0,
+                    riktigResultat: false,
+                    riktigUtfall: false,
+                    matchpoeng: scoreForKamp.get(b.match_id)!,
+                }
+            } else {
+                const utfall = finnUtfall(b.home_score, b.away_score)
+                const riktigResultat = b.home_result == b.home_score && b.away_result == b.away_score
+                let poeng = 0
+                let riktigUtfall = utfall == scoreForKamp.get(b.match_id)!.utfall
+                if (riktigUtfall) {
+                    poeng = poeng + scoreForKamp.get(b.match_id)!.riktigUtfall
+                }
+                if (riktigResultat) {
+                    poeng = poeng + scoreForKamp.get(b.match_id)!.riktigResultat
+                }
+                return {
+                    ...b,
+                    away_score: stringTilNumber(b.away_score),
+                    home_score: stringTilNumber(b.home_score),
+                    poeng: poeng,
+                    riktigResultat: riktigResultat,
+                    riktigUtfall: riktigUtfall,
+                    matchpoeng: scoreForKamp.get(b.match_id)!,
+                }
             }
-        } else {
-            const utfall = finnUtfall(b.home_score, b.away_score)
-            const riktigResultat = b.home_result == b.home_score && b.away_result == b.away_score
-            let poeng = 0
-            let riktigUtfall = utfall == scoreForKamp.get(b.match_id)!.utfall
-            if (riktigUtfall) {
-                poeng = poeng + scoreForKamp.get(b.match_id)!.riktigUtfall
-            }
-            if (riktigResultat) {
-                poeng = poeng + scoreForKamp.get(b.match_id)!.riktigResultat
-            }
-            return {
-                ...b,
-                away_score: stringTilNumber(b.away_score),
-                home_score: stringTilNumber(b.home_score),
-                poeng: poeng,
-                riktigResultat: riktigResultat,
-                riktigUtfall: riktigUtfall,
-                matchpoeng: scoreForKamp.get(b.match_id)!,
-            }
-        }
-    })
+        })
     const winnerPointsFun = () => {
         const antallOk = allBets.users.filter((u) => u.winner == winner).length
         if (antallOk == 0) {
