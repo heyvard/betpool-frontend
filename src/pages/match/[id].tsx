@@ -30,8 +30,8 @@ const Home: NextPage = () => {
                 {match.home_result} - {match.away_result}
             </BodyShort>
             <div className={'mb-4'}>
-                <BodyShort>{match.matchpoeng.antallRiktigeSvar + ' hadde helt rett'} </BodyShort>
-                <BodyShort spacing>{match.matchpoeng.antallRiktigeUtfall + ' hadde riktig utfall'} </BodyShort>
+                <BodyShort>{match.matchpoeng.antallRiktigeSvar + ' har helt rett'} </BodyShort>
+                <BodyShort spacing>{match.matchpoeng.antallRiktigeUtfall + ' har riktig utfall'} </BodyShort>
                 <BodyShort>{match.matchpoeng.riktigResultat + ' poeng for riktig resultat'} </BodyShort>
                 <BodyShort spacing>
                     {Math.floor(match.matchpoeng.andelRiktigeResultat * 100) + ' % har riktig resultat'}{' '}
