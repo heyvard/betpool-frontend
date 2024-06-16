@@ -15,8 +15,6 @@ export function calculateAllBetsExtended(allBets: AllBets): AllBetsExtended {
         .map((b) => {
             return {
                 ...b,
-                away_score: b.away_score || '0',
-                home_score: b.home_score || '0',
                 home_result: b.home_result || '0',
                 away_result: b.away_result || '0',
             } as MatchBet

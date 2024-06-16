@@ -12,7 +12,7 @@ describe('Tester leaderboard beregning på 2022 data', () => {
             {
                 paid: true,
                 picture: null,
-                poeng: 77,
+                poeng: 71,
                 userName: 'HK',
                 userid: 'b9c7be8a-f4e9-41a4-b33b-aa9f5a5ba72f',
             },
@@ -29,13 +29,6 @@ describe('Tester leaderboard beregning på 2022 data', () => {
                 poeng: 61,
                 userName: 'SA',
                 userid: '41896186-17d9-484e-a960-af691ae5eb81',
-            },
-            {
-                paid: true,
-                picture: null,
-                poeng: 57,
-                userName: 'NJ',
-                userid: '1a89f92c-3457-4c78-afed-aa5e3e055260',
             },
             {
                 paid: true,
@@ -75,13 +68,6 @@ describe('Tester leaderboard beregning på 2022 data', () => {
             {
                 paid: true,
                 picture: null,
-                poeng: 47,
-                userName: 'FS',
-                userid: '8e087c26-ede0-4141-a5a0-9640a6eec7a3',
-            },
-            {
-                paid: true,
-                picture: null,
                 poeng: 45,
                 userName: 'TSB',
                 userid: '8a604853-66ed-4cee-96c8-e16e81e06d19',
@@ -96,9 +82,23 @@ describe('Tester leaderboard beregning på 2022 data', () => {
             {
                 paid: true,
                 picture: null,
-                poeng: 42,
+                poeng: 43,
+                userName: 'FS',
+                userid: '8e087c26-ede0-4141-a5a0-9640a6eec7a3',
+            },
+            {
+                paid: true,
+                picture: null,
+                poeng: 41,
                 userName: 'SØ',
                 userid: 'a41b1d2d-2612-4f8a-ab56-f34752c7d3b8',
+            },
+            {
+                paid: true,
+                picture: null,
+                poeng: 10,
+                userName: 'NJ',
+                userid: '1a89f92c-3457-4c78-afed-aa5e3e055260',
             },
         ])
     })
