@@ -11,6 +11,9 @@ export interface MatchPoeng {
     andelRiktigeUtfall: number
     andelRiktigeResultat: number
     utfall: Utfall | null
+    hjemme: number
+    uavgjort: number
+    borte: number
 }
 
 export function finnUtfall(home: String, away: String): Utfall {
@@ -36,6 +39,24 @@ export function regnUtScoreForKamp(bets: MatchBet[]): Map<string, MatchPoeng> {
         const homeResult = bets[0].home_result
         const awayResult = bets[0].away_result
 
+        let hjemme = 0
+        let uavgjort = 0
+        let borte = 0
+        bets.forEach((b) => {
+            if (b.home_score && b.away_score) {
+                const utfall = finnUtfall(b.home_score, b.away_score)
+                if (utfall == 'H') {
+                    hjemme++
+                }
+                if (utfall == 'U') {
+                    uavgjort++
+                }
+                if (utfall == 'B') {
+                    borte++
+                }
+            }
+        })
+
         if (homeResult == null || awayResult == null) {
             res.push({
                 matchid: match,
@@ -46,6 +67,9 @@ export function regnUtScoreForKamp(bets: MatchBet[]): Map<string, MatchPoeng> {
                 andelRiktigeUtfall: 0,
                 andelRiktigeResultat: 0,
                 utfall: null,
+                hjemme,
+                uavgjort,
+                borte,
             })
         } else {
             let riktigeSvar = 0
@@ -113,6 +137,9 @@ export function regnUtScoreForKamp(bets: MatchBet[]): Map<string, MatchPoeng> {
                 andelRiktigeUtfall: andelRiktigeUtfall,
                 andelRiktigeResultat: andelRiktigeResultat,
                 utfall: utfall,
+                hjemme,
+                uavgjort,
+                borte,
             })
         }
     })

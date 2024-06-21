@@ -8,6 +8,7 @@ import React from 'react'
 import { PastBetView } from '../../components/bet/PastBetView'
 import { rundeTilTekst } from '../../utils/rundeTilTekst'
 import { BodyShort, Heading } from '@navikt/ds-react'
+import { hentNorsk } from '../../utils/lag'
 
 const Home: NextPage = () => {
     const { data, isLoading } = UseAllBets()
@@ -30,15 +31,20 @@ const Home: NextPage = () => {
                 {match.home_result} - {match.away_result}
             </BodyShort>
             <div className={'mb-4'}>
+                <BodyShort>{`${match.matchpoeng.hjemme} tror at ${hentNorsk(match.home_team)} vinner`} </BodyShort>
+                <BodyShort>{`${match.matchpoeng.uavgjort} tror på uavgjort`} </BodyShort>
+                <BodyShort spacing>
+                    {`${match.matchpoeng.borte} tror at ${hentNorsk(match.away_team)} vinner`}{' '}
+                </BodyShort>
                 <BodyShort>
                     {`${match.matchpoeng.antallRiktigeSvar} stk (${Math.floor(match.matchpoeng.andelRiktigeResultat * 100)} %) har riktig resultat`}
                 </BodyShort>
                 <BodyShort spacing>
                     {`${match.matchpoeng.antallRiktigeUtfall} stk (${Math.floor(match.matchpoeng.andelRiktigeUtfall * 100)} %) har riktig utfall`}{' '}
                 </BodyShort>
-                <BodyShort>{match.matchpoeng.riktigResultat + ' poeng for riktig resultat'} </BodyShort>
+                <BodyShort>{`${match.matchpoeng.riktigResultat} poeng for riktig resultat`} </BodyShort>
 
-                <BodyShort>{match.matchpoeng.riktigUtfall + ' poeng for riktig utfall'} </BodyShort>
+                <BodyShort>{`${match.matchpoeng.riktigUtfall} poeng for riktig utfall`} </BodyShort>
             </div>
             {data.bets
                 .filter((a) => a.match_id == id)
