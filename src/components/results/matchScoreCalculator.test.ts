@@ -27,6 +27,9 @@ describe('Tester match score calculator', () => {
             utfall: 'B',
             andelRiktigeResultat: 0.1111111111111111,
             andelRiktigeUtfall: 0.1111111111111111,
+            borte: 1,
+            hjemme: 0,
+            uavgjort: 8,
         })
     })
 
@@ -49,6 +52,9 @@ describe('Tester match score calculator', () => {
             utfall: 'B',
             andelRiktigeResultat: 0.1111111111111111,
             andelRiktigeUtfall: 0.1111111111111111,
+            borte: 1,
+            hjemme: 0,
+            uavgjort: 8,
         })
     })
 })
