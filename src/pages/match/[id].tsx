@@ -25,9 +25,33 @@ const Home: NextPage = () => {
     const awayBets = match.matchpoeng.borte
     const totalBets = homeBets + drawBets + awayBets
 
-    const homePercentage = (homeBets / totalBets) * 100
-    const drawPercentage = (drawBets / totalBets) * 100
-    const awayPercentage = (awayBets / totalBets) * 100
+    let homePercentage = (homeBets / totalBets) * 100
+    let drawPercentage = (drawBets / totalBets) * 100
+    let awayPercentage = (awayBets / totalBets) * 100
+
+    const minPercentage = 15
+    let adjusted = false
+
+    if (homePercentage < minPercentage) {
+        homePercentage = minPercentage
+        adjusted = true
+    }
+    if (drawPercentage < minPercentage) {
+        drawPercentage = minPercentage
+        adjusted = true
+    }
+    if (awayPercentage < minPercentage) {
+        awayPercentage = minPercentage
+        adjusted = true
+    }
+
+    if (adjusted) {
+        const totalAdjusted = homePercentage + drawPercentage + awayPercentage
+        const scale = 100 / totalAdjusted
+        homePercentage *= scale
+        drawPercentage *= scale
+        awayPercentage *= scale
+    }
     return (
         <>
             <Heading level={'1'} size={'large'} align={'center'}>
