@@ -1,6 +1,6 @@
 import { finnUtfall, regnUtScoreForKamp } from './matchScoreCalculator'
 import { stringTilNumber } from '../../utils/stringnumber'
-import { AllBets, MatchBet, MatchBetMedScore, OtherUser } from '../../queries/useAllBets'
+import { AllBets, MatchBetMedScore, OtherUser } from '../../queries/useAllBets'
 const winner = 'TODO'
 
 export interface AllBetsExtended {
@@ -17,7 +17,7 @@ export function calculateAllBetsExtended(allBets: AllBets): AllBetsExtended {
                 ...b,
                 home_result: b.home_result || '0',
                 away_result: b.away_result || '0',
-            } as MatchBet
+            }
         })
         .map((b): MatchBetMedScore => {
             if (b.home_score == null || b.away_score == null) {

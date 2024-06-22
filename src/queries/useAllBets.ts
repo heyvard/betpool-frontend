@@ -33,10 +33,10 @@ export interface MatchBetMedScore {
     match_id: string
     game_start: string
     away_score: number | null
-    away_team: string
     home_score: number | null
-    away_result: string | null
-    home_result: string | null
+    away_team: string
+    away_result: string
+    home_result: string
     home_team: string
     round: string
     poeng: number
@@ -62,7 +62,15 @@ export function UseAllBets() {
                 method: 'GET',
                 headers: { Authorization: `Bearer ${idtoken}` },
             })
-            let allBets = (await responsePromise.json()) as AllBets
+            const allBets = (await responsePromise.json()) as AllBets
+            allBets.bets.forEach((bet) => {
+                if (bet.home_result === null) {
+                    bet.home_result = '0'
+                }
+                if (bet.away_result === null) {
+                    bet.away_result = '0'
+                }
+            })
             return calculateAllBetsExtended(allBets)
         },
     })
