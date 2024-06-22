@@ -9,13 +9,15 @@ import { PastBetView } from '../../components/bet/PastBetView'
 import { rundeTilTekst } from '../../utils/rundeTilTekst'
 import { BodyShort, Heading } from '@navikt/ds-react'
 import { hentFlag } from '../../utils/lag'
+import { UseUser } from '../../queries/useUser'
 
 const Home: NextPage = () => {
     const { data, isLoading } = UseAllBets()
+    const { data: me } = UseUser()
 
     const router = useRouter()
     const { id } = router.query
-    if (!data || isLoading) {
+    if (!data || isLoading || !me) {
         return <Spinner />
     }
 
@@ -52,6 +54,13 @@ const Home: NextPage = () => {
         drawPercentage *= scale
         awayPercentage *= scale
     }
+    const matchensBets = data.bets
+        .filter((a) => a.match_id == id)
+        .map((a) => ({
+            ...a,
+            bet_id: a.match_id + a.user_id,
+            user: data.users.find((u) => u.id == a.user_id)!,
+        }))
     return (
         <>
             <Heading level={'1'} size={'large'} align={'center'}>
@@ -92,14 +101,13 @@ const Home: NextPage = () => {
 
                 <BodyShort>{`${match.matchpoeng.riktigUtfall} poeng for riktig utfall`} </BodyShort>
             </div>
-            {data.bets
-                .filter((a) => a.match_id == id)
-                .map((a) => ({
-                    ...a,
-                    bet_id: a.match_id + a.user_id,
-                    user: data.users.find((u) => u.id == a.user_id)!,
-                }))
-                .filter((a) => a.user)
+            {matchensBets
+                .filter((a) => a.user.id == me.id)
+                .map((a) => (
+                    <PastBetView key={a.bet_id} bet={a} matchside={true} navn={a.user.name} />
+                ))}
+            {matchensBets
+                .filter((a) => a.user.id != me.id)
                 .sort((b, a) => b.user.name.localeCompare(a.user.name))
                 .sort((b, a) => a.poeng - b.poeng)
                 .map((a) => (
