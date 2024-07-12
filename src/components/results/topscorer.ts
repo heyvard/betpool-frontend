@@ -1,1 +1,1 @@
-export const topscorer = ['TODO']
+export const topscorer = ['kane', 'bellingham']
