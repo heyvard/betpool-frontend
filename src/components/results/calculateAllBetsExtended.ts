@@ -1,14 +1,14 @@
 import { finnUtfall, regnUtScoreForKamp } from './matchScoreCalculator'
 import { stringTilNumber } from '../../utils/stringnumber'
 import { AllBets, MatchBetMedScore, OtherUser } from '../../queries/useAllBets'
-const winner = 'TODO'
+import { winner } from './winner'
+import { topscorer } from './topscorer'
 
 export interface AllBetsExtended {
     users: OtherUser[]
     bets: MatchBetMedScore[]
 }
 
-const topscorer = ['TODO']
 export function calculateAllBetsExtended(allBets: AllBets): AllBetsExtended {
     let scoreForKamp = regnUtScoreForKamp(allBets.bets)
     const betsMedScore = allBets.bets
@@ -60,8 +60,14 @@ export function calculateAllBetsExtended(allBets: AllBets): AllBetsExtended {
         return Math.min(Math.ceil((allBets.users.length * 3) / antallOk), 15)
     }
     const poengPerVinner = winnerPointsFun()
+    function riktigTopscorer(userTopscorer: string | undefined) {
+        if (!userTopscorer) {
+            return false
+        }
+        return topscorer.some((t) => userTopscorer.toLowerCase().includes(t.toLowerCase()))
+    }
     const topscorerPointsFun = () => {
-        const antallOk = allBets.users.filter((u) => topscorer.includes(u.topscorer || 'blah')).length
+        const antallOk = allBets.users.filter((u) => riktigTopscorer(u.topscorer)).length
         if (antallOk == 0) {
             return 0
         }
@@ -75,7 +81,7 @@ export function calculateAllBetsExtended(allBets: AllBets): AllBetsExtended {
             if (u.winner == winner) {
                 winnerPoints = poengPerVinner
             }
-            if (u.topscorer && topscorer.includes(u.topscorer)) {
+            if (riktigTopscorer(u.topscorer)) {
                 topscorerPoints = poengPerTopscorer
             }
             return {
